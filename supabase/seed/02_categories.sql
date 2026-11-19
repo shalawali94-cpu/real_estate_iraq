@@ -1,0 +1,53 @@
+-- Property categories (spec §6) and common features. Staff can add more.
+insert into public.property_categories (slug, "group", name_ckb, name_ar, name_en, fields, allowed_transaction_types, sort_order) values
+  -- Residential
+  ('house',                'residential', 'خانوو',              'منزل',            'House',
+     '{area_sqm,bedrooms,bathrooms,floors,property_age_years,building_condition,furnishing,has_parking,heating,cooling,electricity,water,has_internet,ownership_doc_status}', '{sale,rent,short_term_rent,investment}', 1),
+  ('apartment',            'residential', 'شوقە',               'شقة',             'Apartment',
+     '{area_sqm,bedrooms,bathrooms,floor_number,property_age_years,building_condition,furnishing,has_parking,heating,cooling,electricity,water,has_internet,ownership_doc_status}', '{sale,rent,short_term_rent,investment}', 2),
+  ('villa',                'residential', 'ڤێلا',               'فيلا',            'Villa',
+     '{area_sqm,bedrooms,bathrooms,floors,property_age_years,building_condition,furnishing,has_parking,heating,cooling,electricity,water,has_internet,ownership_doc_status}', '{sale,rent,short_term_rent,investment}', 3),
+  ('studio',               'residential', 'ستۆدیۆ',             'ستوديو',          'Studio',
+     '{area_sqm,bathrooms,floor_number,furnishing,heating,cooling,electricity,water,has_internet}', '{sale,rent,short_term_rent}', 4),
+  ('duplex',               'residential', 'دووپلێکس',           'دوبلكس',          'Duplex',
+     '{area_sqm,bedrooms,bathrooms,floors,property_age_years,building_condition,furnishing,has_parking,heating,cooling,electricity,water,has_internet,ownership_doc_status}', '{sale,rent,investment}', 5),
+  ('residential_building', 'residential', 'باڵەخانەی نیشتەجێبوون', 'عمارة سكنية',   'Residential Building',
+     '{area_sqm,floors,property_age_years,building_condition,has_parking,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 6),
+  -- Commercial
+  ('shop',                 'commercial',  'دووکان',             'محل تجاري',       'Shop',
+     '{area_sqm,floor_number,building_condition,electricity,water,has_internet,ownership_doc_status}', '{sale,rent,investment}', 10),
+  ('office',               'commercial',  'نووسینگە',           'مكتب',            'Office',
+     '{area_sqm,bathrooms,floor_number,building_condition,furnishing,has_parking,heating,cooling,electricity,has_internet,ownership_doc_status}', '{sale,rent,investment}', 11),
+  ('warehouse',            'commercial',  'کۆگا',               'مستودع',          'Warehouse',
+     '{area_sqm,building_condition,has_parking,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 12),
+  ('restaurant',           'commercial',  'چێشتخانە',           'مطعم',            'Restaurant',
+     '{area_sqm,floors,building_condition,furnishing,has_parking,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 13),
+  ('hotel',                'commercial',  'هوتێل',              'فندق',            'Hotel',
+     '{area_sqm,bedrooms,floors,property_age_years,building_condition,furnishing,has_parking,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 14),
+  ('commercial_building',  'commercial',  'باڵەخانەی بازرگانی', 'عمارة تجارية',    'Commercial Building',
+     '{area_sqm,floors,property_age_years,building_condition,has_parking,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 15),
+  ('commercial_space',     'commercial',  'شوێنی بازرگانی',     'مساحة تجارية',    'Commercial Space',
+     '{area_sqm,floor_number,building_condition,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 16),
+  -- Land
+  ('residential_land',     'land',        'زەوی نیشتەجێبوون',   'أرض سكنية',       'Residential Land',
+     '{area_sqm,ownership_doc_status}', '{sale,investment}', 20),
+  ('commercial_land',      'land',        'زەوی بازرگانی',      'أرض تجارية',      'Commercial Land',
+     '{area_sqm,ownership_doc_status}', '{sale,rent,investment}', 21),
+  ('agricultural_land',    'land',        'زەوی کشتوکاڵی',      'أرض زراعية',      'Agricultural Land',
+     '{area_sqm,water,ownership_doc_status}', '{sale,rent,investment}', 22),
+  ('industrial_land',      'land',        'زەوی پیشەسازی',      'أرض صناعية',      'Industrial Land',
+     '{area_sqm,electricity,water,ownership_doc_status}', '{sale,rent,investment}', 23);
+
+insert into public.property_features (slug, name_ckb, name_ar, name_en) values
+  ('elevator',      'بەرزکەرەوە',       'مصعد',          'Elevator'),
+  ('generator',     'مۆلیدە',           'مولدة',         'Generator'),
+  ('garden',        'باخچە',            'حديقة',         'Garden'),
+  ('balcony',       'بالکۆن',           'شرفة',          'Balcony'),
+  ('swimming_pool', 'مەلەوانگە',        'مسبح',          'Swimming Pool'),
+  ('security',      'پاسەوانی',         'حراسة',         'Security'),
+  ('cctv',          'کامێرای چاودێری',  'كاميرات مراقبة', 'CCTV'),
+  ('storage_room',  'کۆگای ناوماڵ',     'غرفة تخزين',    'Storage Room'),
+  ('maid_room',     'ژووری خزمەتکار',   'غرفة خادمة',    'Maid Room'),
+  ('gym',           'هۆڵی وەرزش',       'صالة رياضية',   'Gym'),
+  ('water_tank',    'تانکی ئاو',        'خزان ماء',      'Water Tank'),
+  ('solar_panels',  'پانێڵی خۆر',       'ألواح شمسية',   'Solar Panels');
