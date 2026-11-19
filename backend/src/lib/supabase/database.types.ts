@@ -2349,11 +2349,76 @@ export type Database = {
       property_fee_required: { Args: { p_property: string }; Returns: boolean }
       property_is_mine_editable: { Args: { p_id: string }; Returns: boolean }
       property_is_public: { Args: { p_id: string }; Returns: boolean }
+      property_moderate: {
+        Args: {
+          p_admin: string
+          p_decision: string
+          p_property: string
+          p_reason?: string
+        }
+        Returns: {
+          address_text: string | null
+          area_sqm: number | null
+          assigned_agent_id: string | null
+          attributes: Json
+          availability_date: string | null
+          bathrooms: number | null
+          bedrooms: number | null
+          building_condition: string | null
+          category_id: number
+          company_id: string | null
+          contact_phone: string | null
+          cooling: string | null
+          created_at: string
+          deleted_at: string | null
+          description: string | null
+          district_id: number
+          electricity: string | null
+          expires_at: string | null
+          favorites_count: number
+          featured_until: string | null
+          floor_number: number | null
+          floors: number | null
+          furnishing: string | null
+          governorate_id: number
+          has_internet: boolean | null
+          has_parking: boolean | null
+          heating: string | null
+          id: string
+          is_featured: boolean
+          listing_state: Database["public"]["Enums"]["listing_state"]
+          location: unknown
+          neighborhood_id: string | null
+          owner_id: string
+          ownership_doc_status: string | null
+          price_amount: number
+          price_currency: string
+          price_negotiable: boolean
+          property_age_years: number | null
+          publication_status: Database["public"]["Enums"]["publication_status"]
+          published_at: string | null
+          rejection_reason: string | null
+          search_tsv: unknown
+          show_phone: boolean
+          title: string
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          updated_at: string
+          views_count: number
+          water: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "properties"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       property_submit: {
         Args: { p_property: string; p_user: string }
         Returns: Database["public"]["Enums"]["publication_status"]
       }
       record_property_view: { Args: { p_property: string }; Returns: undefined }
+      run_daily_maintenance: { Args: never; Returns: Json }
       search_properties: {
         Args: { p_filters?: Json; p_limit?: number; p_offset?: number }
         Returns: {
@@ -2408,6 +2473,13 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      user_has_any_role: {
+        Args: {
+          p_roles: Database["public"]["Enums"]["app_role"][]
+          p_user: string
+        }
+        Returns: boolean
       }
       users_blocked: { Args: { p_a: string; p_b: string }; Returns: boolean }
     }
