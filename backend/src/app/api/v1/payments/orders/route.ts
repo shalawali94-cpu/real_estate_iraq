@@ -5,7 +5,11 @@ import { unwrap } from '@/lib/db/rpc-error';
 import { ApiError, ErrorCode } from '@/lib/http/errors';
 import { json, route } from '@/lib/http/handler';
 import { supabaseAdmin } from '@/lib/supabase/admin';
+import type { Json } from '@/lib/supabase/database.types';
 import { getProvider } from '@/payments/registry';
+
+// Generated types mark every SQL parameter as non-null, but these functions accept NULL.
+const sqlNull = null as unknown as string;
 
 const body = z
   .object({
@@ -43,8 +47,8 @@ export const POST = route(async (req) => {
       .rpc('payment_create_order', {
         p_user: user.id,
         p_service: input.service_type,
-        p_property: input.property_id ?? null,
-        p_ai_job: input.ai_job_id ?? null,
+        p_property: input.property_id ?? sqlNull,
+        p_ai_job: input.ai_job_id ?? sqlNull,
         p_provider: input.provider,
         p_idempotency_key: idempotencyKey,
       })
@@ -85,8 +89,8 @@ export const POST = route(async (req) => {
       await db.rpc('payment_attach_transaction', {
         p_order: order.id,
         p_provider_payment_id: created.providerPaymentId,
-        p_payload: created,
-        p_valid_until: created.validUntil ?? null,
+        p_payload: created as unknown as Json,
+        p_valid_until: created.validUntil ?? sqlNull,
       }),
     );
     return json({ order, payment: created }, { status: 201 });
