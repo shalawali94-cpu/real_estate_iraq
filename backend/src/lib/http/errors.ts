@@ -1,0 +1,53 @@
+/**
+ * Stable error codes. The mobile app localizes these (ckb/ar/en);
+ * the server never sends user-facing text.
+ */
+export const ErrorCode = {
+  VALIDATION_FAILED: 'VALIDATION_FAILED',
+  UNAUTHENTICATED: 'UNAUTHENTICATED',
+  FORBIDDEN: 'FORBIDDEN',
+  NOT_FOUND: 'NOT_FOUND',
+  CONFLICT: 'CONFLICT',
+  RATE_LIMITED: 'RATE_LIMITED',
+  INTERNAL: 'INTERNAL',
+  PAYMENT_PROVIDER_NOT_CONFIGURED: 'PAYMENT_PROVIDER_NOT_CONFIGURED',
+  PAYMENT_ALREADY_PAID: 'PAYMENT_ALREADY_PAID',
+  PAYMENT_ORDER_EXPIRED: 'PAYMENT_ORDER_EXPIRED',
+  PAYMENT_AMOUNT_MISMATCH: 'PAYMENT_AMOUNT_MISMATCH',
+  PAYMENT_PROVIDER_ERROR: 'PAYMENT_PROVIDER_ERROR',
+  PAYMENT_NOT_REQUIRED: 'PAYMENT_NOT_REQUIRED',
+  PROPERTY_NOT_SUBMITTABLE: 'PROPERTY_NOT_SUBMITTABLE',
+  AI_JOB_NOT_PAYABLE: 'AI_JOB_NOT_PAYABLE',
+} as const;
+
+export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
+
+const statusFor: Record<ErrorCode, number> = {
+  VALIDATION_FAILED: 400,
+  UNAUTHENTICATED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  RATE_LIMITED: 429,
+  INTERNAL: 500,
+  PAYMENT_PROVIDER_NOT_CONFIGURED: 503,
+  PAYMENT_ALREADY_PAID: 409,
+  PAYMENT_ORDER_EXPIRED: 410,
+  PAYMENT_AMOUNT_MISMATCH: 422,
+  PAYMENT_PROVIDER_ERROR: 502,
+  PAYMENT_NOT_REQUIRED: 409,
+  PROPERTY_NOT_SUBMITTABLE: 409,
+  AI_JOB_NOT_PAYABLE: 409,
+};
+
+export class ApiError extends Error {
+  readonly status: number;
+
+  constructor(
+    readonly code: ErrorCode,
+    readonly details?: unknown,
+  ) {
+    super(code);
+    this.status = statusFor[code];
+  }
+}
