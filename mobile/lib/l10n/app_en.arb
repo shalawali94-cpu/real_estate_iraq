@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "appTitle": "Real Estate Iraq",
+  "navHome": "Home",
+  "navExplore": "Explore",
+  "navAdd": "Add",
+  "navFavorites": "Favorites",
+  "navProfile": "Profile",
+  "addPropertyTitle": "Add Property",
+  "phaseNotice": "This section is built in Phase 5",
+  "settingsLanguage": "Language",
+  "settingsTheme": "Appearance",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "languageKurdish": "کوردی",
+  "languageArabic": "العربية",
+  "languageEnglish": "English"
+}

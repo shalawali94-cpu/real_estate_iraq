@@ -1,0 +1,19 @@
+{
+  "@@locale": "ar",
+  "appTitle": "عقارات العراق",
+  "navHome": "الرئيسية",
+  "navExplore": "استكشاف",
+  "navAdd": "إضافة",
+  "navFavorites": "المفضلة",
+  "navProfile": "الملف الشخصي",
+  "addPropertyTitle": "إضافة عقار",
+  "phaseNotice": "سيتم بناء هذا القسم في المرحلة ٥",
+  "settingsLanguage": "اللغة",
+  "settingsTheme": "المظهر",
+  "themeSystem": "النظام",
+  "themeLight": "فاتح",
+  "themeDark": "داكن",
+  "languageKurdish": "کوردی",
+  "languageArabic": "العربية",
+  "languageEnglish": "English"
+}

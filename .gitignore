@@ -1,0 +1,27 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+key.properties
+google-services.json
+GoogleService-Info.plist
+service-account*.json
+
+# node
+node_modules/
+.next/
+.vercel/
+dist/
+coverage/
+
+# supabase local
+supabase/.branches/
+supabase/.temp/
+
+# os / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

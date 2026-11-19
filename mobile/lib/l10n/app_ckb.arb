@@ -1,0 +1,19 @@
+{
+  "@@locale": "ckb",
+  "appTitle": "خانووبەرەی عێراق",
+  "navHome": "سەرەکی",
+  "navExplore": "گەڕان",
+  "navAdd": "زیادکردن",
+  "navFavorites": "دڵخوازەکان",
+  "navProfile": "پرۆفایل",
+  "addPropertyTitle": "زیادکردنی خانووبەرە",
+  "phaseNotice": "ئەم بەشە لە قۆناغی ٥ دروست دەکرێت",
+  "settingsLanguage": "زمان",
+  "settingsTheme": "ڕووکار",
+  "themeSystem": "سیستەم",
+  "themeLight": "ڕووناک",
+  "themeDark": "تاریک",
+  "languageKurdish": "کوردی",
+  "languageArabic": "العربية",
+  "languageEnglish": "English"
+}
