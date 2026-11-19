@@ -5,7 +5,8 @@ Supabase (Free, Frankfurt): project ref `mvwaajcucfforwymmogn` — linked, migra
 Last updated: 2026-11-19
 
 ## Current phase
-Phase 3 — Database: **in progress**
+Phase 3 — Database: **done** (pending cloud push of 010–011 if not yet)
+Next: Phase 4 — Backend APIs on Vercel
 
 ## Done
 ### Phase 1 — Architecture ✅
@@ -31,13 +32,15 @@ docs/ (architecture, database, payments, ai_integrations, security, screens, cre
 - [x] 005 payment engine: settings (30,000 IQD each), orders, transactions, provider events, refunds,
       append-only audit; service_role-only functions (submit, create order, attach tx, mark paid/failed)
 - [x] 006 public_profiles view → get_public_profiles(ids) function (linter CRITICAL fixed)
-- [ ] companies + members + leads
-- [ ] conversations / messages / notifications
-- [ ] verification requests, reports, saved searches, recently viewed, comparisons
-- [ ] ai_jobs / ai_generations / ai_usage (+ AI video order in payment_create_order)
-- [ ] admin_audit_logs, application_settings, banners, jobs queue
-- [ ] search_properties() RPC
-- [ ] pgTAP test suite (current tests are SQL scripts in supabase/tests, run via docker exec)
+- [x] 007 companies, members (owner/manager/agent/viewer), company listings, leads (tests 17/17)
+- [x] 008 conversations, messages (Realtime), message reports, notifications, blocking
+- [x] 009 strict privileges: local stack now matches cloud (no auto-grant)
+- [x] 010 search_properties() RPC (filters, keyword, GPS radius, map bbox, sorts), views, recently viewed,
+      saved searches (≤20), comparisons (≤4), property reports, verification requests + private bucket (tests 18/18)
+- [x] 011 AI jobs (paid video orders → queued only after payment, 3 attempts, 1 free regeneration, refunds),
+      property_videos (ai/template labeled), ai usage/cost/provider config, admin audit, app settings, banners,
+      jobs queue (tests 16/16; payments 21/21)
+- [ ] pgTAP test suite + CI (current tests are SQL scripts in supabase/tests)
 
 ## How to test locally
 ```
