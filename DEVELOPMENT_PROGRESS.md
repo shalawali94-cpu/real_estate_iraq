@@ -10,11 +10,17 @@ Phase 4 — Backend: **in progress**
 ### Phase 4 — Backend
 - [x] Vercel project `real-estate-iraq-api` (Hobby, root = backend/), auto-deploys on push to main
 - [x] Prod URL: https://real-estate-iraq-api.vercel.app — /api/v1/health returns database: ok
-- [x] Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (Production + Preview)
-- [ ] properties API (create/submit/edit/state), media upload-url + confirm (MIME sniff)
-- [ ] payments API (orders, FIB/Qi adapters stay unconfigured until credentials), webhooks, reconciler cron
-- [ ] companies/leads, messaging (open conversation), notifications (FCM later), verification
-- [ ] admin API (moderation, prices, refunds), rate limiting
+- [x] Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, CRON_SECRET
+- [x] Functions run in fra1 (backend/vercel.json) next to the database
+- [x] Typed Supabase client (`npm run gen:types` after every migration)
+- [x] POST /properties/{id}/submit · POST /media/upload-url · POST /media/confirm (magic-byte MIME sniffing, size, ≤20 photos)
+- [x] POST /payments/orders (Idempotency-Key, server price, provider must be configured) · GET /payments/orders/{id}
+- [x] Admin: GET /admin/properties (queue) · POST /admin/properties/{id}/moderate (approve/reject/suspend/unsuspend, audited, owner notified)
+- [x] Cron GET /cron/daily (Bearer CRON_SECRET, 01:00 UTC): expires listings after 90 days, closes stale orders
+- [x] Migration 012 moderation + maintenance (tests 9/9); backend unit tests 19/19
+- [ ] payment webhooks + reconciler (with real FIB/Qi adapters, Phase 6)
+- [ ] companies/members invites, messaging helpers, push notifications sender (FCM), verification decisions
+- [ ] admin API: users, roles, prices, refunds, reports; rate limiting (Upstash or Vercel WAF)
 - [ ] AI endpoints (Phase 7)
 
 ## Done
