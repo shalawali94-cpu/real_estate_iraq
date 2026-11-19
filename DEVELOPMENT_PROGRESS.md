@@ -5,8 +5,17 @@ Supabase (Free, Frankfurt): project ref `mvwaajcucfforwymmogn` — linked, migra
 Last updated: 2026-11-19
 
 ## Current phase
-Phase 3 — Database: **done** (pending cloud push of 010–011 if not yet)
-Next: Phase 4 — Backend APIs on Vercel
+Phase 4 — Backend: **in progress**
+
+### Phase 4 — Backend
+- [x] Vercel project `real-estate-iraq-api` (Hobby, root = backend/), auto-deploys on push to main
+- [x] Prod URL: https://real-estate-iraq-api.vercel.app — /api/v1/health returns database: ok
+- [x] Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (Production + Preview)
+- [ ] properties API (create/submit/edit/state), media upload-url + confirm (MIME sniff)
+- [ ] payments API (orders, FIB/Qi adapters stay unconfigured until credentials), webhooks, reconciler cron
+- [ ] companies/leads, messaging (open conversation), notifications (FCM later), verification
+- [ ] admin API (moderation, prices, refunds), rate limiting
+- [ ] AI endpoints (Phase 7)
 
 ## Done
 ### Phase 1 — Architecture ✅
@@ -50,7 +59,7 @@ docker exec -i supabase_db_real_estate_iraq psql -U postgres -d postgres < supab
 Push to cloud: `supabase db push --remote` (add `--include-seed` when seed files change)
 
 ## External services
-Created: GitHub repo, Supabase project. Not yet: Vercel, SMS provider, Firebase, map tiles, FIB, Qi Card, AI providers.
+Created: GitHub repo, Supabase project, Vercel project (backend). Not yet: Vercel, SMS provider, Firebase, map tiles, FIB, Qi Card, AI providers.
 
 ## Open questions
 - FIB/Qi Card merchant onboarding (start early)
