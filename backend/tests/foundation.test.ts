@@ -9,10 +9,13 @@ import { getProvider } from '@/payments/registry';
 
 describe('health', () => {
   it('returns ok and reports providers as unconfigured', async () => {
+    delete process.env.SUPABASE_URL;
+    delete process.env.SUPABASE_SERVICE_ROLE_KEY;
     const res = await GET(new Request('http://x/api/v1/health'), undefined);
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.status).toBe('ok');
+    expect(body.database).toBe('not_configured');
     expect(body.payments).toEqual({ FIB: 'unconfigured', QI_CARD: 'unconfigured' });
     expect(res.headers.get('x-request-id')).toBeTruthy();
   });
