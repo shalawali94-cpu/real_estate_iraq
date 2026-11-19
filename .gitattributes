@@ -1,0 +1,7 @@
+# Keep LF line endings in the repo for all text files
+* text=auto eol=lf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.ico binary
+*.ttf binary
