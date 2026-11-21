@@ -38,7 +38,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
     try {
       await ref.read(authRepositoryProvider)!.sendOtp(phone);
-      if (mounted) context.push('/verify', extra: phone);
+      if (mounted) {
+        final from = GoRouterState.of(context).uri.queryParameters['from'];
+        context.push(
+          from == null ? '/verify' : '/verify?from=${Uri.encodeComponent(from)}',
+          extra: phone,
+        );
+      }
     } catch (e) {
       debugPrint('auth error: $e');
       if (mounted) {
@@ -95,6 +101,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           width: 20, height: 20,
                           child: CircularProgressIndicator(strokeWidth: 2))
                       : Text(t.authSendCode),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                TextButton(
+                  key: const Key('continueGuestButton'),
+                  onPressed: () => context.go('/home'),
+                  child: Text(t.authContinueGuest),
                 ),
               ],
             ),

@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
-import '../../properties/data/property_repository.dart';
-import '../../properties/presentation/property_card.dart';
+import '../../properties/presentation/property_card_tile.dart';
 import '../../properties/presentation/property_list_controller.dart';
 
 class ExploreScreen extends ConsumerStatefulWidget {
@@ -47,7 +46,6 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context);
     final state = ref.watch(exploreListProvider);
-    final repo = ref.watch(propertyRepositoryProvider);
     final types = {
       null: t.filterAll,
       'sale': t.txSale,
@@ -123,7 +121,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                       );
                     }
                     final p = state.items[i];
-                    return PropertyCard(property: p, imageUrl: repo?.coverUrl(p.coverPath));
+                    return PropertyCardTile(property: p);
                   },
                 ),
         ),

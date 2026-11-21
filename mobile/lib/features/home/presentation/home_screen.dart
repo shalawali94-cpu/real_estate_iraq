@@ -5,7 +5,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
 import '../../properties/data/property_repository.dart';
 import '../../properties/domain/property_summary.dart';
-import '../../properties/presentation/property_card.dart';
+import '../../properties/presentation/property_card_tile.dart';
 import '../../properties/presentation/property_list_controller.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -73,7 +73,7 @@ class _Section extends ConsumerWidget {
           for (final p in items)
             Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.md),
-              child: PropertyCard(property: p, imageUrl: repo?.coverUrl(p.coverPath)),
+              child: PropertyCardTile(property: p),
             ),
         ]);
       },

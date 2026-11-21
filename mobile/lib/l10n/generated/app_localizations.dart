@@ -351,6 +351,480 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Load more'**
   String get loadMore;
+
+  /// No description provided for @specBedrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedrooms'**
+  String get specBedrooms;
+
+  /// No description provided for @specBathrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bathrooms'**
+  String get specBathrooms;
+
+  /// No description provided for @specArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get specArea;
+
+  /// No description provided for @specFloors.
+  ///
+  /// In en, this message translates to:
+  /// **'Floors'**
+  String get specFloors;
+
+  /// No description provided for @specCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Condition'**
+  String get specCondition;
+
+  /// No description provided for @specFurnishing.
+  ///
+  /// In en, this message translates to:
+  /// **'Furnishing'**
+  String get specFurnishing;
+
+  /// No description provided for @specParking.
+  ///
+  /// In en, this message translates to:
+  /// **'Parking'**
+  String get specParking;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @descriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get descriptionTitle;
+
+  /// No description provided for @specsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get specsTitle;
+
+  /// No description provided for @ownerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Listed by'**
+  String get ownerTitle;
+
+  /// No description provided for @contactCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get contactCall;
+
+  /// No description provided for @contactWhatsApp.
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp'**
+  String get contactWhatsApp;
+
+  /// No description provided for @favoritesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved properties yet'**
+  String get favoritesEmpty;
+
+  /// No description provided for @condNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get condNew;
+
+  /// No description provided for @condExcellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
+  String get condExcellent;
+
+  /// No description provided for @condGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get condGood;
+
+  /// No description provided for @condNeedsRenovation.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs renovation'**
+  String get condNeedsRenovation;
+
+  /// No description provided for @condUnderConstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Under construction'**
+  String get condUnderConstruction;
+
+  /// No description provided for @furnUnfurnished.
+  ///
+  /// In en, this message translates to:
+  /// **'Unfurnished'**
+  String get furnUnfurnished;
+
+  /// No description provided for @furnSemi.
+  ///
+  /// In en, this message translates to:
+  /// **'Semi-furnished'**
+  String get furnSemi;
+
+  /// No description provided for @furnFurnished.
+  ///
+  /// In en, this message translates to:
+  /// **'Furnished'**
+  String get furnFurnished;
+
+  /// No description provided for @notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'This listing is no longer available'**
+  String get notFound;
+
+  /// No description provided for @views.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get views;
+
+  /// No description provided for @publishedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Published'**
+  String get publishedOn;
+
+  /// No description provided for @fieldCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Property type'**
+  String get fieldCategory;
+
+  /// No description provided for @fieldTransaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing type'**
+  String get fieldTransaction;
+
+  /// No description provided for @fieldTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get fieldTitle;
+
+  /// No description provided for @fieldDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get fieldDescription;
+
+  /// No description provided for @fieldPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get fieldPrice;
+
+  /// No description provided for @fieldCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get fieldCurrency;
+
+  /// No description provided for @fieldNegotiable.
+  ///
+  /// In en, this message translates to:
+  /// **'Price is negotiable'**
+  String get fieldNegotiable;
+
+  /// No description provided for @fieldGovernorate.
+  ///
+  /// In en, this message translates to:
+  /// **'Governorate'**
+  String get fieldGovernorate;
+
+  /// No description provided for @fieldDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get fieldDistrict;
+
+  /// No description provided for @fieldArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (m²)'**
+  String get fieldArea;
+
+  /// No description provided for @fieldAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address (optional)'**
+  String get fieldAddress;
+
+  /// No description provided for @fieldBedrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedrooms'**
+  String get fieldBedrooms;
+
+  /// No description provided for @fieldBathrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bathrooms'**
+  String get fieldBathrooms;
+
+  /// No description provided for @fieldFloors.
+  ///
+  /// In en, this message translates to:
+  /// **'Floors'**
+  String get fieldFloors;
+
+  /// No description provided for @saveDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Save draft'**
+  String get saveDraft;
+
+  /// No description provided for @draftSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft saved'**
+  String get draftSaved;
+
+  /// No description provided for @validationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get validationRequired;
+
+  /// No description provided for @validationTitleLen.
+  ///
+  /// In en, this message translates to:
+  /// **'Title must be 5 to 120 characters'**
+  String get validationTitleLen;
+
+  /// No description provided for @validationNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid number'**
+  String get validationNumber;
+
+  /// No description provided for @addPropertyIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Property details'**
+  String get addPropertyIntro;
+
+  /// No description provided for @mediaTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get mediaTitle;
+
+  /// No description provided for @mediaAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos'**
+  String get mediaAdd;
+
+  /// No description provided for @mediaEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No photos yet. Add up to 20 photos.'**
+  String get mediaEmpty;
+
+  /// No description provided for @mediaUploading.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading {done} of {total}'**
+  String mediaUploading(int done, int total);
+
+  /// No description provided for @mediaFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Some photos failed to upload'**
+  String get mediaFailed;
+
+  /// No description provided for @mediaDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete photo'**
+  String get mediaDelete;
+
+  /// No description provided for @mediaCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover'**
+  String get mediaCover;
+
+  /// No description provided for @mediaLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum 20 photos'**
+  String get mediaLimit;
+
+  /// No description provided for @mediaApiMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Server address is not configured'**
+  String get mediaApiMissing;
+
+  /// No description provided for @addPhotosNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos'**
+  String get addPhotosNow;
+
+  /// No description provided for @profileGuestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to your account'**
+  String get profileGuestTitle;
+
+  /// No description provided for @profileGuestBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to save favorites, publish properties and contact owners.'**
+  String get profileGuestBody;
+
+  /// No description provided for @authContinueGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as guest'**
+  String get authContinueGuest;
+
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in / Create account'**
+  String get authSignIn;
+
+  /// No description provided for @loginRequiredHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue'**
+  String get loginRequiredHint;
+
+  /// No description provided for @onboardingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your profile'**
+  String get onboardingTitle;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @fieldFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fieldFullName;
+
+  /// No description provided for @fieldAccountType.
+  ///
+  /// In en, this message translates to:
+  /// **'Account type'**
+  String get fieldAccountType;
+
+  /// No description provided for @accountIndividual.
+  ///
+  /// In en, this message translates to:
+  /// **'Individual'**
+  String get accountIndividual;
+
+  /// No description provided for @accountOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Property owner'**
+  String get accountOwner;
+
+  /// No description provided for @accountAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Real estate agent'**
+  String get accountAgent;
+
+  /// No description provided for @accountCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Real estate company'**
+  String get accountCompany;
+
+  /// No description provided for @accountDeveloper.
+  ///
+  /// In en, this message translates to:
+  /// **'Property developer'**
+  String get accountDeveloper;
+
+  /// No description provided for @saveProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveProfile;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile saved'**
+  String get profileSaved;
+
+  /// No description provided for @roleMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get roleMember;
+
+  /// No description provided for @roleModerator.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderator'**
+  String get roleModerator;
+
+  /// No description provided for @roleAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Administrator'**
+  String get roleAdmin;
+
+  /// No description provided for @roleSuperAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Super administrator'**
+  String get roleSuperAdmin;
+
+  /// No description provided for @fieldGovernorateOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Governorate (optional)'**
+  String get fieldGovernorateOptional;
+
+  /// No description provided for @fieldDistrictOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'District (optional)'**
+  String get fieldDistrictOptional;
+
+  /// No description provided for @validationName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be 2 to 80 characters'**
+  String get validationName;
 }
 
 class _AppLocalizationsDelegate

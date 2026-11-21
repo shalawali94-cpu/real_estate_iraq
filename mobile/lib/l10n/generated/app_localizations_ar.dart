@@ -135,4 +135,244 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get loadMore => 'المزيد';
+
+  @override
+  String get specBedrooms => 'غرف النوم';
+
+  @override
+  String get specBathrooms => 'الحمامات';
+
+  @override
+  String get specArea => 'المساحة';
+
+  @override
+  String get specFloors => 'الطوابق';
+
+  @override
+  String get specCondition => 'الحالة';
+
+  @override
+  String get specFurnishing => 'الأثاث';
+
+  @override
+  String get specParking => 'موقف سيارات';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get descriptionTitle => 'الوصف';
+
+  @override
+  String get specsTitle => 'التفاصيل';
+
+  @override
+  String get ownerTitle => 'صاحب الإعلان';
+
+  @override
+  String get contactCall => 'اتصال';
+
+  @override
+  String get contactWhatsApp => 'واتساب';
+
+  @override
+  String get favoritesEmpty => 'لا توجد عقارات محفوظة بعد';
+
+  @override
+  String get condNew => 'جديد';
+
+  @override
+  String get condExcellent => 'ممتاز';
+
+  @override
+  String get condGood => 'جيد';
+
+  @override
+  String get condNeedsRenovation => 'يحتاج ترميم';
+
+  @override
+  String get condUnderConstruction => 'قيد الإنشاء';
+
+  @override
+  String get furnUnfurnished => 'غير مفروش';
+
+  @override
+  String get furnSemi => 'نصف مفروش';
+
+  @override
+  String get furnFurnished => 'مفروش';
+
+  @override
+  String get notFound => 'هذا الإعلان لم يعد متاحاً';
+
+  @override
+  String get views => 'المشاهدات';
+
+  @override
+  String get publishedOn => 'تاريخ النشر';
+
+  @override
+  String get fieldCategory => 'نوع العقار';
+
+  @override
+  String get fieldTransaction => 'نوع الإعلان';
+
+  @override
+  String get fieldTitle => 'عنوان الإعلان';
+
+  @override
+  String get fieldDescription => 'الوصف';
+
+  @override
+  String get fieldPrice => 'السعر';
+
+  @override
+  String get fieldCurrency => 'العملة';
+
+  @override
+  String get fieldNegotiable => 'السعر قابل للتفاوض';
+
+  @override
+  String get fieldGovernorate => 'المحافظة';
+
+  @override
+  String get fieldDistrict => 'القضاء';
+
+  @override
+  String get fieldArea => 'المساحة (م²)';
+
+  @override
+  String get fieldAddress => 'العنوان (اختياري)';
+
+  @override
+  String get fieldBedrooms => 'غرف النوم';
+
+  @override
+  String get fieldBathrooms => 'الحمامات';
+
+  @override
+  String get fieldFloors => 'الطوابق';
+
+  @override
+  String get saveDraft => 'حفظ المسودة';
+
+  @override
+  String get draftSaved => 'تم حفظ المسودة';
+
+  @override
+  String get validationRequired => 'مطلوب';
+
+  @override
+  String get validationTitleLen => 'العنوان من 5 إلى 120 حرفاً';
+
+  @override
+  String get validationNumber => 'أدخل رقماً صحيحاً';
+
+  @override
+  String get addPropertyIntro => 'تفاصيل العقار';
+
+  @override
+  String get mediaTitle => 'الصور';
+
+  @override
+  String get mediaAdd => 'إضافة صور';
+
+  @override
+  String get mediaEmpty => 'لا توجد صور بعد. يمكنك إضافة حتى 20 صورة.';
+
+  @override
+  String mediaUploading(int done, int total) {
+    return 'جارٍ رفع $done من $total';
+  }
+
+  @override
+  String get mediaFailed => 'فشل رفع بعض الصور';
+
+  @override
+  String get mediaDelete => 'حذف الصورة';
+
+  @override
+  String get mediaCover => 'الغلاف';
+
+  @override
+  String get mediaLimit => 'الحد الأقصى 20 صورة';
+
+  @override
+  String get mediaApiMissing => 'عنوان الخادم غير مضبوط';
+
+  @override
+  String get addPhotosNow => 'إضافة صور';
+
+  @override
+  String get profileGuestTitle => 'سجّل الدخول إلى حسابك';
+
+  @override
+  String get profileGuestBody =>
+      'سجّل الدخول لحفظ المفضلة ونشر العقارات والتواصل مع الملاك.';
+
+  @override
+  String get authContinueGuest => 'المتابعة كزائر';
+
+  @override
+  String get authSignIn => 'تسجيل الدخول / إنشاء حساب';
+
+  @override
+  String get loginRequiredHint => 'سجّل الدخول للمتابعة';
+
+  @override
+  String get onboardingTitle => 'أكمل ملفك الشخصي';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get fieldFullName => 'الاسم الكامل';
+
+  @override
+  String get fieldAccountType => 'نوع الحساب';
+
+  @override
+  String get accountIndividual => 'فرد';
+
+  @override
+  String get accountOwner => 'مالك عقار';
+
+  @override
+  String get accountAgent => 'وسيط عقاري';
+
+  @override
+  String get accountCompany => 'شركة عقارية';
+
+  @override
+  String get accountDeveloper => 'مطوّر عقاري';
+
+  @override
+  String get saveProfile => 'حفظ';
+
+  @override
+  String get profileSaved => 'تم حفظ الملف الشخصي';
+
+  @override
+  String get roleMember => 'عضو';
+
+  @override
+  String get roleModerator => 'مشرف';
+
+  @override
+  String get roleAdmin => 'مدير';
+
+  @override
+  String get roleSuperAdmin => 'مدير عام';
+
+  @override
+  String get fieldGovernorateOptional => 'المحافظة (اختياري)';
+
+  @override
+  String get fieldDistrictOptional => 'القضاء (اختياري)';
+
+  @override
+  String get validationName => 'الاسم من 2 إلى 80 حرفاً';
 }

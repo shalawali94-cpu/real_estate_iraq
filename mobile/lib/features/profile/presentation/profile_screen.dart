@@ -1,21 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../localization/app_settings_controllers.dart';
 import '../../../theme/app_theme.dart';
 import '../../authentication/data/auth_repository.dart';
+import '../data/profile_repository.dart';
 
-/// Phase 2: language + appearance settings (working).
-/// Account sections are added in Phase 5.
+/// Guest view (no account) or the signed-in user's profile, plus app settings.
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
+
+  String _accountLabel(AppLocalizations t, String type) => switch (type) {
+        'owner' => t.accountOwner,
+        'agent' => t.accountAgent,
+        'company' => t.accountCompany,
+        'developer' => t.accountDeveloper,
+        _ => t.accountIndividual,
+      };
+
+  String _roleLabel(AppLocalizations t, String? role) => switch (role) {
+        'super_admin' => t.roleSuperAdmin,
+        'admin' => t.roleAdmin,
+        'moderator' => t.roleModerator,
+        _ => t.roleMember,
+      };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = AppLocalizations.of(context);
+    final theme = Theme.of(context);
     final locale = ref.watch(localeControllerProvider);
     final themeMode = ref.watch(themeModeControllerProvider);
+    final signedIn = ref.watch(sessionProvider).value != null;
+    final profile = ref.watch(profileProvider).value;
     final languages = {
       'ckb': t.languageKurdish,
       'ar': t.languageArabic,
@@ -27,7 +46,77 @@ class ProfileScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.md),
         children: [
-          Text(t.settingsLanguage, style: Theme.of(context).textTheme.titleMedium),
+          if (!signedIn)
+            Card(
+              color: theme.colorScheme.surfaceContainerHigh,
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(children: [
+                  Icon(Icons.account_circle_outlined, size: 56, color: theme.colorScheme.primary),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(t.profileGuestTitle,
+                      textAlign: TextAlign.center, style: theme.textTheme.titleMedium),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(t.profileGuestBody, textAlign: TextAlign.center),
+                  const SizedBox(height: AppSpacing.md),
+                  FilledButton(
+                    key: const Key('profileSignInButton'),
+                    onPressed: () => context.push('/login?from=%2Fprofile'),
+                    child: Text(t.authSignIn),
+                  ),
+                ]),
+              ),
+            )
+          else
+            Card(
+              color: theme.colorScheme.surfaceContainerHigh,
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Row(children: [
+                    CircleAvatar(
+                      radius: 28,
+                      child: Text(
+                        (profile?.fullName?.trim().isNotEmpty ?? false)
+                            ? profile!.fullName!.trim().characters.first
+                            : '?',
+                        style: theme.textTheme.titleLarge,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Text(profile?.fullName ?? '—', style: theme.textTheme.titleMedium),
+                        if (profile?.phone != null)
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: Text('+${profile!.phone!.replaceAll('+', '')}'),
+                          ),
+                      ]),
+                    ),
+                  ]),
+                  const SizedBox(height: AppSpacing.md),
+                  Wrap(spacing: AppSpacing.sm, children: [
+                    Chip(label: Text(_accountLabel(t, profile?.accountType ?? 'individual'))),
+                    Chip(
+                      avatar: profile?.isStaff == true
+                          ? const Icon(Icons.shield_outlined, size: 16)
+                          : null,
+                      label: Text(_roleLabel(t, profile?.topRole)),
+                    ),
+                  ]),
+                  const SizedBox(height: AppSpacing.sm),
+                  OutlinedButton.icon(
+                    key: const Key('editProfileButton'),
+                    onPressed: () => context.push('/profile/edit'),
+                    icon: const Icon(Icons.edit_outlined),
+                    label: Text(t.editProfile),
+                  ),
+                ]),
+              ),
+            ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(t.settingsLanguage, style: theme.textTheme.titleMedium),
           const SizedBox(height: AppSpacing.sm),
           SegmentedButton<String>(
             key: const Key('languageSelector'),
@@ -36,12 +125,11 @@ class ProfileScreen extends ConsumerWidget {
                 ButtonSegment(value: e.key, label: Text(e.value)),
             ],
             selected: {locale.languageCode},
-            onSelectionChanged: (s) => ref
-                .read(localeControllerProvider.notifier)
-                .setLocale(Locale(s.first)),
+            onSelectionChanged: (s) =>
+                ref.read(localeControllerProvider.notifier).setLocale(Locale(s.first)),
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text(t.settingsTheme, style: Theme.of(context).textTheme.titleMedium),
+          Text(t.settingsTheme, style: theme.textTheme.titleMedium),
           const SizedBox(height: AppSpacing.sm),
           SegmentedButton<ThemeMode>(
             segments: [
@@ -50,11 +138,10 @@ class ProfileScreen extends ConsumerWidget {
               ButtonSegment(value: ThemeMode.dark, label: Text(t.themeDark)),
             ],
             selected: {themeMode},
-            onSelectionChanged: (s) => ref
-                .read(themeModeControllerProvider.notifier)
-                .setThemeMode(s.first),
+            onSelectionChanged: (s) =>
+                ref.read(themeModeControllerProvider.notifier).setThemeMode(s.first),
           ),
-          if (ref.watch(authRepositoryProvider) != null) ...[
+          if (signedIn) ...[
             const SizedBox(height: AppSpacing.xl),
             OutlinedButton.icon(
               key: const Key('signOutButton'),

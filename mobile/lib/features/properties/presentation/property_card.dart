@@ -15,10 +15,12 @@ String transactionLabel(AppLocalizations t, String type) => switch (type) {
     };
 
 class PropertyCard extends StatelessWidget {
-  const PropertyCard({super.key, required this.property, this.imageUrl, this.onTap});
+  const PropertyCard({super.key, required this.property, this.imageUrl, this.onTap, this.isFavorite, this.onFavorite});
   final PropertySummary property;
   final String? imageUrl;
   final VoidCallback? onTap;
+  final bool? isFavorite; // null hides the heart (signed out / unconfigured)
+  final VoidCallback? onFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +53,22 @@ class PropertyCard extends StatelessWidget {
                   child: _Badge(transactionLabel(t, p.transactionType),
                       theme.colorScheme.secondary, Colors.black87),
                 ),
+                if (isFavorite != null)
+                  PositionedDirectional(
+                    top: 0,
+                    end: 0,
+                    child: IconButton(
+                      key: const Key('favoriteButton'),
+                      onPressed: onFavorite,
+                      icon: Icon(
+                        isFavorite! ? Icons.favorite : Icons.favorite_border,
+                        color: isFavorite! ? Colors.redAccent : Colors.white,
+                      ),
+                    ),
+                  ),
                 if (p.ownerVerified)
                   PositionedDirectional(
-                    top: AppSpacing.sm,
+                    bottom: AppSpacing.sm,
                     end: AppSpacing.sm,
                     child: Icon(Icons.verified, color: theme.colorScheme.secondary),
                   ),

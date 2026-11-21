@@ -136,4 +136,244 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadMore => 'Load more';
+
+  @override
+  String get specBedrooms => 'Bedrooms';
+
+  @override
+  String get specBathrooms => 'Bathrooms';
+
+  @override
+  String get specArea => 'Area';
+
+  @override
+  String get specFloors => 'Floors';
+
+  @override
+  String get specCondition => 'Condition';
+
+  @override
+  String get specFurnishing => 'Furnishing';
+
+  @override
+  String get specParking => 'Parking';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get descriptionTitle => 'Description';
+
+  @override
+  String get specsTitle => 'Details';
+
+  @override
+  String get ownerTitle => 'Listed by';
+
+  @override
+  String get contactCall => 'Call';
+
+  @override
+  String get contactWhatsApp => 'WhatsApp';
+
+  @override
+  String get favoritesEmpty => 'No saved properties yet';
+
+  @override
+  String get condNew => 'New';
+
+  @override
+  String get condExcellent => 'Excellent';
+
+  @override
+  String get condGood => 'Good';
+
+  @override
+  String get condNeedsRenovation => 'Needs renovation';
+
+  @override
+  String get condUnderConstruction => 'Under construction';
+
+  @override
+  String get furnUnfurnished => 'Unfurnished';
+
+  @override
+  String get furnSemi => 'Semi-furnished';
+
+  @override
+  String get furnFurnished => 'Furnished';
+
+  @override
+  String get notFound => 'This listing is no longer available';
+
+  @override
+  String get views => 'Views';
+
+  @override
+  String get publishedOn => 'Published';
+
+  @override
+  String get fieldCategory => 'Property type';
+
+  @override
+  String get fieldTransaction => 'Listing type';
+
+  @override
+  String get fieldTitle => 'Title';
+
+  @override
+  String get fieldDescription => 'Description';
+
+  @override
+  String get fieldPrice => 'Price';
+
+  @override
+  String get fieldCurrency => 'Currency';
+
+  @override
+  String get fieldNegotiable => 'Price is negotiable';
+
+  @override
+  String get fieldGovernorate => 'Governorate';
+
+  @override
+  String get fieldDistrict => 'District';
+
+  @override
+  String get fieldArea => 'Area (m²)';
+
+  @override
+  String get fieldAddress => 'Address (optional)';
+
+  @override
+  String get fieldBedrooms => 'Bedrooms';
+
+  @override
+  String get fieldBathrooms => 'Bathrooms';
+
+  @override
+  String get fieldFloors => 'Floors';
+
+  @override
+  String get saveDraft => 'Save draft';
+
+  @override
+  String get draftSaved => 'Draft saved';
+
+  @override
+  String get validationRequired => 'Required';
+
+  @override
+  String get validationTitleLen => 'Title must be 5 to 120 characters';
+
+  @override
+  String get validationNumber => 'Enter a valid number';
+
+  @override
+  String get addPropertyIntro => 'Property details';
+
+  @override
+  String get mediaTitle => 'Photos';
+
+  @override
+  String get mediaAdd => 'Add photos';
+
+  @override
+  String get mediaEmpty => 'No photos yet. Add up to 20 photos.';
+
+  @override
+  String mediaUploading(int done, int total) {
+    return 'Uploading $done of $total';
+  }
+
+  @override
+  String get mediaFailed => 'Some photos failed to upload';
+
+  @override
+  String get mediaDelete => 'Delete photo';
+
+  @override
+  String get mediaCover => 'Cover';
+
+  @override
+  String get mediaLimit => 'Maximum 20 photos';
+
+  @override
+  String get mediaApiMissing => 'Server address is not configured';
+
+  @override
+  String get addPhotosNow => 'Add photos';
+
+  @override
+  String get profileGuestTitle => 'Sign in to your account';
+
+  @override
+  String get profileGuestBody =>
+      'Sign in to save favorites, publish properties and contact owners.';
+
+  @override
+  String get authContinueGuest => 'Continue as guest';
+
+  @override
+  String get authSignIn => 'Sign in / Create account';
+
+  @override
+  String get loginRequiredHint => 'Sign in to continue';
+
+  @override
+  String get onboardingTitle => 'Complete your profile';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get fieldFullName => 'Full name';
+
+  @override
+  String get fieldAccountType => 'Account type';
+
+  @override
+  String get accountIndividual => 'Individual';
+
+  @override
+  String get accountOwner => 'Property owner';
+
+  @override
+  String get accountAgent => 'Real estate agent';
+
+  @override
+  String get accountCompany => 'Real estate company';
+
+  @override
+  String get accountDeveloper => 'Property developer';
+
+  @override
+  String get saveProfile => 'Save';
+
+  @override
+  String get profileSaved => 'Profile saved';
+
+  @override
+  String get roleMember => 'Member';
+
+  @override
+  String get roleModerator => 'Moderator';
+
+  @override
+  String get roleAdmin => 'Administrator';
+
+  @override
+  String get roleSuperAdmin => 'Super administrator';
+
+  @override
+  String get fieldGovernorateOptional => 'Governorate (optional)';
+
+  @override
+  String get fieldDistrictOptional => 'District (optional)';
+
+  @override
+  String get validationName => 'Name must be 2 to 80 characters';
 }
