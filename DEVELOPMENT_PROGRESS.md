@@ -2,10 +2,23 @@
 
 Local path: `C:\dev\real_estate_iraq` · GitHub: shalawali94-cpu/real_estate_iraq (private)
 Supabase (Free, Frankfurt): project ref `mvwaajcucfforwymmogn` — linked, migrations pushed
-Last updated: 2026-11-19
+Last updated: 2026-11-21
 
 ## Current phase
-Phase 4 — Backend: **in progress**
+Phase 5 — Flutter app: **in progress** (Phase 4 backend core done, see below)
+
+### Phase 5 — Flutter app
+- [x] Design system, l10n (ckb/ar/en, RTL), theme light/dark, 5-tab shell (640px max width on wide screens)
+- [x] Accounts: phone OTP login, guest browsing ("binar"), onboarding profile, edit profile, roles shown, sign-out, account deletion (migration 013 `account_anonymize` + POST /account/delete, test supabase/tests/account.sql 6/6; pushed to cloud)
+- [x] Home, Explore (server-side search, paging), property details, favorites
+- [x] Add property: type -> photos (up to 20, chosen on device, cover choice) -> details; nothing is uploaded until final save, then draft + photo upload (cover first)
+- [x] Review and pay screen: submit, 30,000 IQD fee (from payment_settings, sale only by default), FIB/Qi choice; shows "awaiting setup" until merchant credentials exist; never fakes payment
+- [x] My properties (status per listing)
+- [x] Messaging: Message button on listing, live inbox (Realtime), chat (Realtime), unread counters, online (presence) + typing (broadcast) indicators
+- [ ] Messaging extras: image attachments, block/report UI, push notifications (FCM)
+- [ ] Companies/business profiles, verification requests UI, saved searches/alerts UI, comparison, map search/location picker, notifications screen
+- [ ] AI Studio (Phase 7)
+Local-only helpers: `dev.bat` (start everything), `check.bat`, `save.bat "msg"`, `step.bat "msg"` (check + commit + push), `supabase/dev/publish_drafts.sql` (publishes local drafts, skipping payment).
 
 ### Phase 4 — Backend
 - [x] Vercel project `real-estate-iraq-api` (Hobby, root = backend/), auto-deploys on push to main
