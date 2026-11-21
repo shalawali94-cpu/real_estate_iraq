@@ -267,5 +267,12 @@
   "fieldPhoneIraq": "ژمارەی مۆبایل (07XX XXX XXXX)",
   "validationPhoneIraq": "ژمارەی مۆبایلی عێراقی دروست بنووسە",
   "authSignInTitle": "چوونەژوورەوە",
-  "fieldEmailOrPhone": "ئیمەیڵ یان ژمارەی مۆبایل"
+  "fieldEmailOrPhone": "ئیمەیڵ یان ژمارەی مۆبایل",
+  "compareTitle": "بەراوردکردن",
+  "compareClear": "پاککردنەوە",
+  "compareEmpty": "مووڵکێک بکەرەوە و ئایکۆنی بەراوردکردن بکە بۆ زیادکردنی (تا ٥).",
+  "compareFull": "دەتوانیت تا ٥ مووڵک بەراورد بکەیت.",
+  "compareAdded": "زیادکرا بۆ بەراوردکردن",
+  "compareAdd": "زیادکردن بۆ بەراوردکردن",
+  "compareRemove": "لابردن لە بەراوردکردن"
 }

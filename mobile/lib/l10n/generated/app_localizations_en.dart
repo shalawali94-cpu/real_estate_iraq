@@ -775,4 +775,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fieldEmailOrPhone => 'Email or mobile number';
+
+  @override
+  String get compareTitle => 'Compare';
+
+  @override
+  String get compareClear => 'Clear';
+
+  @override
+  String get compareEmpty =>
+      'Open a property and tap the compare icon to add it (up to 5).';
+
+  @override
+  String get compareFull => 'You can compare up to 5 properties.';
+
+  @override
+  String get compareAdded => 'Added to compare';
+
+  @override
+  String get compareAdd => 'Add to compare';
+
+  @override
+  String get compareRemove => 'Remove from compare';
 }

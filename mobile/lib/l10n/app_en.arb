@@ -267,5 +267,12 @@
   "fieldPhoneIraq": "Mobile number (07XX XXX XXXX)",
   "validationPhoneIraq": "Enter a valid Iraqi mobile number",
   "authSignInTitle": "Sign in",
-  "fieldEmailOrPhone": "Email or mobile number"
+  "fieldEmailOrPhone": "Email or mobile number",
+  "compareTitle": "Compare",
+  "compareClear": "Clear",
+  "compareEmpty": "Open a property and tap the compare icon to add it (up to 5).",
+  "compareFull": "You can compare up to 5 properties.",
+  "compareAdded": "Added to compare",
+  "compareAdd": "Add to compare",
+  "compareRemove": "Remove from compare"
 }

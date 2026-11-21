@@ -193,6 +193,9 @@ class ProfileScreen extends ConsumerWidget {
                   item(const Key('messagesButton'), Icons.chat_bubble_outline, t.messagesTitle,
                       () => context.push('/messages')),
                   const Divider(height: 1),
+                  item(const Key('compareListButton'), Icons.compare_arrows, t.compareTitle,
+                      () => context.push('/compare')),
+                  const Divider(height: 1),
                   item(const Key('notificationsButton'), Icons.notifications_outlined,
                       t.notificationsButton, () => context.push('/notifications'),
                       trailing: unread > 0

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../compare/presentation/compare_screen.dart';
 import '../../map/presentation/property_map_card.dart';
 
 import '../../../core/format/money.dart';
@@ -316,6 +317,61 @@ class _Body extends ConsumerWidget {
               ]),
             ],
             Consumer(builder: (context, ref, _) {
+              final inList = ref.watch(compareIdsProvider).contains(d.id);
+              return Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.md),
+                child: OutlinedButton.icon(
+                  key: const Key('compareToggle'),
+                  icon: Icon(inList ? Icons.check_circle : Icons.compare_arrows),
+                  label: Text(inList ? t.compareRemove : t.compareAdd),
+                  onPressed: () {
+                    final m = ScaffoldMessenger.of(context);
+                    final ok = ref.read(compareIdsProvider.notifier).toggle(d.id);
+                    m.hideCurrentSnackBar();
+                    if (!ok) {
+                      m.showSnackBar(SnackBar(
+                          duration: const Duration(seconds: 2), content: Text(t.compareFull)));
+                    } else if (ref.read(compareIdsProvider).contains(d.id)) {
+                      const w = 170.0;
+                      final sw = MediaQuery.of(context).size.width;
+                      final side = EdgeInsets.only(
+                        left: (sw - w) / 2,
+                        right: (sw - w) / 2,
+                        bottom: 96,
+                      );
+                      m.showSnackBar(SnackBar(
+                        duration: const Duration(seconds: 2),
+                        behavior: SnackBarBehavior.floating,
+                        margin: side,
+                        elevation: 0,
+                        backgroundColor: Colors.transparent,
+                        padding: EdgeInsets.zero,
+                        content: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: const Color(0xEB0E1621),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: const Color(0xFF8FB4E0)),
+                            boxShadow: const [
+                              BoxShadow(color: Color(0x408FB4E0), blurRadius: 8),
+                            ],
+                          ),
+                          child: Text(t.compareAdded,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              )),
+                        ),
+                      ));
+                    }
+                  },
+                ),
+              );
+            }),
+            Consumer(builder: (context, ref, _) {
               final p = ref.watch(propertyCoordsProvider(d.id)).value;
               if (p == null) return const SizedBox.shrink();
               return Padding(
@@ -399,3 +455,6 @@ class _Body extends ConsumerWidget {
     );
   }
 }
+
+String? conditionLabel(AppLocalizations t, String? v) => _condition(t, v);
+String? furnishingLabel(AppLocalizations t, String? v) => _furnishing(t, v);

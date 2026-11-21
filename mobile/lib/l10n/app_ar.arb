@@ -267,5 +267,12 @@
   "fieldPhoneIraq": "رقم الموبايل (07XX XXX XXXX)",
   "validationPhoneIraq": "أدخل رقم موبايل عراقي صحيح",
   "authSignInTitle": "تسجيل الدخول",
-  "fieldEmailOrPhone": "البريد الإلكتروني أو رقم الموبايل"
+  "fieldEmailOrPhone": "البريد الإلكتروني أو رقم الموبايل",
+  "compareTitle": "مقارنة",
+  "compareClear": "مسح",
+  "compareEmpty": "افتح عقاراً واضغط على أيقونة المقارنة لإضافته (حتى 5).",
+  "compareFull": "يمكنك مقارنة 5 عقارات كحد أقصى.",
+  "compareAdded": "تمت الإضافة إلى المقارنة",
+  "compareAdd": "إضافة للمقارنة",
+  "compareRemove": "إزالة من المقارنة"
 }

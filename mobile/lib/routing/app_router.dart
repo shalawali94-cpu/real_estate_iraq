@@ -12,6 +12,7 @@ import '../features/authentication/presentation/verify_screen.dart';
 import '../features/explore/presentation/explore_screen.dart';
 import '../features/favorites/presentation/favorites_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../features/compare/presentation/compare_screen.dart';
 import '../features/map/presentation/location_picker_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
 import 'package:latlong2/latlong.dart';
@@ -126,6 +127,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => MediaScreen(propertyId: state.pathParameters['id']!),
       ),
       GoRoute(path: AppRoutes.login, builder: (_, _) => const LoginScreen()),
+      GoRoute(path: '/compare', builder: (_, _) => const CompareScreen()),
       GoRoute(path: '/login/phone', builder: (_, _) => const PhoneLoginScreen()),
       GoRoute(path: '/login/email', builder: (_, _) => const EmailLoginScreen()),
       GoRoute(

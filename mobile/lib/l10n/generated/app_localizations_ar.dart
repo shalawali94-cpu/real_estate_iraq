@@ -771,4 +771,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get fieldEmailOrPhone => 'البريد الإلكتروني أو رقم الموبايل';
+
+  @override
+  String get compareTitle => 'مقارنة';
+
+  @override
+  String get compareClear => 'مسح';
+
+  @override
+  String get compareEmpty =>
+      'افتح عقاراً واضغط على أيقونة المقارنة لإضافته (حتى 5).';
+
+  @override
+  String get compareFull => 'يمكنك مقارنة 5 عقارات كحد أقصى.';
+
+  @override
+  String get compareAdded => 'تمت الإضافة إلى المقارنة';
+
+  @override
+  String get compareAdd => 'إضافة للمقارنة';
+
+  @override
+  String get compareRemove => 'إزالة من المقارنة';
 }

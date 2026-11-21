@@ -775,4 +775,26 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get fieldEmailOrPhone => 'ئیمەیڵ یان ژمارەی مۆبایل';
+
+  @override
+  String get compareTitle => 'بەراوردکردن';
+
+  @override
+  String get compareClear => 'پاککردنەوە';
+
+  @override
+  String get compareEmpty =>
+      'مووڵکێک بکەرەوە و ئایکۆنی بەراوردکردن بکە بۆ زیادکردنی (تا ٥).';
+
+  @override
+  String get compareFull => 'دەتوانیت تا ٥ مووڵک بەراورد بکەیت.';
+
+  @override
+  String get compareAdded => 'زیادکرا بۆ بەراوردکردن';
+
+  @override
+  String get compareAdd => 'زیادکردن بۆ بەراوردکردن';
+
+  @override
+  String get compareRemove => 'لابردن لە بەراوردکردن';
 }

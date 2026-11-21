@@ -1605,6 +1605,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Email or mobile number'**
   String get fieldEmailOrPhone;
+
+  /// No description provided for @compareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare'**
+  String get compareTitle;
+
+  /// No description provided for @compareClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get compareClear;
+
+  /// No description provided for @compareEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a property and tap the compare icon to add it (up to 5).'**
+  String get compareEmpty;
+
+  /// No description provided for @compareFull.
+  ///
+  /// In en, this message translates to:
+  /// **'You can compare up to 5 properties.'**
+  String get compareFull;
+
+  /// No description provided for @compareAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to compare'**
+  String get compareAdded;
+
+  /// No description provided for @compareAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to compare'**
+  String get compareAdd;
+
+  /// No description provided for @compareRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from compare'**
+  String get compareRemove;
 }
 
 class _AppLocalizationsDelegate

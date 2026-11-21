@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/compare/presentation/compare_screen.dart';
 import '../../l10n/generated/app_localizations.dart';
 
-class MainShell extends StatelessWidget {
+class MainShell extends ConsumerWidget {
   const MainShell({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = AppLocalizations.of(context);
+    final compareCount = ref.watch(compareIdsProvider).length;
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: compareCount == 0
+          ? null
+          : FloatingActionButton.extended(
+              key: const Key('compareFab'),
+              onPressed: () => context.push('/compare'),
+              icon: const Icon(Icons.compare_arrows),
+              label: Text('${t.compareTitle} ($compareCount)'),
+            ),
       // Keep content readable on wide screens (browser / tablet).
       body: Align(
         alignment: Alignment.topCenter,
