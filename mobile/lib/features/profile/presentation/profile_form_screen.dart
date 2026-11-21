@@ -54,7 +54,8 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
             markOnboarded: current?.onboarded != true,
           );
       // Wait for the fresh profile so the router already knows onboarding is done.
-      await ref.refresh(profileProvider.future);
+      ref.invalidate(profileProvider);
+      await ref.read(profileProvider.future);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.profileSaved)));
       if (widget.editMode && context.canPop()) {

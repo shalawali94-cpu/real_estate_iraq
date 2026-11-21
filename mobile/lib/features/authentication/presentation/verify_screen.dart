@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
+import '../../profile/data/profile_repository.dart';
 import '../data/auth_repository.dart';
 import '../data/phone_number.dart';
 
@@ -25,6 +26,7 @@ class _VerifyScreenState extends ConsumerState<VerifyScreen> {
   bool _busy = false;
   int _left = _cooldown;
   Timer? _timer;
+  bool _navigated = false;
 
   @override
   void initState() {
@@ -84,10 +86,24 @@ class _VerifyScreenState extends ConsumerState<VerifyScreen> {
     }
   }
 
+  /// After a successful sign-in, replace the whole stack with the target page.
+  void _finish() {
+    if (_navigated || !mounted) return;
+    _navigated = true;
+    final from = GoRouterState.of(context).uri.queryParameters['from'];
+    context.go((from != null && from.startsWith('/')) ? from : '/home');
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    // Profile loads right after the session appears; onboarding is handled by the router.
+    ref.listen<AsyncValue<UserProfile?>>(profileProvider, (_, next) {
+      if (next.isLoading) return;
+      final p = next.value;
+      if (next.hasError || (p != null && p.onboarded)) _finish();
+    });
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: () => context.pop()),

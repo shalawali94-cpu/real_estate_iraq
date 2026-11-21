@@ -44,48 +44,45 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   final signedIn = ValueNotifier<bool>(
     ref.read(authRepositoryProvider)?.currentSession != null,
   );
-  // null = signed in but the profile hasn't loaded yet (don't guess: avoids a Home flash).
-  final needsOnboarding = ValueNotifier<bool?>(null);
+  // Redirects read the live provider state; this notifier only asks the router to
+  // re-run them whenever auth or profile state changes (no mirrored copy to go stale).
+  final tick = ValueNotifier<int>(0);
+  void poke() => tick.value++;
   ref.listen<AsyncValue<Session?>>(sessionProvider, (_, next) {
     signedIn.value = next.value != null;
-    needsOnboarding.value = next.value == null ? false : null;
+    poke();
   });
-  ref.listen<AsyncValue<UserProfile?>>(profileProvider, (_, next) {
-    if (next.isLoading) return; // keep the last known value while reloading
-    if (next.hasError) {
-      needsOnboarding.value = false; // don't trap the user if the profile can't load
-      return;
-    }
-    final p = next.value;
-    needsOnboarding.value = p == null ? null : !p.onboarded;
-  });
+  ref.listen<AsyncValue<UserProfile?>>(profileProvider, (_, _) => poke());
   ref.onDispose(signedIn.dispose);
-  ref.onDispose(needsOnboarding.dispose);
+  ref.onDispose(tick.dispose);
+
+  /// null = signed in but the profile is not known yet (avoids a Home flash).
+  bool? needsOnboarding() {
+    final prof = ref.read(profileProvider);
+    if (prof.hasError) return false; // don't trap the user if it can't load
+    final p = prof.value;
+    if (p == null) return null;
+    return !p.onboarded;
+  }
 
   return GoRouter(
     initialLocation: AppRoutes.home,
-    refreshListenable: Listenable.merge([signedIn, needsOnboarding]),
+    refreshListenable: Listenable.merge([signedIn, tick]),
     redirect: (context, state) {
       // Without Supabase config (tests, local UI work) the app stays open.
       if (!Env.isSupabaseConfigured) return null;
       final loc = state.matchedLocation;
-      final onAuth = loc == AppRoutes.login || loc == AppRoutes.verify;
 
       if (!signedIn.value) {
         return _requiresAccount(loc) ? _loginFor(state.uri.toString()) : null;
       }
-      if (needsOnboarding.value == true && loc != AppRoutes.onboarding) {
+      final needs = needsOnboarding();
+      if (needs == true && loc != AppRoutes.onboarding) {
         return AppRoutes.onboarding;
       }
-      // Profile still loading right after login: stay put until we know where to go.
-      if (needsOnboarding.value == null && onAuth) return null;
-      if (needsOnboarding.value == false && loc == AppRoutes.onboarding) {
-        return AppRoutes.home;
-      }
-      if (onAuth) {
-        final from = state.uri.queryParameters['from'];
-        return (from != null && from.startsWith('/')) ? from : AppRoutes.home;
-      }
+      // Leaving login/verify (and onboarding) is done by those screens with go(),
+      // which replaces the whole stack. A redirect here could recreate a page that is
+      // already in the stack (e.g. /profile under the pushed login) and crash.
       return null;
     },
     routes: [

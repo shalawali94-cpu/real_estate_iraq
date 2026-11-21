@@ -375,4 +375,24 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get validationName => 'ناو دەبێت لە ٢ بۆ ٨٠ پیت بێت';
+
+  @override
+  String get deleteAccount => 'سڕینەوەی ئەکاونت';
+
+  @override
+  String get deleteAccountTitle => 'ئەکاونتەکەت دەسڕیتەوە؟';
+
+  @override
+  String get deleteAccountBody =>
+      'زانیارییە کەسییەکانت دەسڕدرێنەوە و ڕیکلامەکانت چیتر نابینرێن. تۆمارەکانی پارەدان بەپێی پێویست دەمێننەوە. ئەم کارە ناگەڕێتەوە.';
+
+  @override
+  String get deleteAccountConfirm => 'بسڕەوە';
+
+  @override
+  String get cancel => 'هەڵوەشاندنەوە';
+
+  @override
+  String get deleteAccountFailed =>
+      'نەتوانرا ئەکاونتەکە بسڕدرێتەوە. دووبارە هەوڵبدەرەوە.';
 }

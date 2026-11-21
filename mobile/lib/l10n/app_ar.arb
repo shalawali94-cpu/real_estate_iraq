@@ -137,5 +137,11 @@
   "roleSuperAdmin": "مدير عام",
   "fieldGovernorateOptional": "المحافظة (اختياري)",
   "fieldDistrictOptional": "القضاء (اختياري)",
-  "validationName": "الاسم من 2 إلى 80 حرفاً"
+  "validationName": "الاسم من 2 إلى 80 حرفاً",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountTitle": "حذف حسابك؟",
+  "deleteAccountBody": "ستتم إزالة بياناتك الشخصية ولن تظهر إعلاناتك بعد الآن. تُحفظ سجلات الدفع كما يقتضي القانون. لا يمكن التراجع عن ذلك.",
+  "deleteAccountConfirm": "حذف",
+  "cancel": "إلغاء",
+  "deleteAccountFailed": "تعذّر حذف الحساب. حاول مرة أخرى."
 }

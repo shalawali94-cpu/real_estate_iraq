@@ -376,4 +376,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get validationName => 'Name must be 2 to 80 characters';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountTitle => 'Delete your account?';
+
+  @override
+  String get deleteAccountBody =>
+      'Your personal data will be removed and your listings will no longer be visible. Payment records are kept as required. This cannot be undone.';
+
+  @override
+  String get deleteAccountConfirm => 'Delete';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get deleteAccountFailed =>
+      'Could not delete the account. Please try again.';
 }

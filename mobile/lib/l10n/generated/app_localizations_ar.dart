@@ -375,4 +375,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get validationName => 'الاسم من 2 إلى 80 حرفاً';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get deleteAccountTitle => 'حذف حسابك؟';
+
+  @override
+  String get deleteAccountBody =>
+      'ستتم إزالة بياناتك الشخصية ولن تظهر إعلاناتك بعد الآن. تُحفظ سجلات الدفع كما يقتضي القانون. لا يمكن التراجع عن ذلك.';
+
+  @override
+  String get deleteAccountConfirm => 'حذف';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get deleteAccountFailed => 'تعذّر حذف الحساب. حاول مرة أخرى.';
 }

@@ -137,5 +137,11 @@
   "roleSuperAdmin": "بەڕێوەبەری باڵا",
   "fieldGovernorateOptional": "پارێزگا (ئارەزوومەندانە)",
   "fieldDistrictOptional": "قەزا (ئارەزوومەندانە)",
-  "validationName": "ناو دەبێت لە ٢ بۆ ٨٠ پیت بێت"
+  "validationName": "ناو دەبێت لە ٢ بۆ ٨٠ پیت بێت",
+  "deleteAccount": "سڕینەوەی ئەکاونت",
+  "deleteAccountTitle": "ئەکاونتەکەت دەسڕیتەوە؟",
+  "deleteAccountBody": "زانیارییە کەسییەکانت دەسڕدرێنەوە و ڕیکلامەکانت چیتر نابینرێن. تۆمارەکانی پارەدان بەپێی پێویست دەمێننەوە. ئەم کارە ناگەڕێتەوە.",
+  "deleteAccountConfirm": "بسڕەوە",
+  "cancel": "هەڵوەشاندنەوە",
+  "deleteAccountFailed": "نەتوانرا ئەکاونتەکە بسڕدرێتەوە. دووبارە هەوڵبدەرەوە."
 }

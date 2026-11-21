@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../localization/app_settings_controllers.dart';
 import '../../../theme/app_theme.dart';
+import '../../../core/network/api_client.dart';
 import '../../authentication/data/auth_repository.dart';
 import '../data/profile_repository.dart';
 
@@ -26,6 +27,34 @@ class ProfileScreen extends ConsumerWidget {
         'moderator' => t.roleModerator,
         _ => t.roleMember,
       };
+
+  Future<void> _deleteAccount(BuildContext context, WidgetRef ref) async {
+    final t = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: Text(t.deleteAccountTitle),
+        content: Text(t.deleteAccountBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(c, false), child: Text(t.cancel)),
+          TextButton(
+            key: const Key('confirmDeleteButton'),
+            style: TextButton.styleFrom(foregroundColor: Theme.of(c).colorScheme.error),
+            onPressed: () => Navigator.pop(c, true),
+            child: Text(t.deleteAccountConfirm),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    try {
+      await ref.read(apiClientProvider)!.post('/api/v1/account/delete', const {});
+      await ref.read(authRepositoryProvider)!.signOut();
+    } catch (_) {
+      messenger.showSnackBar(SnackBar(content: Text(t.deleteAccountFailed)));
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -148,6 +177,14 @@ class ProfileScreen extends ConsumerWidget {
               onPressed: () => ref.read(authRepositoryProvider)!.signOut(),
               icon: const Icon(Icons.logout),
               label: Text(t.authSignOut),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            TextButton.icon(
+              key: const Key('deleteAccountButton'),
+              style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
+              onPressed: () => _deleteAccount(context, ref),
+              icon: const Icon(Icons.delete_forever_outlined),
+              label: Text(t.deleteAccount),
             ),
           ],
         ],

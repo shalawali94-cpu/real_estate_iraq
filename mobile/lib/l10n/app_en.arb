@@ -137,5 +137,11 @@
   "roleSuperAdmin": "Super administrator",
   "fieldGovernorateOptional": "Governorate (optional)",
   "fieldDistrictOptional": "District (optional)",
-  "validationName": "Name must be 2 to 80 characters"
+  "validationName": "Name must be 2 to 80 characters",
+  "deleteAccount": "Delete account",
+  "deleteAccountTitle": "Delete your account?",
+  "deleteAccountBody": "Your personal data will be removed and your listings will no longer be visible. Payment records are kept as required. This cannot be undone.",
+  "deleteAccountConfirm": "Delete",
+  "cancel": "Cancel",
+  "deleteAccountFailed": "Could not delete the account. Please try again."
 }
