@@ -20,7 +20,7 @@ class MyProperty {
 }
 
 /// The signed-in user's own listings (RLS returns only their rows), any status.
-final myPropertiesProvider = FutureProvider<List<MyProperty>>((ref) async {
+final myPropertiesProvider = FutureProvider.autoDispose<List<MyProperty>>((ref) async {
   if (!Env.isSupabaseConfigured) return const [];
   final c = Supabase.instance.client;
   final uid = c.auth.currentUser?.id;
