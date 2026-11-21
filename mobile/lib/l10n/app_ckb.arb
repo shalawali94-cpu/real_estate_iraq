@@ -253,5 +253,9 @@
   "searchEmpty": "هیچ گەڕانێکی پاشەکەوتکراو نییە",
   "searchSaved": "گەڕان پاشەکەوت کرا",
   "delete": "سڕینەوە",
-  "profileMyActivity": "چالاکییەکانم"
+  "profileMyActivity": "چالاکییەکانم",
+  "secBasics": "زانیاری بنەڕەتی",
+  "secPrice": "نرخ",
+  "secLocation": "شوێن",
+  "secDetails": "وردەکاری موڵک"
 }

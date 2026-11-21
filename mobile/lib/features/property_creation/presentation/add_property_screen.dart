@@ -209,6 +209,32 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(t.addPropertyTitle)),
+      bottomNavigationBar: Material(
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        elevation: 3,
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(AppSpacing.md, 10, AppSpacing.md, 10),
+            child: Center(
+              heightFactor: 1,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 640),
+                child: FilledButton(
+                  key: const Key('saveDraftButton'),
+                  onPressed: _busy ? null : _save,
+                  child: _busy
+                      ? Text(_uploaded > 0 || _photos.isNotEmpty
+                          ? t.mediaUploading(
+                              (_uploaded + 1).clamp(1, _photos.length), _photos.length)
+                          : '...')
+                      : Text(t.saveDraft),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 640),
@@ -221,6 +247,8 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
               child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                _gap(_photoSection(t)),
+                _gap(_section(t.secBasics, [
                 _gap(DropdownButtonFormField<DbRow>(
                   key: const Key('categoryField'),
                   decoration: InputDecoration(labelText: t.fieldCategory),
@@ -235,7 +263,6 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                     if (!_allowedTx.contains(_tx)) _tx = null;
                   }),
                 )),
-                _gap(_photoSection(t)),
                 _gap(DropdownButtonFormField<String>(
                   key: ValueKey('tx-${_category?['id']}'),
                   decoration: InputDecoration(labelText: t.fieldTransaction),
@@ -261,6 +288,8 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                   maxLength: 5000,
                   decoration: InputDecoration(labelText: t.fieldDescription),
                 )),
+                ])),
+                _gap(_section(t.secPrice, [
                 _gap(Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Expanded(
                     flex: 3,
@@ -300,6 +329,8 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                   value: _negotiable,
                   onChanged: (v) => setState(() => _negotiable = v),
                 ),
+                ])),
+                _gap(_section(t.secLocation, [
                 _gap(DropdownButtonFormField<int>(
                   key: const Key('governorateField'),
                   decoration: InputDecoration(labelText: t.fieldGovernorate),
@@ -332,7 +363,9 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                   maxLength: 200,
                   decoration: InputDecoration(labelText: t.fieldAddress),
                 )),
-                if (_category != null) ...[
+                ])),
+                if (_category != null)
+                  _gap(_section(t.secDetails, [
                   if (_has('area_sqm'))
                     _gap(_numField(_area, t.fieldArea, decimal: true)),
                   if (_has('bedrooms')) _gap(_numField(_beds, t.fieldBedrooms)),
@@ -369,18 +402,7 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                       value: _parking ?? false,
                       onChanged: (v) => setState(() => _parking = v),
                     ),
-                ],
-                const SizedBox(height: AppSpacing.md),
-                FilledButton(
-                  key: const Key('saveDraftButton'),
-                  onPressed: _busy ? null : _save,
-                  child: _busy
-                      ? Text(_uploaded > 0 || _photos.isNotEmpty
-                          ? t.mediaUploading(
-                              (_uploaded + 1).clamp(1, _photos.length), _photos.length)
-                          : '...')
-                      : Text(t.saveDraft),
-                ),
+                  ])),
                 const SizedBox(height: AppSpacing.xl),
               ],
             ),
@@ -465,6 +487,22 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
               : null;
         },
       );
+
+  Widget _section(String title, List<Widget> children) {
+    final theme = Theme.of(context);
+    return Card(
+      color: theme.colorScheme.surfaceContainerHigh,
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Text(title,
+              style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+          const SizedBox(height: AppSpacing.md),
+          ...children,
+        ]),
+      ),
+    );
+  }
 
   Widget _gap(Widget w) =>
       Padding(padding: const EdgeInsets.only(bottom: AppSpacing.md), child: w);

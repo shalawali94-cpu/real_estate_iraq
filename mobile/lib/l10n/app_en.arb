@@ -253,5 +253,9 @@
   "searchEmpty": "No saved searches",
   "searchSaved": "Search saved",
   "delete": "Delete",
-  "profileMyActivity": "My activity"
+  "profileMyActivity": "My activity",
+  "secBasics": "Basic information",
+  "secPrice": "Price",
+  "secLocation": "Location",
+  "secDetails": "Property details"
 }

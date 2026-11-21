@@ -57,6 +57,7 @@ class PropertyDetailScreen extends ConsumerWidget {
           ],
         ),
       ]),
+      bottomNavigationBar: async.value == null ? null : _ContactBar(d: async.value!),
       body: async.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(
@@ -80,52 +81,167 @@ class PropertyDetailScreen extends ConsumerWidget {
   }
 }
 
+String? _condition(AppLocalizations t, String? v) => switch (v) {
+      'new' => t.condNew,
+      'excellent' => t.condExcellent,
+      'good' => t.condGood,
+      'needs_renovation' => t.condNeedsRenovation,
+      'under_construction' => t.condUnderConstruction,
+      _ => null,
+    };
+
+String? _furnishing(AppLocalizations t, String? v) => switch (v) {
+      'unfurnished' => t.furnUnfurnished,
+      'semi_furnished' => t.furnSemi,
+      'furnished' => t.furnFurnished,
+      _ => null,
+    };
+
+Future<void> _message(
+    BuildContext context, WidgetRef ref, String ownerId, String propertyId) async {
+  final t = AppLocalizations.of(context);
+  final messenger = ScaffoldMessenger.of(context);
+  final router = GoRouter.of(context);
+  final from = GoRouterState.of(context).uri.toString();
+  final repo = ref.read(messagingRepositoryProvider);
+  if (repo == null) {
+    router.push('/login?from=${Uri.encodeComponent(from)}');
+    return;
+  }
+  if (ownerId == repo.myId) {
+    messenger.showSnackBar(SnackBar(content: Text(t.chatOwnListing)));
+    return;
+  }
+  try {
+    final id = await repo.open(ownerId, propertyId: propertyId);
+    router.push('/chat/$id');
+  } catch (e) {
+    messenger.showSnackBar(SnackBar(content: Text(t.chatOpenFailed)));
+  }
+}
+
+Future<void> _open(Uri uri) async {
+  await launchUrl(uri, mode: LaunchMode.externalApplication);
+}
+
+/// Always-visible contact actions at the bottom of the screen.
+class _ContactBar extends ConsumerWidget {
+  const _ContactBar({required this.d});
+  final PropertyDetail d;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final t = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final phone = d.phone;
+    return Material(
+      color: theme.colorScheme.surfaceContainer,
+      elevation: 3,
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(AppSpacing.md, 10, AppSpacing.md, 10),
+          child: Center(
+            heightFactor: 1,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 640),
+              child: Row(children: [
+                Expanded(
+                  flex: 3,
+                  child: FilledButton.icon(
+                    key: const Key('messageOwnerButton'),
+                    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(46)),
+                    onPressed: () => _message(context, ref, d.owner.id, d.id),
+                    icon: const Icon(Icons.chat_bubble_outline),
+                    label: Text(t.contactMessage),
+                  ),
+                ),
+                if (phone != null) ...[
+                  const SizedBox(width: AppSpacing.sm),
+                  IconButton.filledTonal(
+                    key: const Key('callButton'),
+                    tooltip: t.contactCall,
+                    onPressed: () => _open(Uri(scheme: 'tel', path: phone)),
+                    icon: const Icon(Icons.call),
+                  ),
+                  const SizedBox(width: 4),
+                  IconButton.filledTonal(
+                    key: const Key('whatsappButton'),
+                    tooltip: t.contactWhatsApp,
+                    onPressed: () =>
+                        _open(Uri.parse('https://wa.me/${phone.replaceAll('+', '')}')),
+                    icon: const Icon(Icons.chat_outlined),
+                  ),
+                ],
+              ]),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Gallery extends StatefulWidget {
+  const _Gallery({required this.urls});
+  final List<String> urls;
+  @override
+  State<_Gallery> createState() => _GalleryState();
+}
+
+class _GalleryState extends State<_Gallery> {
+  int _i = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final urls = widget.urls;
+    return LayoutBuilder(
+      builder: (context, c) => SizedBox(
+        height: (c.maxWidth * 3 / 4).clamp(0.0, 340.0).toDouble(),
+        child: _content(theme, urls),
+      ),
+    );
+  }
+
+  Widget _content(ThemeData theme, List<String> urls) {
+    return Builder(
+      builder: (context) => urls.isEmpty
+          ? ColoredBox(
+              color: theme.colorScheme.surfaceContainerHighest,
+              child: const Icon(Icons.home_work_outlined, size: 64))
+          : Stack(fit: StackFit.expand, children: [
+              PageView(
+                onPageChanged: (i) => setState(() => _i = i),
+                children: [
+                  for (final u in urls) CachedNetworkImage(imageUrl: u, fit: BoxFit.cover),
+                ],
+              ),
+              if (urls.length > 1)
+                PositionedDirectional(
+                  bottom: 10,
+                  end: 10,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        color: Colors.black54, borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      child: Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Text('${_i + 1} / ${urls.length}',
+                            style: const TextStyle(color: Colors.white, fontSize: 12)),
+                      ),
+                    ),
+                  ),
+                ),
+            ]),
+    );
+  }
+}
+
 class _Body extends ConsumerWidget {
   const _Body({required this.d});
   final PropertyDetail d;
-
-  String? _condition(AppLocalizations t, String? v) => switch (v) {
-        'new' => t.condNew,
-        'excellent' => t.condExcellent,
-        'good' => t.condGood,
-        'needs_renovation' => t.condNeedsRenovation,
-        'under_construction' => t.condUnderConstruction,
-        _ => null,
-      };
-
-  String? _furnishing(AppLocalizations t, String? v) => switch (v) {
-        'unfurnished' => t.furnUnfurnished,
-        'semi_furnished' => t.furnSemi,
-        'furnished' => t.furnFurnished,
-        _ => null,
-      };
-
-  Future<void> _message(
-      BuildContext context, WidgetRef ref, String ownerId, String propertyId) async {
-    final t = AppLocalizations.of(context);
-    final messenger = ScaffoldMessenger.of(context);
-    final router = GoRouter.of(context);
-    final from = GoRouterState.of(context).uri.toString();
-    final repo = ref.read(messagingRepositoryProvider);
-    if (repo == null) {
-      router.push('/login?from=${Uri.encodeComponent(from)}');
-      return;
-    }
-    if (ownerId == repo.myId) {
-      messenger.showSnackBar(SnackBar(content: Text(t.chatOwnListing)));
-      return;
-    }
-    try {
-      final id = await repo.open(ownerId, propertyId: propertyId);
-      router.push('/chat/$id');
-    } catch (e) {
-      messenger.showSnackBar(SnackBar(content: Text(t.chatOpenFailed)));
-    }
-  }
-
-  Future<void> _open(Uri uri) async {
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -145,112 +261,119 @@ class _Body extends ConsumerWidget {
       if (d.hasParking != null)
         (Icons.local_parking, t.specParking, d.hasParking! ? t.yes : t.no),
     ];
-    final phone = d.phone;
     return ListView(
       children: [
-        AspectRatio(
-          aspectRatio: 16 / 10,
-          child: urls.isEmpty
-              ? ColoredBox(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                  child: const Icon(Icons.home_work_outlined, size: 64))
-              : PageView(children: [
-                  for (final u in urls)
-                    CachedNetworkImage(imageUrl: u, fit: BoxFit.cover),
-                ]),
-        ),
+        _Gallery(urls: urls),
         Padding(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(transactionLabel(t, d.transactionType),
-                style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.secondary)),
-            const SizedBox(height: AppSpacing.xs),
+            Row(children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                    color: theme.colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(8)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  child: Text(transactionLabel(t, d.transactionType),
+                      style: const TextStyle(
+                          color: Colors.black87, fontSize: 12, fontWeight: FontWeight.w600)),
+                ),
+              ),
+              if (d.owner.verified) ...[
+                const SizedBox(width: AppSpacing.sm),
+                Icon(Icons.verified, size: 20, color: theme.colorScheme.secondary),
+              ],
+            ]),
+            const SizedBox(height: AppSpacing.sm),
             Directionality(
               textDirection: TextDirection.ltr,
               child: Text(formatMoney(d.priceAmount, d.priceCurrency),
-                  style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
+                  style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
             ),
             if (d.priceNegotiable) Text(t.negotiable, style: theme.textTheme.bodySmall),
-            const SizedBox(height: AppSpacing.sm),
-            Text(d.title, style: theme.textTheme.titleLarge),
+            const SizedBox(height: AppSpacing.xs),
+            Text(d.title, style: theme.textTheme.titleMedium),
             if (d.addressText != null) ...[
               const SizedBox(height: AppSpacing.xs),
               Row(children: [
-                const Icon(Icons.place_outlined, size: 18),
+                Icon(Icons.place_outlined, size: 18, color: theme.colorScheme.onSurfaceVariant),
                 const SizedBox(width: 4),
-                Expanded(child: Text(d.addressText!)),
+                Expanded(
+                    child: Text(d.addressText!,
+                        style: theme.textTheme.bodyMedium
+                            ?.copyWith(color: theme.colorScheme.onSurfaceVariant))),
               ]),
             ],
-            const SizedBox(height: AppSpacing.lg),
             if (specs.isNotEmpty) ...[
-              Text(t.specsTitle, style: theme.textTheme.titleMedium),
-              const SizedBox(height: AppSpacing.sm),
-              Wrap(spacing: AppSpacing.sm, runSpacing: AppSpacing.sm, children: [
-                for (final s in specs)
-                  Chip(avatar: Icon(s.$1, size: 18), label: Text('${s.$2}: ${s.$3}')),
-              ]),
               const SizedBox(height: AppSpacing.lg),
+              Text(t.specsTitle,
+                  style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+              const SizedBox(height: AppSpacing.sm),
+              GridView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: AppSpacing.sm,
+                  crossAxisSpacing: AppSpacing.sm,
+                  mainAxisExtent: 86,
+                ),
+                children: [
+                  for (final s in specs)
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainerHigh,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        Icon(s.$1, size: 22, color: theme.colorScheme.primary),
+                        const SizedBox(height: 4),
+                        Text(s.$3,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleSmall
+                                ?.copyWith(fontWeight: FontWeight.w700)),
+                        Text(s.$2, style: theme.textTheme.labelSmall),
+                      ]),
+                    ),
+                ],
+              ),
             ],
             if ((d.description ?? '').isNotEmpty) ...[
-              Text(t.descriptionTitle, style: theme.textTheme.titleMedium),
-              const SizedBox(height: AppSpacing.sm),
-              Text(d.description!),
               const SizedBox(height: AppSpacing.lg),
+              Text(t.descriptionTitle,
+                  style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+              const SizedBox(height: AppSpacing.sm),
+              Text(d.description!, style: theme.textTheme.bodyMedium?.copyWith(height: 1.5)),
             ],
-            Text('${t.views}: ${d.viewsCount}', style: theme.textTheme.bodySmall),
             const SizedBox(height: AppSpacing.lg),
             Card(
               color: theme.colorScheme.surfaceContainerHigh,
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.md),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(t.ownerTitle, style: theme.textTheme.labelMedium),
-                  const SizedBox(height: AppSpacing.xs),
-                  Row(children: [
-                    Expanded(
-                      child: Text(d.owner.name ?? '—', style: theme.textTheme.titleMedium),
-                    ),
-                    if (d.owner.verified)
-                      Icon(Icons.verified, color: theme.colorScheme.secondary),
-                  ]),
-                  const SizedBox(height: AppSpacing.md),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.tonalIcon(
-                      key: const Key('messageOwnerButton'),
-                      onPressed: () => _message(context, ref, d.owner.id, d.id),
-                      icon: const Icon(Icons.chat_bubble_outline),
-                      label: Text(t.contactMessage),
+                child: Row(children: [
+                  CircleAvatar(
+                    radius: 22,
+                    backgroundColor: theme.colorScheme.primaryContainer,
+                    child: Text(
+                      (d.owner.name?.trim().isNotEmpty ?? false)
+                          ? d.owner.name!.trim().characters.first
+                          : '?',
                     ),
                   ),
-                  if (phone != null) ...[
-                    const SizedBox(height: AppSpacing.md),
-                    Row(children: [
-                      Expanded(
-                        child: FilledButton.icon(
-                          key: const Key('callButton'),
-                          onPressed: () => _open(Uri(scheme: 'tel', path: phone)),
-                          icon: const Icon(Icons.call),
-                          label: Text(t.contactCall),
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.sm),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          key: const Key('whatsappButton'),
-                          style: OutlinedButton.styleFrom(
-                              minimumSize: const Size.fromHeight(52)),
-                          onPressed: () => _open(
-                              Uri.parse('https://wa.me/${phone.replaceAll('+', '')}')),
-                          icon: const Icon(Icons.chat_outlined),
-                          label: Text(t.contactWhatsApp),
-                        ),
-                      ),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(t.ownerTitle, style: theme.textTheme.labelSmall),
+                      Text(d.owner.name ?? '—', style: theme.textTheme.titleSmall),
                     ]),
-                  ],
+                  ),
+                  if (d.owner.verified) Icon(Icons.verified, color: theme.colorScheme.secondary),
                 ]),
               ),
             ),
+            const SizedBox(height: AppSpacing.sm),
+            Text('${t.views}: ${d.viewsCount}', style: theme.textTheme.bodySmall),
           ]),
         ),
       ],

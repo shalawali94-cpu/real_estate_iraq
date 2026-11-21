@@ -253,5 +253,9 @@
   "searchEmpty": "لا توجد عمليات بحث محفوظة",
   "searchSaved": "تم حفظ البحث",
   "delete": "حذف",
-  "profileMyActivity": "نشاطي"
+  "profileMyActivity": "نشاطي",
+  "secBasics": "المعلومات الأساسية",
+  "secPrice": "السعر",
+  "secLocation": "الموقع",
+  "secDetails": "تفاصيل العقار"
 }
