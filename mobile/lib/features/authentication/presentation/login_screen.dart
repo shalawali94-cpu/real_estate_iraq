@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -38,8 +39,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     try {
       await ref.read(authRepositoryProvider)!.sendOtp(phone);
       if (mounted) context.push('/verify', extra: phone);
-    } catch (_) {
-      if (mounted) setState(() => _error = t.authGenericError);
+    } catch (e) {
+      debugPrint('auth error: $e');
+      if (mounted) {
+        setState(() => _error = kDebugMode ? '$e' : t.authGenericError);
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }

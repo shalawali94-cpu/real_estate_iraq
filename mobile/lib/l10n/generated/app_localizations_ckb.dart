@@ -96,4 +96,43 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get authChangeNumber => 'گۆڕینی ژمارە';
+
+  @override
+  String get homeFeatured => 'تایبەت';
+
+  @override
+  String get homeLatest => 'دوایین ڕیکلامەکان';
+
+  @override
+  String get exploreSearchHint => 'گەڕان بەدوای موڵک';
+
+  @override
+  String get txSale => 'بۆ فرۆشتن';
+
+  @override
+  String get txRent => 'بۆ کرێ';
+
+  @override
+  String get txShortTermRent => 'کرێی کورتخایەن';
+
+  @override
+  String get txInvestment => 'وەبەرهێنان';
+
+  @override
+  String get filterAll => 'هەموو';
+
+  @override
+  String get emptyProperties => 'هیچ موڵکێک نەدۆزرایەوە';
+
+  @override
+  String get retry => 'دووبارە هەوڵبدەرەوە';
+
+  @override
+  String get negotiable => 'قابیلی دانوستان';
+
+  @override
+  String get sqm => 'م²';
+
+  @override
+  String get loadMore => 'زیاتر';
 }

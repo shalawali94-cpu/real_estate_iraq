@@ -35,5 +35,18 @@
   "authInvalidCode": "The code is 6 digits",
   "authGenericError": "Something went wrong, please try again",
   "authSignOut": "Sign out",
-  "authChangeNumber": "Change number"
+  "authChangeNumber": "Change number",
+  "homeFeatured": "Featured",
+  "homeLatest": "Latest listings",
+  "exploreSearchHint": "Search properties",
+  "txSale": "For sale",
+  "txRent": "For rent",
+  "txShortTermRent": "Short-term",
+  "txInvestment": "Investment",
+  "filterAll": "All",
+  "emptyProperties": "No properties found",
+  "retry": "Retry",
+  "negotiable": "Negotiable",
+  "sqm": "m²",
+  "loadMore": "Load more"
 }

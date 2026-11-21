@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,8 +64,11 @@ class _VerifyScreenState extends ConsumerState<VerifyScreen> {
     try {
       await ref.read(authRepositoryProvider)!.verifyOtp(widget.phone, code);
       // Router redirect reacts to the new session.
-    } catch (_) {
-      if (mounted) setState(() => _error = t.authGenericError);
+    } catch (e) {
+      debugPrint('auth error: $e');
+      if (mounted) {
+        setState(() => _error = kDebugMode ? '$e' : t.authGenericError);
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }

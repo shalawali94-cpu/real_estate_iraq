@@ -1,14 +1,133 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../shared/widgets/phase_placeholder.dart';
+import '../../../theme/app_theme.dart';
+import '../../properties/data/property_repository.dart';
+import '../../properties/presentation/property_card.dart';
+import '../../properties/presentation/property_list_controller.dart';
 
-class ExploreScreen extends StatelessWidget {
+class ExploreScreen extends ConsumerStatefulWidget {
   const ExploreScreen({super.key});
+  @override
+  ConsumerState<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends ConsumerState<ExploreScreen> {
+  final _search = TextEditingController();
+  final _scroll = ScrollController();
+  String? _tx;
 
   @override
-  Widget build(BuildContext context) => PhasePlaceholder(
-        title: AppLocalizations.of(context).navExplore,
-        icon: Icons.map_outlined,
-      );
+  void initState() {
+    super.initState();
+    _scroll.addListener(() {
+      if (_scroll.position.pixels > _scroll.position.maxScrollExtent - 400) {
+        ref.read(exploreListProvider.notifier).loadMore();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _search.dispose();
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _apply() {
+    final q = _search.text.trim();
+    ref.read(exploreListProvider.notifier).setFilters({
+      if (q.isNotEmpty) 'q': q,
+      if (_tx != null) 'transaction_type': _tx,
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    final state = ref.watch(exploreListProvider);
+    final repo = ref.watch(propertyRepositoryProvider);
+    final types = {
+      null: t.filterAll,
+      'sale': t.txSale,
+      'rent': t.txRent,
+      'short_term_rent': t.txShortTermRent,
+      'investment': t.txInvestment,
+    };
+    return Scaffold(
+      appBar: AppBar(title: Text(t.navExplore)),
+      body: Column(children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 0),
+          child: TextField(
+            key: const Key('exploreSearch'),
+            controller: _search,
+            textInputAction: TextInputAction.search,
+            onSubmitted: (_) => _apply(),
+            decoration: InputDecoration(
+              hintText: t.exploreSearchHint,
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: () {
+                  _search.clear();
+                  _apply();
+                },
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 52,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+            children: [
+              for (final e in types.entries)
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(end: AppSpacing.sm),
+                  child: ChoiceChip(
+                    label: Text(e.value),
+                    selected: _tx == e.key,
+                    onSelected: (_) {
+                      setState(() => _tx = e.key);
+                      _apply();
+                    },
+                  ),
+                ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: state.items.isEmpty && !state.loading
+              ? Center(
+                  child: state.error != null
+                      ? Column(mainAxisSize: MainAxisSize.min, children: [
+                          Text(t.authGenericError),
+                          TextButton(
+                              onPressed: () => ref.read(exploreListProvider.notifier).loadMore(),
+                              child: Text(t.retry)),
+                        ])
+                      : Text(t.emptyProperties))
+              : ListView.separated(
+                  controller: _scroll,
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  itemCount: state.items.length + (state.loading ? 1 : 0),
+                  separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
+                  itemBuilder: (_, i) {
+                    if (i >= state.items.length) {
+                      return const Padding(
+                        padding: EdgeInsets.all(AppSpacing.md),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    final p = state.items[i];
+                    return PropertyCard(property: p, imageUrl: repo?.coverUrl(p.coverPath));
+                  },
+                ),
+        ),
+      ]),
+    );
+  }
 }

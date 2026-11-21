@@ -96,4 +96,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get authChangeNumber => 'تغيير الرقم';
+
+  @override
+  String get homeFeatured => 'مميز';
+
+  @override
+  String get homeLatest => 'أحدث الإعلانات';
+
+  @override
+  String get exploreSearchHint => 'ابحث عن عقار';
+
+  @override
+  String get txSale => 'للبيع';
+
+  @override
+  String get txRent => 'للإيجار';
+
+  @override
+  String get txShortTermRent => 'إيجار قصير';
+
+  @override
+  String get txInvestment => 'استثمار';
+
+  @override
+  String get filterAll => 'الكل';
+
+  @override
+  String get emptyProperties => 'لا توجد عقارات';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get negotiable => 'قابل للتفاوض';
+
+  @override
+  String get sqm => 'م²';
+
+  @override
+  String get loadMore => 'المزيد';
 }

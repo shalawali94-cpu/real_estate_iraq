@@ -273,6 +273,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change number'**
   String get authChangeNumber;
+
+  /// No description provided for @homeFeatured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured'**
+  String get homeFeatured;
+
+  /// No description provided for @homeLatest.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest listings'**
+  String get homeLatest;
+
+  /// No description provided for @exploreSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search properties'**
+  String get exploreSearchHint;
+
+  /// No description provided for @txSale.
+  ///
+  /// In en, this message translates to:
+  /// **'For sale'**
+  String get txSale;
+
+  /// No description provided for @txRent.
+  ///
+  /// In en, this message translates to:
+  /// **'For rent'**
+  String get txRent;
+
+  /// No description provided for @txShortTermRent.
+  ///
+  /// In en, this message translates to:
+  /// **'Short-term'**
+  String get txShortTermRent;
+
+  /// No description provided for @txInvestment.
+  ///
+  /// In en, this message translates to:
+  /// **'Investment'**
+  String get txInvestment;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @emptyProperties.
+  ///
+  /// In en, this message translates to:
+  /// **'No properties found'**
+  String get emptyProperties;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @negotiable.
+  ///
+  /// In en, this message translates to:
+  /// **'Negotiable'**
+  String get negotiable;
+
+  /// No description provided for @sqm.
+  ///
+  /// In en, this message translates to:
+  /// **'m²'**
+  String get sqm;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
 }
 
 class _AppLocalizationsDelegate

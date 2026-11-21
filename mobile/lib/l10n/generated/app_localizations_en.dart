@@ -97,4 +97,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authChangeNumber => 'Change number';
+
+  @override
+  String get homeFeatured => 'Featured';
+
+  @override
+  String get homeLatest => 'Latest listings';
+
+  @override
+  String get exploreSearchHint => 'Search properties';
+
+  @override
+  String get txSale => 'For sale';
+
+  @override
+  String get txRent => 'For rent';
+
+  @override
+  String get txShortTermRent => 'Short-term';
+
+  @override
+  String get txInvestment => 'Investment';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get emptyProperties => 'No properties found';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get negotiable => 'Negotiable';
+
+  @override
+  String get sqm => 'm²';
+
+  @override
+  String get loadMore => 'Load more';
 }

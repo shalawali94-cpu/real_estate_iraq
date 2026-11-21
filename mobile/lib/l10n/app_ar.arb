@@ -35,5 +35,18 @@
   "authInvalidCode": "الرمز مكوّن من 6 أرقام",
   "authGenericError": "حدث خطأ، حاول مرة أخرى",
   "authSignOut": "تسجيل الخروج",
-  "authChangeNumber": "تغيير الرقم"
+  "authChangeNumber": "تغيير الرقم",
+  "homeFeatured": "مميز",
+  "homeLatest": "أحدث الإعلانات",
+  "exploreSearchHint": "ابحث عن عقار",
+  "txSale": "للبيع",
+  "txRent": "للإيجار",
+  "txShortTermRent": "إيجار قصير",
+  "txInvestment": "استثمار",
+  "filterAll": "الكل",
+  "emptyProperties": "لا توجد عقارات",
+  "retry": "إعادة المحاولة",
+  "negotiable": "قابل للتفاوض",
+  "sqm": "م²",
+  "loadMore": "المزيد"
 }

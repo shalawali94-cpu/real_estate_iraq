@@ -35,5 +35,18 @@
   "authInvalidCode": "کۆدەکە ٦ ژمارەیە",
   "authGenericError": "هەڵەیەک ڕوویدا، دووبارە هەوڵبدەرەوە",
   "authSignOut": "چوونەدەرەوە",
-  "authChangeNumber": "گۆڕینی ژمارە"
+  "authChangeNumber": "گۆڕینی ژمارە",
+  "homeFeatured": "تایبەت",
+  "homeLatest": "دوایین ڕیکلامەکان",
+  "exploreSearchHint": "گەڕان بەدوای موڵک",
+  "txSale": "بۆ فرۆشتن",
+  "txRent": "بۆ کرێ",
+  "txShortTermRent": "کرێی کورتخایەن",
+  "txInvestment": "وەبەرهێنان",
+  "filterAll": "هەموو",
+  "emptyProperties": "هیچ موڵکێک نەدۆزرایەوە",
+  "retry": "دووبارە هەوڵبدەرەوە",
+  "negotiable": "قابیلی دانوستان",
+  "sqm": "م²",
+  "loadMore": "زیاتر"
 }
