@@ -1077,6 +1077,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not open the conversation.'**
   String get chatOpenFailed;
+
+  /// No description provided for @chatTyping.
+  ///
+  /// In en, this message translates to:
+  /// **'typing…'**
+  String get chatTyping;
+
+  /// No description provided for @chatOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'online'**
+  String get chatOnline;
 }
 
 class _AppLocalizationsDelegate

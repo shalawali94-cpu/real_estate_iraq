@@ -505,4 +505,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chatOpenFailed => 'تعذّر فتح المحادثة.';
+
+  @override
+  String get chatTyping => 'يكتب…';
+
+  @override
+  String get chatOnline => 'متصل';
 }

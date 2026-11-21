@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
@@ -19,8 +22,100 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   bool _sending = false;
   int _lastCount = 0;
 
+  // Presence (Supabase Realtime): who has this chat open, and who is typing.
+  RealtimeChannel? _channel;
+  Timer? _typingTimer;
+  bool _iAmTyping = false;
+  bool _otherOnline = false;
+  bool _otherTyping = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _text.addListener(_onTextChanged);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _joinPresence();
+      _markRead();
+    });
+  }
+
+  void _joinPresence() {
+    final repo = ref.read(messagingRepositoryProvider);
+    if (repo == null || !mounted) return;
+    final me = repo.myId;
+    final ch = Supabase.instance.client.channel('chat:${widget.conversationId}');
+    void recompute() {
+      try {
+        _recomputePresence(ch, me);
+      } catch (e) {
+        debugPrint('presence error: $e');
+      }
+    }
+
+    // A "typing" change is a track() update, which arrives as join/leave events.
+    ch
+        .onPresenceSync((_) => recompute())
+        .onPresenceJoin((_) => recompute())
+        .onPresenceLeave((_) => recompute())
+        .subscribe((status, _) {
+      if (status == RealtimeSubscribeStatus.subscribed) {
+        ch.track({'user_id': me, 'typing': false});
+      }
+    });
+    _channel = ch;
+  }
+
+  void _recomputePresence(RealtimeChannel ch, String me) {
+    var online = false;
+    var typing = false;
+    for (final state in ch.presenceState()) {
+      for (final p in state.presences) {
+        final d = p.payload;
+        if (d['user_id'] != me) {
+          online = true;
+          if (d['typing'] == true) typing = true;
+        }
+      }
+    }
+    if (mounted) {
+      setState(() {
+        _otherOnline = online;
+        _otherTyping = typing;
+      });
+    }
+  }
+
+  Future<void> _markRead() async {
+    try {
+      await ref.read(messagingRepositoryProvider)?.markRead(widget.conversationId);
+    } catch (e) {
+      debugPrint('markRead error: $e');
+    }
+  }
+
+  void _setTyping(bool value) {
+    if (_iAmTyping == value) return;
+    _iAmTyping = value;
+    final repo = ref.read(messagingRepositoryProvider);
+    _channel?.track({'user_id': repo?.myId, 'typing': value});
+  }
+
+  void _onTextChanged() {
+    if (_text.text.trim().isEmpty) {
+      _typingTimer?.cancel();
+      _setTyping(false);
+      return;
+    }
+    _setTyping(true);
+    _typingTimer?.cancel();
+    _typingTimer = Timer(const Duration(seconds: 3), () => _setTyping(false));
+  }
+
   @override
   void dispose() {
+    _typingTimer?.cancel();
+    final ch = _channel;
+    if (ch != null) Supabase.instance.client.removeChannel(ch);
     _text.dispose();
     _scroll.dispose();
     super.dispose();
@@ -36,6 +131,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     try {
       await repo.send(widget.conversationId, body);
       _text.clear();
+      _setTyping(false);
     } catch (e) {
       debugPrint('send error: $e');
       messenger.showSnackBar(SnackBar(content: Text(kDebugMode ? '$e' : t.chatSendFailed)));
@@ -58,7 +154,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       if (list.length != _lastCount) {
         final first = _lastCount == 0;
         _lastCount = list.length;
-        repo?.markRead(widget.conversationId);
+        _markRead();
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!_scroll.hasClients) return;
           final end = _scroll.position.maxScrollExtent;
@@ -73,7 +169,25 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     });
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(title),
+          if (_otherTyping || _otherOnline)
+            Row(mainAxisSize: MainAxisSize.min, children: [
+              if (!_otherTyping)
+                Container(
+                  width: 8,
+                  height: 8,
+                  margin: const EdgeInsetsDirectional.only(end: 6),
+                  decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+                ),
+              Text(
+                _otherTyping ? t.chatTyping : t.chatOnline,
+                style: theme.textTheme.bodySmall,
+              ),
+            ]),
+        ]),
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 640),

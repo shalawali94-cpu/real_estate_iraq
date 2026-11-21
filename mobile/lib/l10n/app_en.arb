@@ -179,5 +179,7 @@
   "chatEmpty": "Say hello to start the conversation.",
   "chatSendFailed": "The message was not sent. Please try again.",
   "chatOwnListing": "This is your own listing.",
-  "chatOpenFailed": "Could not open the conversation."
+  "chatOpenFailed": "Could not open the conversation.",
+  "chatTyping": "typing…",
+  "chatOnline": "online"
 }

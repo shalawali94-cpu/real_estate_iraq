@@ -179,5 +179,7 @@
   "chatEmpty": "ابدأ المحادثة بتحية.",
   "chatSendFailed": "لم يتم إرسال الرسالة. حاول مرة أخرى.",
   "chatOwnListing": "هذا إعلانك.",
-  "chatOpenFailed": "تعذّر فتح المحادثة."
+  "chatOpenFailed": "تعذّر فتح المحادثة.",
+  "chatTyping": "يكتب…",
+  "chatOnline": "متصل"
 }

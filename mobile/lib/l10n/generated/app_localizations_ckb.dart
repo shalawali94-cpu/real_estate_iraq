@@ -511,4 +511,10 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get chatOpenFailed => 'نەتوانرا گفتوگۆکە بکرێتەوە.';
+
+  @override
+  String get chatTyping => 'دەنووسێت…';
+
+  @override
+  String get chatOnline => 'ئۆنلاینە';
 }

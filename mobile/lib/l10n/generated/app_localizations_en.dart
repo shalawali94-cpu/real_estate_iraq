@@ -511,4 +511,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatOpenFailed => 'Could not open the conversation.';
+
+  @override
+  String get chatTyping => 'typing…';
+
+  @override
+  String get chatOnline => 'online';
 }
