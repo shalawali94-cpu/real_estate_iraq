@@ -12,7 +12,7 @@ class PropertyMapCard extends StatelessWidget {
   final LatLng point;
   @override
   Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
+    final t = AppLocalizations.of(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(t.mapTitle,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
@@ -26,7 +26,7 @@ class PropertyMapCard extends StatelessWidget {
               initialCenter: point,
               initialZoom: 15,
               interactionOptions: const InteractionOptions(flags: InteractiveFlag.none),
-              onTap: (_, __) => launchUrl(
+              onTap: (_, _) => launchUrl(
                 Uri.parse('https://www.google.com/maps/search/?api=1&query=${point.latitude},${point.longitude}'),
                 mode: LaunchMode.externalApplication,
               ),

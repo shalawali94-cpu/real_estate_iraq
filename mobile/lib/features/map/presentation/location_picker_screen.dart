@@ -60,7 +60,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen>
 
   @override
   Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
+    final t = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(t.pickLocationTitle)),
       body: FlutterMap(
