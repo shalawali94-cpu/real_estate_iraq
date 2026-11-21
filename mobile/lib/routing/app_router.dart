@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../config/env.dart';
+import '../features/admin/presentation/admin_review_screen.dart';
 import '../features/authentication/data/auth_repository.dart';
+import '../features/authentication/presentation/email_login_screen.dart';
 import '../features/authentication/presentation/login_screen.dart';
 import '../features/authentication/presentation/verify_screen.dart';
 import '../features/explore/presentation/explore_screen.dart';
@@ -40,6 +42,7 @@ bool _requiresAccount(String loc) =>
     loc.startsWith('/draft') ||
     loc.startsWith('/profile/edit') ||
     loc.startsWith('/profile/properties') ||
+    loc.startsWith('/admin') ||
     loc.startsWith('/messages') ||
     loc.startsWith('/chat');
 
@@ -97,6 +100,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/property/:id',
         builder: (_, state) => PropertyDetailScreen(id: state.pathParameters['id']!),
       ),
+      GoRoute(path: '/admin', builder: (_, _) => const AdminReviewScreen()),
       GoRoute(path: '/messages', builder: (_, _) => const InboxScreen()),
       GoRoute(
         path: '/chat/:id',
@@ -111,6 +115,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => MediaScreen(propertyId: state.pathParameters['id']!),
       ),
       GoRoute(path: AppRoutes.login, builder: (_, _) => const LoginScreen()),
+      GoRoute(path: '/login/email', builder: (_, _) => const EmailLoginScreen()),
       GoRoute(
         path: AppRoutes.verify,
         builder: (_, state) => VerifyScreen(phone: state.extra! as String),

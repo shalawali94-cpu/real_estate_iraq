@@ -523,4 +523,67 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get validationEmail => 'ئیمەیڵێکی دروست بنووسە.';
+
+  @override
+  String get authEmailSignIn => 'چوونەژوورەوە بە ئیمەیڵ';
+
+  @override
+  String get authUsePhone => 'چوونەژوورەوە بە ژمارەی مۆبایل';
+
+  @override
+  String get authPassword => 'پاسوۆرد';
+
+  @override
+  String get authCreateAccount => 'دروستکردنی ئەکاونت';
+
+  @override
+  String get authToSignIn => 'ئەکاونتت هەیە؟ بچۆ ژوورەوە';
+
+  @override
+  String get authToCreate => 'نوێیت؟ ئەکاونت دروست بکە';
+
+  @override
+  String get authPasswordShort => 'پاسوۆرد دەبێت لانیکەم ٦ پیت بێت';
+
+  @override
+  String get authWrongCredentials => 'ئیمەیڵ یان پاسوۆرد هەڵەیە';
+
+  @override
+  String get adminReviewTitle => 'پشکنینی ئیعلانەکان';
+
+  @override
+  String get adminStatusSuspended => 'ڕاگیراو';
+
+  @override
+  String get adminApprove => 'پەسەندکردن';
+
+  @override
+  String get adminReject => 'ڕەتکردنەوە';
+
+  @override
+  String get adminSuspend => 'ڕاگرتن';
+
+  @override
+  String get adminUnsuspend => 'لابردنی ڕاگرتن';
+
+  @override
+  String get adminView => 'بینین';
+
+  @override
+  String get adminEmpty => 'هیچ نییە';
+
+  @override
+  String get adminDone => 'کرا';
+
+  @override
+  String get adminReasonTitle => 'هۆکار';
+
+  @override
+  String get adminReasonHint => 'هۆکارەکە بنووسە (خاوەنەکەی دەیبینێت)';
+
+  @override
+  String get adminConfirm => 'دڵنیابوونەوە';
+
+  @override
+  String get adminOpenButton => 'پشکنینی ئیعلانەکان';
 }

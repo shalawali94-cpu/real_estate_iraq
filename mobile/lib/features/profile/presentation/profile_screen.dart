@@ -6,6 +6,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../localization/app_settings_controllers.dart';
 import '../../../theme/app_theme.dart';
 import '../../../core/network/api_client.dart';
+import '../../admin/presentation/admin_review_screen.dart';
 import '../../authentication/data/auth_repository.dart';
 import '../data/profile_repository.dart';
 
@@ -141,6 +142,13 @@ class ProfileScreen extends ConsumerWidget {
                     icon: const Icon(Icons.edit_outlined),
                     label: Text(t.editProfile),
                   ),
+                  if (ref.watch(isStaffProvider).value ?? false)
+                    FilledButton.icon(
+                      key: const Key('adminButton'),
+                      onPressed: () => context.push('/admin'),
+                      icon: const Icon(Icons.admin_panel_settings_outlined),
+                      label: Text(t.adminOpenButton),
+                    ),
                   OutlinedButton.icon(
                     key: const Key('myPropertiesButton'),
                     onPressed: () => context.push('/profile/properties'),

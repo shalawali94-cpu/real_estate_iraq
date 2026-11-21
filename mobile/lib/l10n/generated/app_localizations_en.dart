@@ -523,4 +523,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get validationEmail => 'Enter a valid email address.';
+
+  @override
+  String get authEmailSignIn => 'Sign in with email';
+
+  @override
+  String get authUsePhone => 'Sign in with phone number';
+
+  @override
+  String get authPassword => 'Password';
+
+  @override
+  String get authCreateAccount => 'Create account';
+
+  @override
+  String get authToSignIn => 'Have an account? Sign in';
+
+  @override
+  String get authToCreate => 'New here? Create account';
+
+  @override
+  String get authPasswordShort => 'Password must be at least 6 characters';
+
+  @override
+  String get authWrongCredentials => 'Wrong email or password';
+
+  @override
+  String get adminReviewTitle => 'Review listings';
+
+  @override
+  String get adminStatusSuspended => 'Suspended';
+
+  @override
+  String get adminApprove => 'Approve';
+
+  @override
+  String get adminReject => 'Reject';
+
+  @override
+  String get adminSuspend => 'Suspend';
+
+  @override
+  String get adminUnsuspend => 'Unsuspend';
+
+  @override
+  String get adminView => 'View';
+
+  @override
+  String get adminEmpty => 'Nothing here';
+
+  @override
+  String get adminDone => 'Done';
+
+  @override
+  String get adminReasonTitle => 'Reason';
+
+  @override
+  String get adminReasonHint => 'Write the reason (the owner will see it)';
+
+  @override
+  String get adminConfirm => 'Confirm';
+
+  @override
+  String get adminOpenButton => 'Review listings';
 }

@@ -18,6 +18,12 @@ class AuthRepository {
   Future<void> verifyOtp(String e164Phone, String code) =>
       _client.auth.verifyOTP(phone: e164Phone, token: code, type: OtpType.sms);
 
+  Future<void> signInWithEmail(String email, String password) =>
+      _client.auth.signInWithPassword(email: email, password: password);
+
+  Future<void> signUpWithEmail(String email, String password) =>
+      _client.auth.signUp(email: email, password: password);
+
   Future<void> signOut() => _client.auth.signOut();
 }
 

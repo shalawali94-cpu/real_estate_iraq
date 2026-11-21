@@ -104,6 +104,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 TextButton(
+                  key: const Key('emailLoginButton'),
+                  onPressed: () {
+                    final from = GoRouterState.of(context).uri.queryParameters['from'];
+                    context.push(from == null
+                        ? '/login/email'
+                        : '/login/email?from=${Uri.encodeComponent(from)}');
+                  },
+                  child: Text(t.authEmailSignIn),
+                ),
+                TextButton(
                   key: const Key('continueGuestButton'),
                   onPressed: () => context.go('/home'),
                   child: Text(t.authContinueGuest),

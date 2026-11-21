@@ -517,4 +517,69 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get validationEmail => 'أدخل بريدًا إلكترونيًا صحيحًا.';
+
+  @override
+  String get authEmailSignIn => 'تسجيل الدخول بالبريد الإلكتروني';
+
+  @override
+  String get authUsePhone => 'تسجيل الدخول برقم الهاتف';
+
+  @override
+  String get authPassword => 'كلمة المرور';
+
+  @override
+  String get authCreateAccount => 'إنشاء حساب';
+
+  @override
+  String get authToSignIn => 'لديك حساب؟ سجّل الدخول';
+
+  @override
+  String get authToCreate => 'جديد هنا؟ أنشئ حسابًا';
+
+  @override
+  String get authPasswordShort =>
+      'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
+
+  @override
+  String get authWrongCredentials =>
+      'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+
+  @override
+  String get adminReviewTitle => 'مراجعة الإعلانات';
+
+  @override
+  String get adminStatusSuspended => 'موقوف';
+
+  @override
+  String get adminApprove => 'موافقة';
+
+  @override
+  String get adminReject => 'رفض';
+
+  @override
+  String get adminSuspend => 'إيقاف';
+
+  @override
+  String get adminUnsuspend => 'إلغاء الإيقاف';
+
+  @override
+  String get adminView => 'عرض';
+
+  @override
+  String get adminEmpty => 'لا يوجد شيء هنا';
+
+  @override
+  String get adminDone => 'تم';
+
+  @override
+  String get adminReasonTitle => 'السبب';
+
+  @override
+  String get adminReasonHint => 'اكتب السبب (سيراه المالك)';
+
+  @override
+  String get adminConfirm => 'تأكيد';
+
+  @override
+  String get adminOpenButton => 'مراجعة الإعلانات';
 }

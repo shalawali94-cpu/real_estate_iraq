@@ -1101,6 +1101,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a valid email address.'**
   String get validationEmail;
+
+  /// No description provided for @authEmailSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with email'**
+  String get authEmailSignIn;
+
+  /// No description provided for @authUsePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with phone number'**
+  String get authUsePhone;
+
+  /// No description provided for @authPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPassword;
+
+  /// No description provided for @authCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get authCreateAccount;
+
+  /// No description provided for @authToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Have an account? Sign in'**
+  String get authToSignIn;
+
+  /// No description provided for @authToCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'New here? Create account'**
+  String get authToCreate;
+
+  /// No description provided for @authPasswordShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get authPasswordShort;
+
+  /// No description provided for @authWrongCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong email or password'**
+  String get authWrongCredentials;
+
+  /// No description provided for @adminReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review listings'**
+  String get adminReviewTitle;
+
+  /// No description provided for @adminStatusSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get adminStatusSuspended;
+
+  /// No description provided for @adminApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get adminApprove;
+
+  /// No description provided for @adminReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get adminReject;
+
+  /// No description provided for @adminSuspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend'**
+  String get adminSuspend;
+
+  /// No description provided for @adminUnsuspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsuspend'**
+  String get adminUnsuspend;
+
+  /// No description provided for @adminView.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get adminView;
+
+  /// No description provided for @adminEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here'**
+  String get adminEmpty;
+
+  /// No description provided for @adminDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get adminDone;
+
+  /// No description provided for @adminReasonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get adminReasonTitle;
+
+  /// No description provided for @adminReasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write the reason (the owner will see it)'**
+  String get adminReasonHint;
+
+  /// No description provided for @adminConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get adminConfirm;
+
+  /// No description provided for @adminOpenButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Review listings'**
+  String get adminOpenButton;
 }
 
 class _AppLocalizationsDelegate
