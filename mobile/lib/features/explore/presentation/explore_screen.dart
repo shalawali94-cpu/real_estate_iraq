@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
 import '../../properties/presentation/property_card_tile.dart';
 import '../../properties/presentation/property_list_controller.dart';
 import 'filter_sheet.dart';
+import 'saved_searches_sheet.dart';
 
 class ExploreScreen extends ConsumerStatefulWidget {
   const ExploreScreen({super.key});
@@ -37,12 +40,36 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   }
 
   void _apply() {
+    ref.read(exploreListProvider.notifier).setFilters(_currentQuery());
+  }
+
+  Future<void> _openSaved() async {
+    if (Supabase.instance.client.auth.currentUser == null) {
+      context.push('/login?from=${Uri.encodeComponent('/explore')}');
+      return;
+    }
+    final current = {
+      ..._currentQuery(),
+      'ui': {..._filters.toJson(), 'q': _search.text.trim(), 'tx': _tx},
+    };
+    final picked = await showSavedSearchesSheet(context, current);
+    if (picked == null || !mounted) return;
+    final ui = Map<String, dynamic>.from((picked['ui'] as Map?) ?? const {});
+    setState(() {
+      _filters = ExploreFilters.fromJson(ui);
+      _tx = ui['tx'] as String?;
+      _search.text = (ui['q'] as String?) ?? '';
+    });
+    _apply();
+  }
+
+  Map<String, dynamic> _currentQuery() {
     final q = _search.text.trim();
-    ref.read(exploreListProvider.notifier).setFilters({
+    return {
       if (q.isNotEmpty) 'q': q,
       if (_tx != null) 'transaction_type': _tx,
       ..._filters.toQuery(),
-    });
+    };
   }
 
   Future<void> _openFilters() async {
@@ -67,6 +94,12 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
       appBar: AppBar(
         title: Text(t.navExplore),
         actions: [
+          IconButton(
+            key: const Key('savedSearchesButton'),
+            tooltip: t.searchesTitle,
+            onPressed: _openSaved,
+            icon: const Icon(Icons.bookmarks_outlined),
+          ),
           IconButton(
             key: const Key('filterButton'),
             tooltip: t.filterTitle,

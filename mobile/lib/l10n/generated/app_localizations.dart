@@ -937,7 +937,7 @@ abstract class AppLocalizations {
   /// No description provided for @reviewFeeNote.
   ///
   /// In en, this message translates to:
-  /// **'Paid once per sale listing. Payment does not guarantee approval: every listing is reviewed before it is published.'**
+  /// **'Paid once per listing. Payment does not guarantee approval: every listing is reviewed before it is published.'**
   String get reviewFeeNote;
 
   /// No description provided for @reviewContinue.
@@ -1383,6 +1383,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications'**
   String get notificationsButton;
+
+  /// No description provided for @reportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report this listing'**
+  String get reportTitle;
+
+  /// No description provided for @reportFake.
+  ///
+  /// In en, this message translates to:
+  /// **'Fake or misleading'**
+  String get reportFake;
+
+  /// No description provided for @reportWrongPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong price'**
+  String get reportWrongPrice;
+
+  /// No description provided for @reportSold.
+  ///
+  /// In en, this message translates to:
+  /// **'Already sold / rented'**
+  String get reportSold;
+
+  /// No description provided for @reportDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get reportDuplicate;
+
+  /// No description provided for @reportFraud.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspected fraud'**
+  String get reportFraud;
+
+  /// No description provided for @reportOffensive.
+  ///
+  /// In en, this message translates to:
+  /// **'Offensive content'**
+  String get reportOffensive;
+
+  /// No description provided for @reportOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get reportOther;
+
+  /// No description provided for @reportDetailsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Details (optional)'**
+  String get reportDetailsHint;
+
+  /// No description provided for @reportSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send report'**
+  String get reportSend;
+
+  /// No description provided for @reportThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you, we will review it'**
+  String get reportThanks;
+
+  /// No description provided for @reportMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get reportMenu;
+
+  /// No description provided for @chatBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Block user'**
+  String get chatBlock;
+
+  /// No description provided for @chatBlockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Block this user?'**
+  String get chatBlockTitle;
+
+  /// No description provided for @chatBlockBody.
+  ///
+  /// In en, this message translates to:
+  /// **'They will no longer be able to message you.'**
+  String get chatBlockBody;
+
+  /// No description provided for @chatBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'User blocked'**
+  String get chatBlocked;
+
+  /// No description provided for @searchesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved searches'**
+  String get searchesTitle;
+
+  /// No description provided for @searchSaveCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Save current search'**
+  String get searchSaveCurrent;
+
+  /// No description provided for @searchName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get searchName;
+
+  /// No description provided for @searchEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved searches'**
+  String get searchEmpty;
+
+  /// No description provided for @searchSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Search saved'**
+  String get searchSaved;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
 }
 
 class _AppLocalizationsDelegate

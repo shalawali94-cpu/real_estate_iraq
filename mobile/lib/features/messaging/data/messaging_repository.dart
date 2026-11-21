@@ -82,6 +82,18 @@ class MessagingRepository {
     return items;
   }
 
+  /// Blocks the other member of a conversation (RLS: only my own block rows).
+  Future<void> blockOther(String conversationId) async {
+    final m = await _c
+        .from('conversation_members')
+        .select('user_id')
+        .eq('conversation_id', conversationId)
+        .neq('user_id', myId)
+        .maybeSingle();
+    if (m == null) return;
+    await _c.from('user_blocks').upsert({'blocker_id': myId, 'blocked_id': m['user_id']});
+  }
+
   Future<String> otherName(String conversationId) async {
     final m = await _c
         .from('conversation_members')

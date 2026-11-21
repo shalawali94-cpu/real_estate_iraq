@@ -433,7 +433,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reviewFeeNote =>
-      'تُدفع مرة واحدة لكل إعلان بيع. الدفع لا يضمن القبول: تتم مراجعة كل إعلان قبل نشره.';
+      'تُدفع مرة واحدة لكل إعلان. الدفع لا يضمن القبول: تتم مراجعة كل إعلان قبل نشره.';
 
   @override
   String get reviewContinue => 'المتابعة إلى الدفع';
@@ -660,4 +660,70 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notificationsButton => 'الإشعارات';
+
+  @override
+  String get reportTitle => 'الإبلاغ عن هذا الإعلان';
+
+  @override
+  String get reportFake => 'مزيف أو مضلل';
+
+  @override
+  String get reportWrongPrice => 'سعر خاطئ';
+
+  @override
+  String get reportSold => 'تم بيعه / تأجيره';
+
+  @override
+  String get reportDuplicate => 'مكرر';
+
+  @override
+  String get reportFraud => 'اشتباه احتيال';
+
+  @override
+  String get reportOffensive => 'محتوى مسيء';
+
+  @override
+  String get reportOther => 'أخرى';
+
+  @override
+  String get reportDetailsHint => 'تفاصيل (اختياري)';
+
+  @override
+  String get reportSend => 'إرسال البلاغ';
+
+  @override
+  String get reportThanks => 'شكرًا، سنراجعه';
+
+  @override
+  String get reportMenu => 'إبلاغ';
+
+  @override
+  String get chatBlock => 'حظر المستخدم';
+
+  @override
+  String get chatBlockTitle => 'حظر هذا المستخدم؟';
+
+  @override
+  String get chatBlockBody => 'لن يتمكن من مراسلتك بعد الآن.';
+
+  @override
+  String get chatBlocked => 'تم حظر المستخدم';
+
+  @override
+  String get searchesTitle => 'عمليات البحث المحفوظة';
+
+  @override
+  String get searchSaveCurrent => 'حفظ البحث الحالي';
+
+  @override
+  String get searchName => 'الاسم';
+
+  @override
+  String get searchEmpty => 'لا توجد عمليات بحث محفوظة';
+
+  @override
+  String get searchSaved => 'تم حفظ البحث';
+
+  @override
+  String get delete => 'حذف';
 }

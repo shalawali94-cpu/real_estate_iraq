@@ -8,6 +8,7 @@ import '../../../core/format/money.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
 import '../../favorites/data/favorites_repository.dart';
+import 'report_dialog.dart';
 import '../../messaging/data/messaging_repository.dart';
 import '../data/property_repository.dart';
 import '../domain/property_detail.dart';
@@ -45,6 +46,15 @@ class PropertyDetailScreen extends ConsumerWidget {
           },
           icon: Icon(isFav ? Icons.favorite : Icons.favorite_border,
               color: isFav ? Colors.redAccent : null),
+        ),
+        PopupMenuButton<String>(
+          key: const Key('detailMenu'),
+          onSelected: (v) {
+            if (v == 'report') showReportDialog(context, id);
+          },
+          itemBuilder: (_) => [
+            PopupMenuItem(value: 'report', child: Text(t.reportMenu)),
+          ],
         ),
       ]),
       body: async.when(

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
@@ -196,6 +197,39 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               Text(t.chatOnline, style: theme.textTheme.bodySmall),
             ]),
         ]),
+        actions: [
+          PopupMenuButton<String>(
+            key: const Key('chatMenu'),
+            onSelected: (v) async {
+              if (v != 'block') return;
+              final messenger = ScaffoldMessenger.of(context);
+              final router = GoRouter.of(context);
+              final repo = ref.read(messagingRepositoryProvider)!;
+              final ok = await showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text(t.chatBlockTitle),
+                  content: Text(t.chatBlockBody),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.of(ctx).pop(false), child: Text(t.cancel)),
+                    FilledButton(
+                        onPressed: () => Navigator.of(ctx).pop(true), child: Text(t.chatBlock)),
+                  ],
+                ),
+              );
+              if (ok != true) return;
+              try {
+                await repo.blockOther(widget.conversationId);
+                messenger.showSnackBar(SnackBar(content: Text(t.chatBlocked)));
+                router.go('/messages');
+              } catch (_) {
+                messenger.showSnackBar(SnackBar(content: Text(t.authGenericError)));
+              }
+            },
+            itemBuilder: (_) => [PopupMenuItem(value: 'block', child: Text(t.chatBlock))],
+          ),
+        ],
       ),
       body: Center(
         child: ConstrainedBox(

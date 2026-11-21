@@ -40,6 +40,28 @@ class ExploreFilters {
         sort == 'newest' ? null : sort,
       ].where((e) => e != null).length;
 
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'governorate_id': governorateId,
+        'district_id': districtId,
+        'currency': currency,
+        'min_price': minPrice,
+        'max_price': maxPrice,
+        'min_bedrooms': minBedrooms,
+        'sort': sort,
+      };
+
+  factory ExploreFilters.fromJson(Map<String, dynamic> j) => ExploreFilters(
+        categoryId: (j['category_id'] as num?)?.toInt(),
+        governorateId: (j['governorate_id'] as num?)?.toInt(),
+        districtId: (j['district_id'] as num?)?.toInt(),
+        currency: (j['currency'] as String?) == 'USD' ? 'USD' : 'IQD',
+        minPrice: (j['min_price'] as num?)?.toInt(),
+        maxPrice: (j['max_price'] as num?)?.toInt(),
+        minBedrooms: (j['min_bedrooms'] as num?)?.toInt(),
+        sort: (j['sort'] as String?) ?? 'newest',
+      );
+
   Map<String, dynamic> toQuery() {
     final factor = currency == 'USD' ? 100 : 1; // integer minor units, no floats
     return {

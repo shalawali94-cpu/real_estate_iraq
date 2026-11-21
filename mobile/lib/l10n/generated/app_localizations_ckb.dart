@@ -435,7 +435,7 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get reviewFeeNote =>
-      'یەک جار بۆ هەر ڕیکلامی فرۆشتنێک دەدرێت. پارەدان گەرەنتی پەسەندکردن نییە: هەموو ڕیکلامێک پێش بڵاوکردنەوە پێداچوونەوەی بۆ دەکرێت.';
+      'یەک جار بۆ هەر ڕیکلامێک دەدرێت. پارەدان گەرەنتی پەسەندکردن نییە: هەموو ڕیکلامێک پێش بڵاوکردنەوە پێداچوونەوەی بۆ دەکرێت.';
 
   @override
   String get reviewContinue => 'بەردەوامبوون بۆ پارەدان';
@@ -664,4 +664,70 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get notificationsButton => 'ئاگادارکردنەوەکان';
+
+  @override
+  String get reportTitle => 'ڕاپۆرتکردنی ئەم ئیعلانە';
+
+  @override
+  String get reportFake => 'ساختە یان چەواشەکار';
+
+  @override
+  String get reportWrongPrice => 'نرخی هەڵە';
+
+  @override
+  String get reportSold => 'پێشتر فرۆشراوە / کرێدراوە';
+
+  @override
+  String get reportDuplicate => 'دووبارە';
+
+  @override
+  String get reportFraud => 'گومانی فێڵ';
+
+  @override
+  String get reportOffensive => 'ناوەڕۆکی نابەجێ';
+
+  @override
+  String get reportOther => 'هیتر';
+
+  @override
+  String get reportDetailsHint => 'وردەکاری (ئارەزوومەندانە)';
+
+  @override
+  String get reportSend => 'ناردنی ڕاپۆرت';
+
+  @override
+  String get reportThanks => 'سوپاس، پشکنینی بۆ دەکەین';
+
+  @override
+  String get reportMenu => 'ڕاپۆرت';
+
+  @override
+  String get chatBlock => 'بلۆککردنی بەکارهێنەر';
+
+  @override
+  String get chatBlockTitle => 'ئەم بەکارهێنەرە بلۆک بکرێت؟';
+
+  @override
+  String get chatBlockBody => 'چیتر ناتوانێت نامەت بۆ بنێرێت.';
+
+  @override
+  String get chatBlocked => 'بەکارهێنەر بلۆک کرا';
+
+  @override
+  String get searchesTitle => 'گەڕانە پاشەکەوتکراوەکان';
+
+  @override
+  String get searchSaveCurrent => 'پاشەکەوتکردنی گەڕانی ئێستا';
+
+  @override
+  String get searchName => 'ناو';
+
+  @override
+  String get searchEmpty => 'هیچ گەڕانێکی پاشەکەوتکراو نییە';
+
+  @override
+  String get searchSaved => 'گەڕان پاشەکەوت کرا';
+
+  @override
+  String get delete => 'سڕینەوە';
 }

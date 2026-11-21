@@ -435,7 +435,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewFeeNote =>
-      'Paid once per sale listing. Payment does not guarantee approval: every listing is reviewed before it is published.';
+      'Paid once per listing. Payment does not guarantee approval: every listing is reviewed before it is published.';
 
   @override
   String get reviewContinue => 'Continue to payment';
@@ -664,4 +664,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationsButton => 'Notifications';
+
+  @override
+  String get reportTitle => 'Report this listing';
+
+  @override
+  String get reportFake => 'Fake or misleading';
+
+  @override
+  String get reportWrongPrice => 'Wrong price';
+
+  @override
+  String get reportSold => 'Already sold / rented';
+
+  @override
+  String get reportDuplicate => 'Duplicate';
+
+  @override
+  String get reportFraud => 'Suspected fraud';
+
+  @override
+  String get reportOffensive => 'Offensive content';
+
+  @override
+  String get reportOther => 'Other';
+
+  @override
+  String get reportDetailsHint => 'Details (optional)';
+
+  @override
+  String get reportSend => 'Send report';
+
+  @override
+  String get reportThanks => 'Thank you, we will review it';
+
+  @override
+  String get reportMenu => 'Report';
+
+  @override
+  String get chatBlock => 'Block user';
+
+  @override
+  String get chatBlockTitle => 'Block this user?';
+
+  @override
+  String get chatBlockBody => 'They will no longer be able to message you.';
+
+  @override
+  String get chatBlocked => 'User blocked';
+
+  @override
+  String get searchesTitle => 'Saved searches';
+
+  @override
+  String get searchSaveCurrent => 'Save current search';
+
+  @override
+  String get searchName => 'Name';
+
+  @override
+  String get searchEmpty => 'No saved searches';
+
+  @override
+  String get searchSaved => 'Search saved';
+
+  @override
+  String get delete => 'Delete';
 }
