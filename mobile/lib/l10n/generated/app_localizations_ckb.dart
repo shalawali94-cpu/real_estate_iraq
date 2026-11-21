@@ -517,4 +517,10 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get chatOnline => 'ئۆنلاینە';
+
+  @override
+  String get fieldEmail => 'ئیمەیڵ';
+
+  @override
+  String get validationEmail => 'ئیمەیڵێکی دروست بنووسە.';
 }

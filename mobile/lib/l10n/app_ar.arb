@@ -181,5 +181,7 @@
   "chatOwnListing": "هذا إعلانك.",
   "chatOpenFailed": "تعذّر فتح المحادثة.",
   "chatTyping": "يكتب…",
-  "chatOnline": "متصل"
+  "chatOnline": "متصل",
+  "fieldEmail": "البريد الإلكتروني",
+  "validationEmail": "أدخل بريدًا إلكترونيًا صحيحًا."
 }

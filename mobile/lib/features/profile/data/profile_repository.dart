@@ -9,6 +9,7 @@ class UserProfile {
     required this.id,
     this.fullName,
     this.phone,
+    this.email,
     required this.accountType,
     this.governorateId,
     this.districtId,
@@ -18,6 +19,7 @@ class UserProfile {
   final String id;
   final String? fullName;
   final String? phone;
+  final String? email;
   final String accountType;
   final int? governorateId;
   final int? districtId;
@@ -47,7 +49,7 @@ class ProfileRepository {
     if (uid == null) return null;
     final p = await _c
         .from('profiles')
-        .select('id,full_name,phone,account_type,governorate_id,district_id,onboarded_at')
+        .select('id,full_name,phone,email,account_type,governorate_id,district_id,onboarded_at')
         .eq('id', uid)
         .maybeSingle();
     if (p == null) return null;
@@ -56,6 +58,7 @@ class ProfileRepository {
       id: uid,
       fullName: p['full_name'] as String?,
       phone: p['phone'] as String?,
+      email: p['email'] as String?,
       accountType: p['account_type'] as String? ?? 'individual',
       governorateId: (p['governorate_id'] as num?)?.toInt(),
       districtId: (p['district_id'] as num?)?.toInt(),
@@ -66,6 +69,7 @@ class ProfileRepository {
 
   Future<void> save({
     required String fullName,
+    required String email,
     required String accountType,
     int? governorateId,
     int? districtId,
@@ -73,6 +77,7 @@ class ProfileRepository {
   }) async {
     await _c.from('profiles').update({
       'full_name': fullName,
+      'email': email,
       'account_type': accountType,
       'governorate_id': governorateId,
       'district_id': districtId,

@@ -20,6 +20,7 @@ class ProfileFormScreen extends ConsumerStatefulWidget {
 class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
   final _form = GlobalKey<FormState>();
   final _name = TextEditingController();
+  final _email = TextEditingController();
   String _type = 'individual';
   int? _gov;
   int? _district;
@@ -29,6 +30,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
   @override
   void dispose() {
     _name.dispose();
+    _email.dispose();
     super.dispose();
   }
 
@@ -36,6 +38,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
     if (_seeded || p == null) return;
     _seeded = true;
     _name.text = p.fullName ?? '';
+    _email.text = p.email ?? '';
     _type = p.accountType;
     _gov = p.governorateId;
     _district = p.districtId;
@@ -48,6 +51,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
     try {
       await ref.read(profileRepositoryProvider)!.save(
             fullName: _name.text.trim(),
+            email: _email.text.trim().toLowerCase(),
             accountType: _type,
             governorateId: _gov,
             districtId: _gov == null ? null : _district,
@@ -111,6 +115,23 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
                           final s = v?.trim() ?? '';
                           return (s.length < 2 || s.length > 80) ? t.validationName : null;
                         },
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: TextFormField(
+                          key: const Key('emailField'),
+                          controller: _email,
+                          keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
+                          decoration: InputDecoration(labelText: t.fieldEmail),
+                          validator: (v) {
+                            final s = v?.trim() ?? '';
+                            return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(s) && s.length <= 120
+                                ? null
+                                : t.validationEmail;
+                          },
+                        ),
                       ),
                       const SizedBox(height: AppSpacing.md),
                       DropdownButtonFormField<String>(

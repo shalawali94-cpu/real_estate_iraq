@@ -1089,6 +1089,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'online'**
   String get chatOnline;
+
+  /// No description provided for @fieldEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get fieldEmail;
+
+  /// No description provided for @validationEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address.'**
+  String get validationEmail;
 }
 
 class _AppLocalizationsDelegate

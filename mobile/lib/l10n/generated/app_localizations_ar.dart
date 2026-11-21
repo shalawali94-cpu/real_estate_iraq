@@ -511,4 +511,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chatOnline => 'متصل';
+
+  @override
+  String get fieldEmail => 'البريد الإلكتروني';
+
+  @override
+  String get validationEmail => 'أدخل بريدًا إلكترونيًا صحيحًا.';
 }

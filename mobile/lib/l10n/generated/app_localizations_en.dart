@@ -517,4 +517,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatOnline => 'online';
+
+  @override
+  String get fieldEmail => 'Email';
+
+  @override
+  String get validationEmail => 'Enter a valid email address.';
 }

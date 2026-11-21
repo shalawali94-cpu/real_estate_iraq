@@ -181,5 +181,7 @@
   "chatOwnListing": "This is your own listing.",
   "chatOpenFailed": "Could not open the conversation.",
   "chatTyping": "typing…",
-  "chatOnline": "online"
+  "chatOnline": "online",
+  "fieldEmail": "Email",
+  "validationEmail": "Enter a valid email address."
 }

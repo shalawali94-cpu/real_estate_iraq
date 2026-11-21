@@ -46,9 +46,9 @@ docs/ (architecture, database, payments, ai_integrations, security, screens, cre
       Home/Explore/Add/Favorites are placeholders until Phase 5.
 - [x] backend/ Next.js 16: /api/v1/health, typed error codes, request ids, Supabase admin client,
       auth guard, payment adapter interface (FIB/QI = unconfigured, never fake success). 5 vitest tests pass, build OK.
-- [x] admin/ created with create-next-app (no app code yet)
+- [x] admin web dropped (decision: admin works inside the mobile app, email+password login)
 - [x] supabase/ init + local stack (Docker)
-- [ ] admin skeleton, CI (GitHub Actions)
+- [ ] CI (GitHub Actions)
 
 ### Phase 3 — Database (migrations pushed to cloud)
 - [x] 001 core roles: user_roles, has_role(), is_staff()
