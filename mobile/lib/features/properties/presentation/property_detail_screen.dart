@@ -8,6 +8,7 @@ import '../../../core/format/money.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
 import '../../favorites/data/favorites_repository.dart';
+import '../../messaging/data/messaging_repository.dart';
 import '../data/property_repository.dart';
 import '../domain/property_detail.dart';
 import 'property_card.dart' show transactionLabel;
@@ -88,6 +89,29 @@ class _Body extends ConsumerWidget {
         'furnished' => t.furnFurnished,
         _ => null,
       };
+
+  Future<void> _message(
+      BuildContext context, WidgetRef ref, String ownerId, String propertyId) async {
+    final t = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final router = GoRouter.of(context);
+    final from = GoRouterState.of(context).uri.toString();
+    final repo = ref.read(messagingRepositoryProvider);
+    if (repo == null) {
+      router.push('/login?from=${Uri.encodeComponent(from)}');
+      return;
+    }
+    if (ownerId == repo.myId) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatOwnListing)));
+      return;
+    }
+    try {
+      final id = await repo.open(ownerId, propertyId: propertyId);
+      router.push('/chat/$id');
+    } catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatOpenFailed)));
+    }
+  }
 
   Future<void> _open(Uri uri) async {
     await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -179,6 +203,16 @@ class _Body extends ConsumerWidget {
                     if (d.owner.verified)
                       Icon(Icons.verified, color: theme.colorScheme.secondary),
                   ]),
+                  const SizedBox(height: AppSpacing.md),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.tonalIcon(
+                      key: const Key('messageOwnerButton'),
+                      onPressed: () => _message(context, ref, d.owner.id, d.id),
+                      icon: const Icon(Icons.chat_bubble_outline),
+                      label: Text(t.contactMessage),
+                    ),
+                  ),
                   if (phone != null) ...[
                     const SizedBox(height: AppSpacing.md),
                     Row(children: [

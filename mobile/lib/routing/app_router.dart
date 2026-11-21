@@ -14,6 +14,9 @@ import '../features/profile/data/profile_repository.dart';
 import '../features/profile/presentation/profile_form_screen.dart';
 import '../features/profile/presentation/profile_screen.dart';
 import '../features/properties/presentation/property_detail_screen.dart';
+import '../features/messaging/presentation/chat_screen.dart';
+import '../features/messaging/presentation/inbox_screen.dart';
+import '../features/payments/presentation/review_pay_screen.dart';
 import '../features/profile/presentation/my_properties_screen.dart';
 import '../features/property_creation/presentation/add_property_screen.dart';
 import '../features/property_creation/presentation/media_screen.dart';
@@ -36,7 +39,9 @@ bool _requiresAccount(String loc) =>
     loc.startsWith(AppRoutes.favorites) ||
     loc.startsWith('/draft') ||
     loc.startsWith('/profile/edit') ||
-    loc.startsWith('/profile/properties');
+    loc.startsWith('/profile/properties') ||
+    loc.startsWith('/messages') ||
+    loc.startsWith('/chat');
 
 String _loginFor(String from) =>
     '${AppRoutes.login}?from=${Uri.encodeComponent(from)}';
@@ -91,6 +96,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/property/:id',
         builder: (_, state) => PropertyDetailScreen(id: state.pathParameters['id']!),
+      ),
+      GoRoute(path: '/messages', builder: (_, _) => const InboxScreen()),
+      GoRoute(
+        path: '/chat/:id',
+        builder: (_, state) => ChatScreen(conversationId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/draft/:id/review',
+        builder: (_, state) => ReviewPayScreen(propertyId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: '/draft/:id/media',

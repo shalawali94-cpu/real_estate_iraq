@@ -426,4 +426,89 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get statusRejected => 'ڕەتکرایەوە';
+
+  @override
+  String get reviewTitle => 'پێداچوونەوە و بڵاوکردنەوە';
+
+  @override
+  String get reviewFeeLabel => 'کرێی بڵاوکردنەوە';
+
+  @override
+  String get reviewFeeNote =>
+      'یەک جار بۆ هەر ڕیکلامی فرۆشتنێک دەدرێت. پارەدان گەرەنتی پەسەندکردن نییە: هەموو ڕیکلامێک پێش بڵاوکردنەوە پێداچوونەوەی بۆ دەکرێت.';
+
+  @override
+  String get reviewContinue => 'بەردەوامبوون بۆ پارەدان';
+
+  @override
+  String get payChooseMethod => 'شێوازی پارەدان هەڵبژێرە';
+
+  @override
+  String get payFib => 'FIB';
+
+  @override
+  String get payQi => 'کارتی کیو (Qi Card)';
+
+  @override
+  String get payPayNow => 'پارەدان';
+
+  @override
+  String get payNotConfigured =>
+      'پارەدانی ئۆنلاین هێشتا بەردەست نییە: دابینکەری پارەدان هێشتا ڕێکدەخرێت. ڕیکلامەکەت پاشەکەوت کراوە و هیچ پارەیەک نەبڕدراوە.';
+
+  @override
+  String get payOpened =>
+      'پارەدانەکە لەو پەڕەیەی کرایەوە تەواو بکە، پاشان دۆخەکەی بپشکنە.';
+
+  @override
+  String get payCheck => 'پشکنینی دۆخی پارەدان';
+
+  @override
+  String get payStatusPaid =>
+      'پارەدان وەرگیرا. ڕیکلامەکەت ئێستا چاوەڕێی پێداچوونەوەیە.';
+
+  @override
+  String get payStatusPending => 'پارەدان هێشتا پشتڕاست نەکراوەتەوە.';
+
+  @override
+  String get payStatusFailed =>
+      'پارەدان سەرنەکەوت یان بەسەرچوو. تکایە دووبارە هەوڵبدەرەوە.';
+
+  @override
+  String get reviewWaitingApproval =>
+      'ڕیکلامەکەت چاوەڕێی پێداچوونەوەی تیمەکەمانە.';
+
+  @override
+  String get reviewPublished => 'ڕیکلامەکەت بڵاوکراوەتەوە.';
+
+  @override
+  String get reviewNoFee =>
+      'بۆ ئەم جۆرە ڕیکلامە کرێی بڵاوکردنەوە نییە. ڕاستەوخۆ دەنێردرێت بۆ پێداچوونەوە.';
+
+  @override
+  String get reviewSubmit => 'ناردن بۆ پێداچوونەوە';
+
+  @override
+  String get messagesTitle => 'نامەکان';
+
+  @override
+  String get messagesEmpty => 'هێشتا هیچ گفتوگۆیەک نییە.';
+
+  @override
+  String get contactMessage => 'نامە';
+
+  @override
+  String get chatHint => 'نامەیەک بنووسە…';
+
+  @override
+  String get chatEmpty => 'سڵاو بکە بۆ دەستپێکردنی گفتوگۆ.';
+
+  @override
+  String get chatSendFailed => 'نامەکە نەنێردرا. تکایە دووبارە هەوڵبدەرەوە.';
+
+  @override
+  String get chatOwnListing => 'ئەمە ڕیکلامی خۆتە.';
+
+  @override
+  String get chatOpenFailed => 'نەتوانرا گفتوگۆکە بکرێتەوە.';
 }

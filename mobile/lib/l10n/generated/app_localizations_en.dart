@@ -426,4 +426,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusRejected => 'Rejected';
+
+  @override
+  String get reviewTitle => 'Review and publish';
+
+  @override
+  String get reviewFeeLabel => 'Publishing fee';
+
+  @override
+  String get reviewFeeNote =>
+      'Paid once per sale listing. Payment does not guarantee approval: every listing is reviewed before it is published.';
+
+  @override
+  String get reviewContinue => 'Continue to payment';
+
+  @override
+  String get payChooseMethod => 'Choose payment method';
+
+  @override
+  String get payFib => 'FIB';
+
+  @override
+  String get payQi => 'Qi Card';
+
+  @override
+  String get payPayNow => 'Pay';
+
+  @override
+  String get payNotConfigured =>
+      'Online payment is not available yet: the payment provider is still being set up. Your listing is saved and nothing was charged.';
+
+  @override
+  String get payOpened =>
+      'Complete the payment in the page that opened, then check the status.';
+
+  @override
+  String get payCheck => 'Check payment status';
+
+  @override
+  String get payStatusPaid =>
+      'Payment received. Your listing is now waiting for review.';
+
+  @override
+  String get payStatusPending => 'Payment is not confirmed yet.';
+
+  @override
+  String get payStatusFailed =>
+      'The payment failed or expired. Please try again.';
+
+  @override
+  String get reviewWaitingApproval =>
+      'Your listing is waiting for review by our team.';
+
+  @override
+  String get reviewPublished => 'Your listing is published.';
+
+  @override
+  String get reviewNoFee =>
+      'No publishing fee applies to this listing type. It will be sent for review.';
+
+  @override
+  String get reviewSubmit => 'Send for review';
+
+  @override
+  String get messagesTitle => 'Messages';
+
+  @override
+  String get messagesEmpty => 'No conversations yet.';
+
+  @override
+  String get contactMessage => 'Message';
+
+  @override
+  String get chatHint => 'Write a message…';
+
+  @override
+  String get chatEmpty => 'Say hello to start the conversation.';
+
+  @override
+  String get chatSendFailed => 'The message was not sent. Please try again.';
+
+  @override
+  String get chatOwnListing => 'This is your own listing.';
+
+  @override
+  String get chatOpenFailed => 'Could not open the conversation.';
 }

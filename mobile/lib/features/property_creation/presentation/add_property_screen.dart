@@ -179,7 +179,7 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(failed ? t.mediaFailed : t.draftSaved)));
-      context.go('/draft/$draftId/media');
+      context.go('/draft/$draftId/review');
     } catch (e) {
       debugPrint('createDraft error: $e');
       if (mounted) {

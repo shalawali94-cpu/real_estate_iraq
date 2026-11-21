@@ -147,6 +147,12 @@ class ProfileScreen extends ConsumerWidget {
                     icon: const Icon(Icons.home_work_outlined),
                     label: Text(t.myPropertiesTitle),
                   ),
+                  OutlinedButton.icon(
+                    key: const Key('messagesButton'),
+                    onPressed: () => context.push('/messages'),
+                    icon: const Icon(Icons.chat_bubble_outline),
+                    label: Text(t.messagesTitle),
+                  ),
                 ]),
               ),
             ),

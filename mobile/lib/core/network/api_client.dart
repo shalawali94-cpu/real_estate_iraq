@@ -19,14 +19,25 @@ class ApiClient {
   ApiClient(this._dio);
   final Dio _dio;
 
-  Future<Map<String, dynamic>> post(String path, Map<String, dynamic> body) async {
+  Future<Map<String, dynamic>> post(String path, Map<String, dynamic> body,
+          {Map<String, String>? headers}) =>
+      _send(() => _dio.post<Map<String, dynamic>>(path, data: body, options: _opts(headers)));
+
+  Future<Map<String, dynamic>> get(String path) =>
+      _send(() => _dio.get<Map<String, dynamic>>(path, options: _opts(null)));
+
+  Options _opts(Map<String, String>? extra) {
     final token = Supabase.instance.client.auth.currentSession?.accessToken;
+    return Options(headers: {
+      if (token != null) 'Authorization': 'Bearer $token',
+      ...?extra,
+    });
+  }
+
+  Future<Map<String, dynamic>> _send(
+      Future<Response<Map<String, dynamic>>> Function() call) async {
     try {
-      final res = await _dio.post<Map<String, dynamic>>(
-        path,
-        data: body,
-        options: Options(headers: {if (token != null) 'Authorization': 'Bearer $token'}),
-      );
+      final res = await call();
       return res.data ?? const {};
     } on DioException catch (e) {
       final data = e.response?.data;

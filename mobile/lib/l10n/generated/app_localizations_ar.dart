@@ -424,4 +424,85 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get statusRejected => 'مرفوض';
+
+  @override
+  String get reviewTitle => 'المراجعة والنشر';
+
+  @override
+  String get reviewFeeLabel => 'رسوم النشر';
+
+  @override
+  String get reviewFeeNote =>
+      'تُدفع مرة واحدة لكل إعلان بيع. الدفع لا يضمن القبول: تتم مراجعة كل إعلان قبل نشره.';
+
+  @override
+  String get reviewContinue => 'المتابعة إلى الدفع';
+
+  @override
+  String get payChooseMethod => 'اختر طريقة الدفع';
+
+  @override
+  String get payFib => 'FIB';
+
+  @override
+  String get payQi => 'كي كارد (Qi Card)';
+
+  @override
+  String get payPayNow => 'ادفع';
+
+  @override
+  String get payNotConfigured =>
+      'الدفع الإلكتروني غير متاح بعد: مزوّد الدفع قيد الإعداد. تم حفظ إعلانك ولم يتم خصم أي مبلغ.';
+
+  @override
+  String get payOpened => 'أكمل الدفع في الصفحة التي فُتحت، ثم تحقق من الحالة.';
+
+  @override
+  String get payCheck => 'التحقق من حالة الدفع';
+
+  @override
+  String get payStatusPaid => 'تم استلام الدفع. إعلانك بانتظار المراجعة الآن.';
+
+  @override
+  String get payStatusPending => 'لم يتم تأكيد الدفع بعد.';
+
+  @override
+  String get payStatusFailed => 'فشل الدفع أو انتهت صلاحيته. حاول مرة أخرى.';
+
+  @override
+  String get reviewWaitingApproval => 'إعلانك بانتظار مراجعة فريقنا.';
+
+  @override
+  String get reviewPublished => 'تم نشر إعلانك.';
+
+  @override
+  String get reviewNoFee =>
+      'لا توجد رسوم نشر لهذا النوع من الإعلانات. سيُرسل للمراجعة.';
+
+  @override
+  String get reviewSubmit => 'إرسال للمراجعة';
+
+  @override
+  String get messagesTitle => 'الرسائل';
+
+  @override
+  String get messagesEmpty => 'لا توجد محادثات بعد.';
+
+  @override
+  String get contactMessage => 'رسالة';
+
+  @override
+  String get chatHint => 'اكتب رسالة…';
+
+  @override
+  String get chatEmpty => 'ابدأ المحادثة بتحية.';
+
+  @override
+  String get chatSendFailed => 'لم يتم إرسال الرسالة. حاول مرة أخرى.';
+
+  @override
+  String get chatOwnListing => 'هذا إعلانك.';
+
+  @override
+  String get chatOpenFailed => 'تعذّر فتح المحادثة.';
 }

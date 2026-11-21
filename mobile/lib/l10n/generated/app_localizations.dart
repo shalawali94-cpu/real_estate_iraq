@@ -921,6 +921,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rejected'**
   String get statusRejected;
+
+  /// No description provided for @reviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and publish'**
+  String get reviewTitle;
+
+  /// No description provided for @reviewFeeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Publishing fee'**
+  String get reviewFeeLabel;
+
+  /// No description provided for @reviewFeeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid once per sale listing. Payment does not guarantee approval: every listing is reviewed before it is published.'**
+  String get reviewFeeNote;
+
+  /// No description provided for @reviewContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to payment'**
+  String get reviewContinue;
+
+  /// No description provided for @payChooseMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose payment method'**
+  String get payChooseMethod;
+
+  /// No description provided for @payFib.
+  ///
+  /// In en, this message translates to:
+  /// **'FIB'**
+  String get payFib;
+
+  /// No description provided for @payQi.
+  ///
+  /// In en, this message translates to:
+  /// **'Qi Card'**
+  String get payQi;
+
+  /// No description provided for @payPayNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay'**
+  String get payPayNow;
+
+  /// No description provided for @payNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Online payment is not available yet: the payment provider is still being set up. Your listing is saved and nothing was charged.'**
+  String get payNotConfigured;
+
+  /// No description provided for @payOpened.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete the payment in the page that opened, then check the status.'**
+  String get payOpened;
+
+  /// No description provided for @payCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check payment status'**
+  String get payCheck;
+
+  /// No description provided for @payStatusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment received. Your listing is now waiting for review.'**
+  String get payStatusPaid;
+
+  /// No description provided for @payStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment is not confirmed yet.'**
+  String get payStatusPending;
+
+  /// No description provided for @payStatusFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The payment failed or expired. Please try again.'**
+  String get payStatusFailed;
+
+  /// No description provided for @reviewWaitingApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing is waiting for review by our team.'**
+  String get reviewWaitingApproval;
+
+  /// No description provided for @reviewPublished.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing is published.'**
+  String get reviewPublished;
+
+  /// No description provided for @reviewNoFee.
+  ///
+  /// In en, this message translates to:
+  /// **'No publishing fee applies to this listing type. It will be sent for review.'**
+  String get reviewNoFee;
+
+  /// No description provided for @reviewSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Send for review'**
+  String get reviewSubmit;
+
+  /// No description provided for @messagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get messagesTitle;
+
+  /// No description provided for @messagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet.'**
+  String get messagesEmpty;
+
+  /// No description provided for @contactMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get contactMessage;
+
+  /// No description provided for @chatHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a message…'**
+  String get chatHint;
+
+  /// No description provided for @chatEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Say hello to start the conversation.'**
+  String get chatEmpty;
+
+  /// No description provided for @chatSendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The message was not sent. Please try again.'**
+  String get chatSendFailed;
+
+  /// No description provided for @chatOwnListing.
+  ///
+  /// In en, this message translates to:
+  /// **'This is your own listing.'**
+  String get chatOwnListing;
+
+  /// No description provided for @chatOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the conversation.'**
+  String get chatOpenFailed;
 }
 
 class _AppLocalizationsDelegate

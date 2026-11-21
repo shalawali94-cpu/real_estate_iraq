@@ -111,7 +111,7 @@ class MyPropertiesScreen extends ConsumerWidget {
                                 '${formatMoney(p.amount, p.currency)} · ${_statusLabel(t, p.status)}'),
                             onTap: () => context.push(p.status == 'published'
                                 ? '/property/${p.id}'
-                                : '/draft/${p.id}/media'),
+                                : '/draft/${p.id}/review'),
                           ),
                         );
                       },
