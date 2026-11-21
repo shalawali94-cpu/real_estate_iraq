@@ -121,6 +121,12 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
             textInputAction: TextInputAction.search,
             onSubmitted: (_) => _apply(),
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(28),
+                borderSide: BorderSide.none,
+              ),
               hintText: t.exploreSearchHint,
               prefixIcon: const Icon(Icons.search),
               suffixIcon: IconButton(
