@@ -763,4 +763,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get locationSet => 'Location set on map';
+
+  @override
+  String get fieldPhoneIraq => 'Mobile number (07XX XXX XXXX)';
+
+  @override
+  String get validationPhoneIraq => 'Enter a valid Iraqi mobile number';
+
+  @override
+  String get authSignInTitle => 'Sign in';
+
+  @override
+  String get fieldEmailOrPhone => 'Email or mobile number';
 }

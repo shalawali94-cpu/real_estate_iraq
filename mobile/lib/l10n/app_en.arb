@@ -263,5 +263,9 @@
   "pickLocationConfirm": "Confirm location",
   "mapTitle": "Location",
   "setOnMap": "Set location on map",
-  "locationSet": "Location set on map"
+  "locationSet": "Location set on map",
+  "fieldPhoneIraq": "Mobile number (07XX XXX XXXX)",
+  "validationPhoneIraq": "Enter a valid Iraqi mobile number",
+  "authSignInTitle": "Sign in",
+  "fieldEmailOrPhone": "Email or mobile number"
 }

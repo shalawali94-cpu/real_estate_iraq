@@ -5,7 +5,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
+import '../../../core/network/api_client.dart';
 import '../data/auth_repository.dart';
+import '../data/phone_number.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Email + password sign-in / sign-up. Everyone (users and staff) can use it;
 /// roles are decided server-side, never here.
@@ -19,15 +22,30 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
   static final _emailRe = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
   final _email = TextEditingController();
   final _password = TextEditingController();
-  bool _createMode = false;
+  final _name = TextEditingController();
+  final _phone = TextEditingController();
+  late bool _createMode;
   bool _hide = true;
   bool _busy = false;
   String? _error;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_modeInit) {
+      _modeInit = true;
+      _createMode = GoRouterState.of(context).uri.queryParameters['mode'] == 'signup';
+    }
+  }
+
+  bool _modeInit = false;
+
+  @override
   void dispose() {
     _email.dispose();
     _password.dispose();
+    _name.dispose();
+    _phone.dispose();
     super.dispose();
   }
 
@@ -35,13 +53,27 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
     final t = AppLocalizations.of(context);
     final email = _email.text.trim();
     final password = _password.text;
-    if (!_emailRe.hasMatch(email) || email.length > 120) {
-      setState(() => _error = t.validationEmail);
+    final loginPhone = (!_createMode && !email.contains('@')) ? normalizeIraqiPhone(email) : null;
+    if (loginPhone == null && (!_emailRe.hasMatch(email) || email.length > 120)) {
+      setState(() => _error = _createMode ? t.validationEmail : t.authWrongCredentials);
       return;
     }
     if (password.length < 6) {
       setState(() => _error = t.authPasswordShort);
       return;
+    }
+    String? phone;
+    if (_createMode) {
+      final n = _name.text.trim();
+      if (n.length < 2 || n.length > 80) {
+        setState(() => _error = t.validationName);
+        return;
+      }
+      phone = normalizeIraqiPhone(_phone.text);
+      if (phone == null) {
+        setState(() => _error = t.validationPhoneIraq);
+        return;
+      }
     }
     setState(() {
       _error = null;
@@ -50,9 +82,17 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
     try {
       final repo = ref.read(authRepositoryProvider)!;
       if (_createMode) {
-        await repo.signUpWithEmail(email, password);
+        await repo.signUpWithEmail(email, password,
+            fullName: _name.text.trim(), phone: phone!);
       } else {
-        await repo.signInWithEmail(email, password);
+        if (loginPhone != null) {
+          final res = await ref
+              .read(apiClientProvider)!
+              .post('/api/v1/auth/phone-login', {'phone': loginPhone, 'password': password});
+          await Supabase.instance.client.auth.setSession(res['refresh_token'] as String);
+        } else {
+          await repo.signInWithEmail(email, password);
+        }
       }
       if (!mounted) return;
       final from = GoRouterState.of(context).uri.queryParameters['from'];
@@ -62,6 +102,7 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
       debugPrint('auth error: $e');
       if (mounted) {
         setState(() => _error = e.toString().contains('invalid_credentials') ||
+                e.toString().contains('UNAUTHENTICATED') ||
                 e.toString().contains('Invalid login')
             ? t.authWrongCredentials
             : (kDebugMode ? '$e' : t.authGenericError));
@@ -85,9 +126,29 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
               padding: const EdgeInsets.all(AppSpacing.lg),
               shrinkWrap: true,
               children: [
-                Text(_createMode ? t.authCreateAccount : t.authEmailSignIn,
+                Text(_createMode ? t.authCreateAccount : t.authSignInTitle,
                     textAlign: TextAlign.center, style: theme.textTheme.headlineSmall),
                 const SizedBox(height: AppSpacing.xl),
+                if (_createMode) ...[
+                  TextField(
+                    key: const Key('nameField'),
+                    controller: _name,
+                    textCapitalization: TextCapitalization.words,
+                    decoration: InputDecoration(labelText: t.fieldFullName),
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: TextField(
+                      key: const Key('phoneField'),
+                      controller: _phone,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                          labelText: t.fieldPhoneIraq, prefixText: '+964 '),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                ],
                 Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextField(
@@ -95,7 +156,8 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
                     controller: _email,
                     keyboardType: TextInputType.emailAddress,
                     autofillHints: const [AutofillHints.email],
-                    decoration: InputDecoration(labelText: t.fieldEmail),
+                    decoration: InputDecoration(
+                        labelText: _createMode ? t.fieldEmail : t.fieldEmailOrPhone),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -126,7 +188,7 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
                       ? const SizedBox(
                           width: 20, height: 20,
                           child: CircularProgressIndicator(strokeWidth: 2))
-                      : Text(_createMode ? t.authCreateAccount : t.authEmailSignIn),
+                      : Text(_createMode ? t.authCreateAccount : t.authSignInTitle),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 TextButton(
@@ -135,10 +197,6 @@ class _EmailLoginScreenState extends ConsumerState<EmailLoginScreen> {
                     _error = null;
                   }),
                   child: Text(_createMode ? t.authToSignIn : t.authToCreate),
-                ),
-                TextButton(
-                  onPressed: () => context.pop(),
-                  child: Text(t.authUsePhone),
                 ),
               ],
             ),

@@ -763,4 +763,16 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get locationSet => 'شوێن لەسەر نەخشە دیاریکرا';
+
+  @override
+  String get fieldPhoneIraq => 'ژمارەی مۆبایل (07XX XXX XXXX)';
+
+  @override
+  String get validationPhoneIraq => 'ژمارەی مۆبایلی عێراقی دروست بنووسە';
+
+  @override
+  String get authSignInTitle => 'چوونەژوورەوە';
+
+  @override
+  String get fieldEmailOrPhone => 'ئیمەیڵ یان ژمارەی مۆبایل';
 }

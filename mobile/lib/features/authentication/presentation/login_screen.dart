@@ -8,13 +8,72 @@ import '../../../theme/app_theme.dart';
 import '../data/auth_repository.dart';
 import '../data/phone_number.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
+/// Landing: clear Sign in / Create account choices. Phone-code sign-in is secondary.
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  String _q(BuildContext context, String path, [String? mode]) {
+    final from = GoRouterState.of(context).uri.queryParameters['from'];
+    final q = <String>[
+      if (mode != null) 'mode=$mode',
+      if (from != null) 'from=${Uri.encodeComponent(from)}',
+    ];
+    return q.isEmpty ? path : '$path?${q.join('&')}';
+  }
+
   @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: ListView(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              shrinkWrap: true,
+              children: [
+                Icon(Icons.apartment_rounded, size: 72, color: theme.colorScheme.primary),
+                const SizedBox(height: AppSpacing.md),
+                Text(t.authWelcomeTitle,
+                    textAlign: TextAlign.center, style: theme.textTheme.headlineMedium),
+                const SizedBox(height: AppSpacing.xl),
+                FilledButton(
+                  key: const Key('signInButton'),
+                  style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(52)),
+                  onPressed: () => context.push(_q(context, '/login/email', 'signin')),
+                  child: Text(t.authSignInTitle),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                OutlinedButton(
+                  key: const Key('signUpButton'),
+                  style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(52)),
+                  onPressed: () => context.push(_q(context, '/login/email', 'signup')),
+                  child: Text(t.authCreateAccount),
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                TextButton(
+                  key: const Key('continueGuestButton'),
+                  onPressed: () => context.go('/home'),
+                  child: Text(t.authContinueGuest),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen> {
+class PhoneLoginScreen extends ConsumerStatefulWidget {
+  const PhoneLoginScreen({super.key});
+  @override
+  ConsumerState<PhoneLoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<PhoneLoginScreen> {
   final _controller = TextEditingController();
   String? _error;
   bool _busy = false;
@@ -60,6 +119,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final t = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Scaffold(
+      appBar: AppBar(leading: BackButton(onPressed: () => context.pop())),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -103,21 +163,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       : Text(t.authSendCode),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                TextButton(
-                  key: const Key('emailLoginButton'),
-                  onPressed: () {
-                    final from = GoRouterState.of(context).uri.queryParameters['from'];
-                    context.push(from == null
-                        ? '/login/email'
-                        : '/login/email?from=${Uri.encodeComponent(from)}');
-                  },
-                  child: Text(t.authEmailSignIn),
-                ),
-                TextButton(
-                  key: const Key('continueGuestButton'),
-                  onPressed: () => context.go('/home'),
-                  child: Text(t.authContinueGuest),
-                ),
               ],
             ),
           ),

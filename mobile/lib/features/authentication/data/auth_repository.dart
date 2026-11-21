@@ -21,8 +21,10 @@ class AuthRepository {
   Future<void> signInWithEmail(String email, String password) =>
       _client.auth.signInWithPassword(email: email, password: password);
 
-  Future<void> signUpWithEmail(String email, String password) =>
-      _client.auth.signUp(email: email, password: password);
+  Future<void> signUpWithEmail(String email, String password,
+          {required String fullName, required String phone}) =>
+      _client.auth.signUp(
+          email: email, password: password, data: {'full_name': fullName, 'phone': phone});
 
   Future<void> signOut() => _client.auth.signOut();
 }

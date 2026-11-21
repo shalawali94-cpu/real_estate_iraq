@@ -759,4 +759,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get locationSet => 'تم تحديد الموقع على الخريطة';
+
+  @override
+  String get fieldPhoneIraq => 'رقم الموبايل (07XX XXX XXXX)';
+
+  @override
+  String get validationPhoneIraq => 'أدخل رقم موبايل عراقي صحيح';
+
+  @override
+  String get authSignInTitle => 'تسجيل الدخول';
+
+  @override
+  String get fieldEmailOrPhone => 'البريد الإلكتروني أو رقم الموبايل';
 }

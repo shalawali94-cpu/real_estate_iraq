@@ -263,5 +263,9 @@
   "pickLocationConfirm": "دووپاتکردنەوەی شوێن",
   "mapTitle": "شوێن",
   "setOnMap": "دیاریکردنی شوێن لەسەر نەخشە",
-  "locationSet": "شوێن لەسەر نەخشە دیاریکرا"
+  "locationSet": "شوێن لەسەر نەخشە دیاریکرا",
+  "fieldPhoneIraq": "ژمارەی مۆبایل (07XX XXX XXXX)",
+  "validationPhoneIraq": "ژمارەی مۆبایلی عێراقی دروست بنووسە",
+  "authSignInTitle": "چوونەژوورەوە",
+  "fieldEmailOrPhone": "ئیمەیڵ یان ژمارەی مۆبایل"
 }

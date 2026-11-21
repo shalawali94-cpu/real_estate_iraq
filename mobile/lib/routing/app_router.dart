@@ -126,6 +126,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => MediaScreen(propertyId: state.pathParameters['id']!),
       ),
       GoRoute(path: AppRoutes.login, builder: (_, _) => const LoginScreen()),
+      GoRoute(path: '/login/phone', builder: (_, _) => const PhoneLoginScreen()),
       GoRoute(path: '/login/email', builder: (_, _) => const EmailLoginScreen()),
       GoRoute(
         path: AppRoutes.verify,

@@ -1581,6 +1581,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location set on map'**
   String get locationSet;
+
+  /// No description provided for @fieldPhoneIraq.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number (07XX XXX XXXX)'**
+  String get fieldPhoneIraq;
+
+  /// No description provided for @validationPhoneIraq.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid Iraqi mobile number'**
+  String get validationPhoneIraq;
+
+  /// No description provided for @authSignInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authSignInTitle;
+
+  /// No description provided for @fieldEmailOrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Email or mobile number'**
+  String get fieldEmailOrPhone;
 }
 
 class _AppLocalizationsDelegate
