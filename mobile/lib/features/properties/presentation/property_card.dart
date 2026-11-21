@@ -25,6 +25,7 @@ class PropertyCard extends StatelessWidget {
     this.isFavorite,
     this.onFavorite,
     this.vertical = false,
+    this.width,
   });
   final PropertySummary property;
   final String? imageUrl;
@@ -32,6 +33,7 @@ class PropertyCard extends StatelessWidget {
   final bool? isFavorite; // null hides the heart (signed out / unconfigured)
   final VoidCallback? onFavorite;
   final bool vertical;
+  final double? width;
 
   Widget _photo(BuildContext context, AppLocalizations t, ThemeData theme) {
     final p = property;
@@ -104,14 +106,14 @@ class PropertyCard extends StatelessWidget {
     final theme = Theme.of(context);
     if (vertical) {
       return SizedBox(
-        width: 210,
+        width: width ?? 210,
         child: Card(
           clipBehavior: Clip.antiAlias,
           color: theme.colorScheme.surfaceContainerHigh,
           child: InkWell(
             onTap: onTap,
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              AspectRatio(aspectRatio: 4 / 3, child: _photo(context, t, theme)),
+              AspectRatio(aspectRatio: 3 / 2, child: _photo(context, t, theme)),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: _info(context, t, theme),

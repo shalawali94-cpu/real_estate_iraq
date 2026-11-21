@@ -118,14 +118,20 @@ class _Section extends ConsumerWidget {
                     .titleMedium
                     ?.copyWith(fontWeight: FontWeight.w700)),
           ),
-          if (horizontal)
-            SizedBox(
-              height: 232,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: items.length,
-                separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
-                itemBuilder: (_, i) => PropertyCardTile(property: items[i], vertical: true),
+          if (horizontal && items.length > 1)
+            LayoutBuilder(
+              builder: (context, c) => SizedBox(
+                height: 256,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: items.length,
+                  separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
+                  itemBuilder: (_, i) => PropertyCardTile(
+                    property: items[i],
+                    vertical: true,
+                    width: (c.maxWidth * 0.62).clamp(190.0, 260.0).toDouble(),
+                  ),
+                ),
               ),
             )
           else

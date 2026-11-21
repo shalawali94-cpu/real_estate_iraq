@@ -9,9 +9,10 @@ import 'property_card.dart';
 
 /// Card wired to image URLs, favorites and navigation to the details page.
 class PropertyCardTile extends ConsumerWidget {
-  const PropertyCardTile({super.key, required this.property, this.vertical = false});
+  const PropertyCardTile({super.key, required this.property, this.vertical = false, this.width});
   final PropertySummary property;
   final bool vertical;
+  final double? width;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,6 +22,7 @@ class PropertyCardTile extends ConsumerWidget {
     return PropertyCard(
       property: property,
       vertical: vertical,
+      width: width,
       imageUrl: repo?.coverUrl(property.coverPath),
       isFavorite: signedIn ? favs.contains(property.id) : false,
       onFavorite: () {
