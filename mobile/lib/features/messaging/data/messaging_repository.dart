@@ -143,8 +143,25 @@ final messagingRepositoryProvider = Provider<MessagingRepository?>((ref) {
       : null;
 });
 
-final inboxProvider = FutureProvider.autoDispose<List<ConversationItem>>(
-    (ref) async => await ref.watch(messagingRepositoryProvider)?.inbox() ?? const []);
+/// The inbox refreshes itself when new messages arrive (Realtime on my membership rows).
+final inboxProvider = FutureProvider.autoDispose<List<ConversationItem>>((ref) async {
+  final repo = ref.watch(messagingRepositoryProvider);
+  if (repo == null) return const [];
+  final client = Supabase.instance.client;
+  final channel = client
+      .channel('inbox:${repo.myId}')
+      .onPostgresChanges(
+        event: PostgresChangeEvent.all,
+        schema: 'public',
+        table: 'conversation_members',
+        filter: PostgresChangeFilter(
+            type: PostgresChangeFilterType.eq, column: 'user_id', value: repo.myId),
+        callback: (_) => ref.invalidateSelf(),
+      )
+      .subscribe();
+  ref.onDispose(() => client.removeChannel(channel));
+  return repo.inbox();
+});
 
 final chatMessagesProvider = StreamProvider.autoDispose.family<List<ChatMessage>, String>(
     (ref, id) => ref.watch(messagingRepositoryProvider)?.messages(id) ?? Stream.value(const []));

@@ -25,6 +25,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   // Presence (Supabase Realtime): who has this chat open, and who is typing.
   RealtimeChannel? _channel;
   Timer? _typingTimer;
+  Timer? _otherTypingExpiry;
+  DateTime _lastTypingSent = DateTime.fromMillisecondsSinceEpoch(0);
   bool _iAmTyping = false;
   bool _otherOnline = false;
   bool _otherTyping = false;
@@ -52,14 +54,29 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       }
     }
 
-    // A "typing" change is a track() update, which arrives as join/leave events.
+    // Online = present in this channel. Typing = short-lived broadcast events.
     ch
         .onPresenceSync((_) => recompute())
         .onPresenceJoin((_) => recompute())
         .onPresenceLeave((_) => recompute())
+        .onBroadcast(event: 'typing', callback: (payload) {
+          final d = (payload['payload'] is Map)
+              ? (payload['payload'] as Map).cast<String, dynamic>()
+              : payload;
+          if (d['user_id'] == me) return;
+          _otherTypingExpiry?.cancel();
+          final typing = d['typing'] == true;
+          if (mounted) setState(() => _otherTyping = typing);
+          if (typing) {
+            // Safety net if the "stopped typing" event is lost.
+            _otherTypingExpiry = Timer(const Duration(seconds: 5), () {
+              if (mounted) setState(() => _otherTyping = false);
+            });
+          }
+        })
         .subscribe((status, _) {
       if (status == RealtimeSubscribeStatus.subscribed) {
-        ch.track({'user_id': me, 'typing': false});
+        ch.track({'user_id': me});
       }
     });
     _channel = ch;
@@ -67,22 +84,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   void _recomputePresence(RealtimeChannel ch, String me) {
     var online = false;
-    var typing = false;
     for (final state in ch.presenceState()) {
       for (final p in state.presences) {
-        final d = p.payload;
-        if (d['user_id'] != me) {
-          online = true;
-          if (d['typing'] == true) typing = true;
-        }
+        if (p.payload['user_id'] != me) online = true;
       }
     }
-    if (mounted) {
-      setState(() {
-        _otherOnline = online;
-        _otherTyping = typing;
-      });
-    }
+    if (mounted) setState(() => _otherOnline = online);
   }
 
   Future<void> _markRead() async {
@@ -94,10 +101,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   void _setTyping(bool value) {
-    if (_iAmTyping == value) return;
-    _iAmTyping = value;
     final repo = ref.read(messagingRepositoryProvider);
-    _channel?.track({'user_id': repo?.myId, 'typing': value});
+    if (_iAmTyping == value && value == false) return;
+    _iAmTyping = value;
+    _lastTypingSent = DateTime.now();
+    _channel?.sendBroadcastMessage(
+        event: 'typing', payload: {'user_id': repo?.myId, 'typing': value});
   }
 
   void _onTextChanged() {
@@ -106,7 +115,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       _setTyping(false);
       return;
     }
-    _setTyping(true);
+    // Re-announce every 2 seconds while typing.
+    if (!_iAmTyping || DateTime.now().difference(_lastTypingSent).inSeconds >= 2) {
+      _setTyping(true);
+    }
     _typingTimer?.cancel();
     _typingTimer = Timer(const Duration(seconds: 3), () => _setTyping(false));
   }
@@ -114,6 +126,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   void dispose() {
     _typingTimer?.cancel();
+    _otherTypingExpiry?.cancel();
     final ch = _channel;
     if (ch != null) Supabase.instance.client.removeChannel(ch);
     _text.dispose();
@@ -172,19 +185,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       appBar: AppBar(
         title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(title),
-          if (_otherTyping || _otherOnline)
+          if (_otherOnline)
             Row(mainAxisSize: MainAxisSize.min, children: [
-              if (!_otherTyping)
-                Container(
-                  width: 8,
-                  height: 8,
-                  margin: const EdgeInsetsDirectional.only(end: 6),
-                  decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
-                ),
-              Text(
-                _otherTyping ? t.chatTyping : t.chatOnline,
-                style: theme.textTheme.bodySmall,
+              Container(
+                width: 8,
+                height: 8,
+                margin: const EdgeInsetsDirectional.only(end: 6),
+                decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
               ),
+              Text(t.chatOnline, style: theme.textTheme.bodySmall),
             ]),
         ]),
       ),
@@ -226,6 +235,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       ),
               ),
             ),
+            // "typing…" sits right above the message box, like Messenger.
+            if (_otherTyping)
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                  child: Text(t.chatTyping,
+                      style: theme.textTheme.bodySmall
+                          ?.copyWith(color: theme.colorScheme.primary)),
+                ),
+              ),
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.sm),
