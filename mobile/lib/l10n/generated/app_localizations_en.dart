@@ -745,4 +745,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get secDetails => 'Property details';
+
+  @override
+  String get pickLocationTitle => 'Pick location';
+
+  @override
+  String get pickLocationHint => 'Tap the map to place a pin';
+
+  @override
+  String get pickLocationConfirm => 'Confirm location';
+
+  @override
+  String get mapTitle => 'Location';
+
+  @override
+  String get setOnMap => 'Set location on map';
+
+  @override
+  String get locationSet => 'Location set on map';
 }

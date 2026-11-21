@@ -1545,6 +1545,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Property details'**
   String get secDetails;
+
+  /// No description provided for @pickLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick location'**
+  String get pickLocationTitle;
+
+  /// No description provided for @pickLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the map to place a pin'**
+  String get pickLocationHint;
+
+  /// No description provided for @pickLocationConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm location'**
+  String get pickLocationConfirm;
+
+  /// No description provided for @mapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get mapTitle;
+
+  /// No description provided for @setOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Set location on map'**
+  String get setOnMap;
+
+  /// No description provided for @locationSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Location set on map'**
+  String get locationSet;
 }
 
 class _AppLocalizationsDelegate

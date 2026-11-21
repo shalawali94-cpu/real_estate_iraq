@@ -257,5 +257,11 @@
   "secBasics": "Basic information",
   "secPrice": "Price",
   "secLocation": "Location",
-  "secDetails": "Property details"
+  "secDetails": "Property details",
+  "pickLocationTitle": "Pick location",
+  "pickLocationHint": "Tap the map to place a pin",
+  "pickLocationConfirm": "Confirm location",
+  "mapTitle": "Location",
+  "setOnMap": "Set location on map",
+  "locationSet": "Location set on map"
 }

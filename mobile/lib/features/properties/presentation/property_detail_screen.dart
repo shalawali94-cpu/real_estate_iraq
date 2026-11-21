@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../map/presentation/property_map_card.dart';
 
 import '../../../core/format/money.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -21,6 +24,14 @@ final propertyDetailProvider =
   final d = await repo.detail(id);
   if (d != null) repo.recordView(id);
   return d;
+});
+
+final propertyCoordsProvider =
+    FutureProvider.family<LatLng?, String>((ref, id) async {
+  final repo = ref.watch(propertyRepositoryProvider);
+  if (repo == null) return null;
+  final c = await repo.coords(id);
+  return c == null ? null : LatLng(c.lat, c.lng);
 });
 
 class PropertyDetailScreen extends ConsumerWidget {
@@ -304,6 +315,14 @@ class _Body extends ConsumerWidget {
                             ?.copyWith(color: theme.colorScheme.onSurfaceVariant))),
               ]),
             ],
+            Consumer(builder: (context, ref, _) {
+              final p = ref.watch(propertyCoordsProvider(d.id)).value;
+              if (p == null) return const SizedBox.shrink();
+              return Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.lg),
+                child: PropertyMapCard(point: p),
+              );
+            }),
             if (specs.isNotEmpty) ...[
               const SizedBox(height: AppSpacing.lg),
               Text(t.specsTitle,

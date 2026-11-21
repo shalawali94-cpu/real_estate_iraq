@@ -257,5 +257,11 @@
   "secBasics": "زانیاری بنەڕەتی",
   "secPrice": "نرخ",
   "secLocation": "شوێن",
-  "secDetails": "وردەکاری موڵک"
+  "secDetails": "وردەکاری موڵک",
+  "pickLocationTitle": "هەڵبژاردنی شوێن",
+  "pickLocationHint": "لەسەر نەخشە دەستبدە بۆ دانانی نیشانە",
+  "pickLocationConfirm": "دووپاتکردنەوەی شوێن",
+  "mapTitle": "شوێن",
+  "setOnMap": "دیاریکردنی شوێن لەسەر نەخشە",
+  "locationSet": "شوێن لەسەر نەخشە دیاریکرا"
 }

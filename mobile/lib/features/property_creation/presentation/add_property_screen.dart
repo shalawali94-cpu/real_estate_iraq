@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../core/localization/localized_name.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -37,6 +38,7 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
   final _baths = TextEditingController();
   final _floors = TextEditingController();
   final _address = TextEditingController();
+  LatLng? _point;
 
   DbRow? _category;
   String? _tx;
@@ -151,6 +153,7 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
         'governorate_id': _gov,
         'district_id': _district,
         if (_address.text.trim().isNotEmpty) 'address_text': _address.text.trim(),
+        if (_point != null) 'location': 'SRID=4326;POINT(${_point!.longitude} ${_point!.latitude})',
         if (_has('area_sqm') && area.isNotEmpty) 'area_sqm': num.parse(area),
         if (_has('bedrooms') && _beds.text.isNotEmpty) 'bedrooms': _intOrNull(_beds),
         if (_has('bathrooms') && _baths.text.isNotEmpty) 'bathrooms': _intOrNull(_baths),
@@ -368,6 +371,34 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                   controller: _address,
                   maxLength: 200,
                   decoration: InputDecoration(labelText: t.fieldAddress),
+                )),
+                _gap(OutlinedButton.icon(
+                  key: const Key('pickLocationButton'),
+                  icon: Icon(_point == null ? Icons.map_outlined : Icons.check_circle,
+                      color: _point == null ? null : Colors.green),
+                  label: Text(_point == null ? t.setOnMap : t.locationSet),
+                  onPressed: () async {
+                    final gov = (ref.read(governoratesProvider).value ?? const <DbRow>[])
+                        .where((g) => g['id'] == _gov);
+                    final dis = (districts?.value ?? const <DbRow>[])
+                        .where((d) => d['id'] == _district);
+                    LatLng? center;
+                    var zoom = 13;
+                    for (final e in [(dis, 13), (gov, 9)]) {
+                      for (final r in e.$1) {
+                        if (center == null &&
+                            r['center_lat'] != null &&
+                            r['center_lng'] != null) {
+                          center = LatLng((r['center_lat'] as num).toDouble(),
+                              (r['center_lng'] as num).toDouble());
+                          zoom = e.$2;
+                        }
+                      }
+                    }
+                    final p = await context.push<LatLng>('/pick-location?z=${_point != null ? 16 : zoom}',
+                        extra: _point ?? center);
+                    if (p != null) setState(() => _point = p);
+                  },
                 )),
                 ])),
                 if (_category != null)

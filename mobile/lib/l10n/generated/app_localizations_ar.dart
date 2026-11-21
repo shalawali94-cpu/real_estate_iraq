@@ -741,4 +741,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get secDetails => 'تفاصيل العقار';
+
+  @override
+  String get pickLocationTitle => 'اختيار الموقع';
+
+  @override
+  String get pickLocationHint => 'اضغط على الخريطة لوضع دبوس';
+
+  @override
+  String get pickLocationConfirm => 'تأكيد الموقع';
+
+  @override
+  String get mapTitle => 'الموقع';
+
+  @override
+  String get setOnMap => 'تحديد الموقع على الخريطة';
+
+  @override
+  String get locationSet => 'تم تحديد الموقع على الخريطة';
 }

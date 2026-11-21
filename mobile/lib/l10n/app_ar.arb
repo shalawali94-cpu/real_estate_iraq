@@ -257,5 +257,11 @@
   "secBasics": "المعلومات الأساسية",
   "secPrice": "السعر",
   "secLocation": "الموقع",
-  "secDetails": "تفاصيل العقار"
+  "secDetails": "تفاصيل العقار",
+  "pickLocationTitle": "اختيار الموقع",
+  "pickLocationHint": "اضغط على الخريطة لوضع دبوس",
+  "pickLocationConfirm": "تأكيد الموقع",
+  "mapTitle": "الموقع",
+  "setOnMap": "تحديد الموقع على الخريطة",
+  "locationSet": "تم تحديد الموقع على الخريطة"
 }

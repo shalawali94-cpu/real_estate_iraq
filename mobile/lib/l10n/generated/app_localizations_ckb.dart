@@ -745,4 +745,22 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get secDetails => 'وردەکاری موڵک';
+
+  @override
+  String get pickLocationTitle => 'هەڵبژاردنی شوێن';
+
+  @override
+  String get pickLocationHint => 'لەسەر نەخشە دەستبدە بۆ دانانی نیشانە';
+
+  @override
+  String get pickLocationConfirm => 'دووپاتکردنەوەی شوێن';
+
+  @override
+  String get mapTitle => 'شوێن';
+
+  @override
+  String get setOnMap => 'دیاریکردنی شوێن لەسەر نەخشە';
+
+  @override
+  String get locationSet => 'شوێن لەسەر نەخشە دیاریکرا';
 }

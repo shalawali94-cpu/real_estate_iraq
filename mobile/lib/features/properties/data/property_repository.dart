@@ -54,6 +54,13 @@ class PropertyRepository {
     } catch (_) {}
   }
 
+  Future<({double lat, double lng})?> coords(String id) async {
+    final rows = await _client.rpc('property_coords', params: {'p_id': id}) as List;
+    if (rows.isEmpty) return null;
+    final r = rows.first as Map;
+    return (lat: (r['lat'] as num).toDouble(), lng: (r['lng'] as num).toDouble());
+  }
+
   String? publicUrl(String path) => _client.storage.from('property-media').getPublicUrl(path);
 
   String? coverUrl(String? storagePath) => storagePath == null

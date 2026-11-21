@@ -13,13 +13,13 @@ class LookupRepository {
 
   Future<List<DbRow>> governorates() async => List<DbRow>.from(await _c
       .from('governorates')
-      .select('id,name_ckb,name_ar,name_en')
+      .select('id,name_ckb,name_ar,name_en,center_lat,center_lng')
       .eq('is_active', true)
       .order('sort_order'));
 
   Future<List<DbRow>> districts(int governorateId) async => List<DbRow>.from(await _c
       .from('districts')
-      .select('id,name_ckb,name_ar,name_en')
+      .select('id,name_ckb,name_ar,name_en,center_lat,center_lng')
       .eq('governorate_id', governorateId)
       .eq('is_active', true)
       .order('name_en'));
