@@ -395,4 +395,35 @@ class AppLocalizationsCkb extends AppLocalizations {
   @override
   String get deleteAccountFailed =>
       'نەتوانرا ئەکاونتەکە بسڕدرێتەوە. دووبارە هەوڵبدەرەوە.';
+
+  @override
+  String get photosSectionTitle => 'وێنەکان';
+
+  @override
+  String get photosCoverHint =>
+      'لەسەر وێنەیەک دابگرە بۆ ئەوەی ببێتە وێنەی بەرگ.';
+
+  @override
+  String get photosRequired => 'لانیکەم یەک وێنە زیاد بکە.';
+
+  @override
+  String get myPropertiesTitle => 'مولکەکانم';
+
+  @override
+  String get myPropertiesEmpty => 'هێشتا هیچ مولکێکت زیاد نەکردووە.';
+
+  @override
+  String get statusDraft => 'دراف';
+
+  @override
+  String get statusPendingPayment => 'چاوەڕێی پارەدان';
+
+  @override
+  String get statusPendingApproval => 'چاوەڕێی پەسەندکردن';
+
+  @override
+  String get statusPublished => 'بڵاوکراوەتەوە';
+
+  @override
+  String get statusRejected => 'ڕەتکرایەوە';
 }

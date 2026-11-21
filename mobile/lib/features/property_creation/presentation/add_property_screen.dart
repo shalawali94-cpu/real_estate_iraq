@@ -3,15 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/localization/localized_name.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
 import '../../properties/presentation/property_card.dart' show transactionLabel;
 import '../data/lookup_repository.dart';
+import '../data/media_repository.dart';
 
-/// Step 1 of the publishing wizard: listing details, saved as a DRAFT.
-/// Media upload and the 30,000 IQD payment steps follow in later units.
+/// Publishing wizard step 1: property type, photos, then details.
+/// Photos stay on the device until the final save; only then are the draft created
+/// and the photos uploaded. The 30,000 IQD payment step follows in a later unit.
+class _LocalPhoto {
+  _LocalPhoto(this.bytes, this.contentType);
+  final Uint8List bytes;
+  final String contentType;
+}
+
 class AddPropertyScreen extends ConsumerStatefulWidget {
   const AddPropertyScreen({super.key});
   @override
@@ -39,6 +48,11 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
   String? _furnishing;
   bool? _parking;
   bool _busy = false;
+  static const _maxPhotos = 20;
+  final List<_LocalPhoto> _photos = [];
+  int _cover = 0;
+  bool _photoError = false;
+  int _uploaded = 0;
 
   @override
   void dispose() {
@@ -64,14 +78,66 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
   int? _intOrNull(TextEditingController c) =>
       c.text.trim().isEmpty ? null : int.parse(c.text.trim());
 
+  String _contentType(XFile f) {
+    final m = f.mimeType;
+    if (m != null && m.startsWith('image/')) return m;
+    final n = f.name.toLowerCase();
+    if (n.endsWith('.png')) return 'image/png';
+    if (n.endsWith('.webp')) return 'image/webp';
+    if (n.endsWith('.heic')) return 'image/heic';
+    return 'image/jpeg';
+  }
+
+  Future<void> _pickPhotos() async {
+    final room = _maxPhotos - _photos.length;
+    if (room <= 0) return;
+    final picker = ImagePicker();
+    final List<XFile> files;
+    if (room == 1) {
+      final one = await picker.pickImage(source: ImageSource.gallery);
+      files = one == null ? const [] : [one];
+    } else {
+      files = await picker.pickMultiImage(limit: room);
+    }
+    if (files.isEmpty) return;
+    final added = <_LocalPhoto>[];
+    for (final f in files.take(room)) {
+      added.add(_LocalPhoto(await f.readAsBytes(), _contentType(f)));
+    }
+    if (!mounted) return;
+    setState(() {
+      _photos.addAll(added);
+      _photoError = false;
+    });
+  }
+
+  void _removePhoto(int i) => setState(() {
+        _photos.removeAt(i);
+        if (i < _cover) {
+          _cover--;
+        } else if (i == _cover) {
+          _cover = 0;
+        }
+      });
+
   Future<void> _save() async {
     final t = AppLocalizations.of(context);
-    if (!_form.currentState!.validate()) return;
+    final formOk = _form.currentState!.validate();
+    if (_photos.isEmpty) setState(() => _photoError = true);
+    if (!formOk || _photos.isEmpty) return;
     if (_category == null || _tx == null || _gov == null || _district == null) {
       setState(() {}); // dropdown validators show errors
       return;
     }
-    setState(() => _busy = true);
+    final media = ref.read(mediaRepositoryProvider);
+    if (media == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.mediaApiMissing)));
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _uploaded = 0;
+    });
     try {
       final area = _area.text.trim();
       final draftId = await ref.read(lookupRepositoryProvider)!.createDraft({
@@ -93,9 +159,27 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
         if (_has('furnishing') && _furnishing != null) 'furnishing': _furnishing,
         if (_has('has_parking') && _parking != null) 'has_parking': _parking,
       });
+      // The chosen cover is uploaded first, which makes it the cover (sort order 0).
+      final ordered = [
+        _photos[_cover],
+        for (var i = 0; i < _photos.length; i++)
+          if (i != _cover) _photos[i],
+      ];
+      var failed = false;
+      for (final p in ordered) {
+        try {
+          await media.uploadImage(draftId, p.bytes, p.contentType);
+        } catch (e) {
+          debugPrint('upload error: $e');
+          failed = true;
+        }
+        if (!mounted) return;
+        setState(() => _uploaded++);
+      }
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.draftSaved)));
-      context.push('/draft/$draftId/media');
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(failed ? t.mediaFailed : t.draftSaved)));
+      context.go('/draft/$draftId/media');
     } catch (e) {
       debugPrint('createDraft error: $e');
       if (mounted) {
@@ -151,6 +235,7 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                     if (!_allowedTx.contains(_tx)) _tx = null;
                   }),
                 )),
+                _gap(_photoSection(t)),
                 _gap(DropdownButtonFormField<String>(
                   key: ValueKey('tx-${_category?['id']}'),
                   decoration: InputDecoration(labelText: t.fieldTransaction),
@@ -290,9 +375,10 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
                   key: const Key('saveDraftButton'),
                   onPressed: _busy ? null : _save,
                   child: _busy
-                      ? const SizedBox(
-                          width: 20, height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2))
+                      ? Text(_uploaded > 0 || _photos.isNotEmpty
+                          ? t.mediaUploading(
+                              (_uploaded + 1).clamp(1, _photos.length), _photos.length)
+                          : '...')
                       : Text(t.saveDraft),
                 ),
                 const SizedBox(height: AppSpacing.xl),
@@ -303,6 +389,65 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
         ),
       ),
     );
+  }
+
+  Widget _photoSection(AppLocalizations t) {
+    final theme = Theme.of(context);
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      Text(t.photosSectionTitle, style: theme.textTheme.titleMedium),
+      const SizedBox(height: AppSpacing.xs),
+      if (_photos.length > 1) Text(t.photosCoverHint, style: theme.textTheme.bodySmall),
+      const SizedBox(height: AppSpacing.sm),
+      if (_photos.isNotEmpty)
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: AppSpacing.sm,
+            crossAxisSpacing: AppSpacing.sm,
+          ),
+          itemCount: _photos.length,
+          itemBuilder: (_, i) => GestureDetector(
+            onTap: _busy ? null : () => setState(() => _cover = i),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Stack(fit: StackFit.expand, children: [
+                Image.memory(_photos[i].bytes, fit: BoxFit.cover),
+                if (i == _cover)
+                  PositionedDirectional(
+                    bottom: 4,
+                    start: 4,
+                    child: Chip(
+                        label: Text(t.mediaCover), visualDensity: VisualDensity.compact),
+                  ),
+                PositionedDirectional(
+                  top: 0,
+                  end: 0,
+                  child: IconButton(
+                    tooltip: t.mediaDelete,
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: _busy ? null : () => _removePhoto(i),
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ),
+      const SizedBox(height: AppSpacing.sm),
+      OutlinedButton.icon(
+        key: const Key('addPhotosButton'),
+        onPressed: (_busy || _photos.length >= _maxPhotos) ? null : _pickPhotos,
+        icon: const Icon(Icons.add_photo_alternate_outlined),
+        label: Text('${t.mediaAdd} (${_photos.length}/$_maxPhotos)'),
+      ),
+      if (_photoError)
+        Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.xs),
+          child: Text(t.photosRequired,
+              style: TextStyle(color: theme.colorScheme.error)),
+        ),
+    ]);
   }
 
   Widget _numField(TextEditingController c, String label, {bool decimal = false}) =>

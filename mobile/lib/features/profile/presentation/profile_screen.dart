@@ -141,6 +141,12 @@ class ProfileScreen extends ConsumerWidget {
                     icon: const Icon(Icons.edit_outlined),
                     label: Text(t.editProfile),
                   ),
+                  OutlinedButton.icon(
+                    key: const Key('myPropertiesButton'),
+                    onPressed: () => context.push('/profile/properties'),
+                    icon: const Icon(Icons.home_work_outlined),
+                    label: Text(t.myPropertiesTitle),
+                  ),
                 ]),
               ),
             ),

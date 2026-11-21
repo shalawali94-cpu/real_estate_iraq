@@ -143,5 +143,15 @@
   "deleteAccountBody": "Your personal data will be removed and your listings will no longer be visible. Payment records are kept as required. This cannot be undone.",
   "deleteAccountConfirm": "Delete",
   "cancel": "Cancel",
-  "deleteAccountFailed": "Could not delete the account. Please try again."
+  "deleteAccountFailed": "Could not delete the account. Please try again.",
+  "photosSectionTitle": "Photos",
+  "photosCoverHint": "Tap a photo to make it the cover.",
+  "photosRequired": "Add at least one photo.",
+  "myPropertiesTitle": "My properties",
+  "myPropertiesEmpty": "You have not added any property yet.",
+  "statusDraft": "Draft",
+  "statusPendingPayment": "Awaiting payment",
+  "statusPendingApproval": "Awaiting approval",
+  "statusPublished": "Published",
+  "statusRejected": "Rejected"
 }

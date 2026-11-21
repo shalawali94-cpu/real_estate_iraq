@@ -143,5 +143,15 @@
   "deleteAccountBody": "زانیارییە کەسییەکانت دەسڕدرێنەوە و ڕیکلامەکانت چیتر نابینرێن. تۆمارەکانی پارەدان بەپێی پێویست دەمێننەوە. ئەم کارە ناگەڕێتەوە.",
   "deleteAccountConfirm": "بسڕەوە",
   "cancel": "هەڵوەشاندنەوە",
-  "deleteAccountFailed": "نەتوانرا ئەکاونتەکە بسڕدرێتەوە. دووبارە هەوڵبدەرەوە."
+  "deleteAccountFailed": "نەتوانرا ئەکاونتەکە بسڕدرێتەوە. دووبارە هەوڵبدەرەوە.",
+  "photosSectionTitle": "وێنەکان",
+  "photosCoverHint": "لەسەر وێنەیەک دابگرە بۆ ئەوەی ببێتە وێنەی بەرگ.",
+  "photosRequired": "لانیکەم یەک وێنە زیاد بکە.",
+  "myPropertiesTitle": "مولکەکانم",
+  "myPropertiesEmpty": "هێشتا هیچ مولکێکت زیاد نەکردووە.",
+  "statusDraft": "دراف",
+  "statusPendingPayment": "چاوەڕێی پارەدان",
+  "statusPendingApproval": "چاوەڕێی پەسەندکردن",
+  "statusPublished": "بڵاوکراوەتەوە",
+  "statusRejected": "ڕەتکرایەوە"
 }

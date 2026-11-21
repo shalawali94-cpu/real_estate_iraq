@@ -861,6 +861,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not delete the account. Please try again.'**
   String get deleteAccountFailed;
+
+  /// No description provided for @photosSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get photosSectionTitle;
+
+  /// No description provided for @photosCoverHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a photo to make it the cover.'**
+  String get photosCoverHint;
+
+  /// No description provided for @photosRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one photo.'**
+  String get photosRequired;
+
+  /// No description provided for @myPropertiesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My properties'**
+  String get myPropertiesTitle;
+
+  /// No description provided for @myPropertiesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You have not added any property yet.'**
+  String get myPropertiesEmpty;
+
+  /// No description provided for @statusDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get statusDraft;
+
+  /// No description provided for @statusPendingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting payment'**
+  String get statusPendingPayment;
+
+  /// No description provided for @statusPendingApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting approval'**
+  String get statusPendingApproval;
+
+  /// No description provided for @statusPublished.
+  ///
+  /// In en, this message translates to:
+  /// **'Published'**
+  String get statusPublished;
+
+  /// No description provided for @statusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get statusRejected;
 }
 
 class _AppLocalizationsDelegate

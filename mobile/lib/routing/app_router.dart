@@ -14,6 +14,7 @@ import '../features/profile/data/profile_repository.dart';
 import '../features/profile/presentation/profile_form_screen.dart';
 import '../features/profile/presentation/profile_screen.dart';
 import '../features/properties/presentation/property_detail_screen.dart';
+import '../features/profile/presentation/my_properties_screen.dart';
 import '../features/property_creation/presentation/add_property_screen.dart';
 import '../features/property_creation/presentation/media_screen.dart';
 import '../shared/widgets/main_shell.dart';
@@ -34,7 +35,8 @@ bool _requiresAccount(String loc) =>
     loc.startsWith(AppRoutes.add) ||
     loc.startsWith(AppRoutes.favorites) ||
     loc.startsWith('/draft') ||
-    loc.startsWith('/profile/edit');
+    loc.startsWith('/profile/edit') ||
+    loc.startsWith('/profile/properties');
 
 String _loginFor(String from) =>
     '${AppRoutes.login}?from=${Uri.encodeComponent(from)}';
@@ -102,6 +104,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.onboarding,
         builder: (_, _) => const ProfileFormScreen(editMode: false),
+      ),
+      GoRoute(
+        path: '/profile/properties',
+        builder: (_, _) => const MyPropertiesScreen(),
       ),
       GoRoute(
         path: '/profile/edit',

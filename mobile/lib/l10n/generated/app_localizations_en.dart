@@ -396,4 +396,34 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteAccountFailed =>
       'Could not delete the account. Please try again.';
+
+  @override
+  String get photosSectionTitle => 'Photos';
+
+  @override
+  String get photosCoverHint => 'Tap a photo to make it the cover.';
+
+  @override
+  String get photosRequired => 'Add at least one photo.';
+
+  @override
+  String get myPropertiesTitle => 'My properties';
+
+  @override
+  String get myPropertiesEmpty => 'You have not added any property yet.';
+
+  @override
+  String get statusDraft => 'Draft';
+
+  @override
+  String get statusPendingPayment => 'Awaiting payment';
+
+  @override
+  String get statusPendingApproval => 'Awaiting approval';
+
+  @override
+  String get statusPublished => 'Published';
+
+  @override
+  String get statusRejected => 'Rejected';
 }

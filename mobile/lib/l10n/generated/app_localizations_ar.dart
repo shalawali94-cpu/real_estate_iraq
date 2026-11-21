@@ -394,4 +394,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deleteAccountFailed => 'تعذّر حذف الحساب. حاول مرة أخرى.';
+
+  @override
+  String get photosSectionTitle => 'الصور';
+
+  @override
+  String get photosCoverHint => 'اضغط على صورة لجعلها صورة الغلاف.';
+
+  @override
+  String get photosRequired => 'أضف صورة واحدة على الأقل.';
+
+  @override
+  String get myPropertiesTitle => 'عقاراتي';
+
+  @override
+  String get myPropertiesEmpty => 'لم تضف أي عقار بعد.';
+
+  @override
+  String get statusDraft => 'مسودة';
+
+  @override
+  String get statusPendingPayment => 'بانتظار الدفع';
+
+  @override
+  String get statusPendingApproval => 'بانتظار الموافقة';
+
+  @override
+  String get statusPublished => 'منشور';
+
+  @override
+  String get statusRejected => 'مرفوض';
 }
