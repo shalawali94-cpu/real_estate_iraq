@@ -247,7 +247,13 @@ class _AddPropertyScreenState extends ConsumerState<AddPropertyScreen> {
               child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _gap(_photoSection(t)),
+                _gap(Card(
+                  color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    child: _photoSection(t),
+                  ),
+                )),
                 _gap(_section(t.secBasics, [
                 _gap(DropdownButtonFormField<DbRow>(
                   key: const Key('categoryField'),

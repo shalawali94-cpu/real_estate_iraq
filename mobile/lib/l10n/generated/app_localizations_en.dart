@@ -733,4 +733,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileMyActivity => 'My activity';
+
+  @override
+  String get secBasics => 'Basic information';
+
+  @override
+  String get secPrice => 'Price';
+
+  @override
+  String get secLocation => 'Location';
+
+  @override
+  String get secDetails => 'Property details';
 }

@@ -729,4 +729,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profileMyActivity => 'نشاطي';
+
+  @override
+  String get secBasics => 'المعلومات الأساسية';
+
+  @override
+  String get secPrice => 'السعر';
+
+  @override
+  String get secLocation => 'الموقع';
+
+  @override
+  String get secDetails => 'تفاصيل العقار';
 }

@@ -1521,6 +1521,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My activity'**
   String get profileMyActivity;
+
+  /// No description provided for @secBasics.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic information'**
+  String get secBasics;
+
+  /// No description provided for @secPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get secPrice;
+
+  /// No description provided for @secLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get secLocation;
+
+  /// No description provided for @secDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Property details'**
+  String get secDetails;
 }
 
 class _AppLocalizationsDelegate

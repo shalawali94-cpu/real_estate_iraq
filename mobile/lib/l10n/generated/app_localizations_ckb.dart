@@ -733,4 +733,16 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get profileMyActivity => 'چالاکییەکانم';
+
+  @override
+  String get secBasics => 'زانیاری بنەڕەتی';
+
+  @override
+  String get secPrice => 'نرخ';
+
+  @override
+  String get secLocation => 'شوێن';
+
+  @override
+  String get secDetails => 'وردەکاری موڵک';
 }
