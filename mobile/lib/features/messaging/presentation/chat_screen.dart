@@ -92,9 +92,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           final m = list[i];
                           final mine = m.senderId == repo?.myId;
                           return Align(
-                            alignment: mine
-                                ? AlignmentDirectional.centerEnd
-                                : AlignmentDirectional.centerStart,
+                            // Physical sides, independent of language direction (like
+                            // Messenger/Instagram): my messages right, theirs left.
+                            alignment: mine ? Alignment.centerRight : Alignment.centerLeft,
                             child: Container(
                               margin: const EdgeInsets.symmetric(vertical: 3),
                               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
