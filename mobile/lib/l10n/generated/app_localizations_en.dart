@@ -55,4 +55,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageEnglish => 'English';
+
+  @override
+  String get authWelcomeTitle => 'Welcome';
+
+  @override
+  String get authPhoneLabel => 'Mobile number';
+
+  @override
+  String get authPhoneHelp =>
+      'Enter your number to receive a verification code';
+
+  @override
+  String get authSendCode => 'Send code';
+
+  @override
+  String get authEnterCodeTitle => 'Verification code';
+
+  @override
+  String authCodeSentTo(String phone) {
+    return 'Code sent to $phone';
+  }
+
+  @override
+  String get authVerify => 'Verify';
+
+  @override
+  String get authResend => 'Resend code';
+
+  @override
+  String get authInvalidPhone => 'Enter a valid Iraqi mobile number';
+
+  @override
+  String get authInvalidCode => 'The code is 6 digits';
+
+  @override
+  String get authGenericError => 'Something went wrong, please try again';
+
+  @override
+  String get authSignOut => 'Sign out';
+
+  @override
+  String get authChangeNumber => 'Change number';
 }

@@ -1,5 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../config/env.dart';
+import '../features/authentication/data/auth_repository.dart';
+import '../features/authentication/presentation/login_screen.dart';
+import '../features/authentication/presentation/verify_screen.dart';
 
 import '../features/explore/presentation/explore_screen.dart';
 import '../features/favorites/presentation/favorites_screen.dart';
@@ -14,12 +21,38 @@ abstract final class AppRoutes {
   static const add = '/add';
   static const favorites = '/favorites';
   static const profile = '/profile';
+  static const login = '/login';
+  static const verify = '/verify';
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
+  // Re-evaluate redirects when the session changes, without rebuilding the router.
+  final signedIn = ValueNotifier<bool>(
+    ref.read(authRepositoryProvider)?.currentSession != null,
+  );
+  ref.listen<AsyncValue<Session?>>(sessionProvider, (_, next) {
+    signedIn.value = next.value != null;
+  });
+  ref.onDispose(signedIn.dispose);
+
   return GoRouter(
     initialLocation: AppRoutes.home,
+    refreshListenable: signedIn,
+    redirect: (context, state) {
+      // Without Supabase config (tests, local UI work) the app stays open.
+      if (!Env.isSupabaseConfigured) return null;
+      final loc = state.matchedLocation;
+      final onAuth = loc == AppRoutes.login || loc == AppRoutes.verify;
+      if (!signedIn.value && !onAuth) return AppRoutes.login;
+      if (signedIn.value && onAuth) return AppRoutes.home;
+      return null;
+    },
     routes: [
+      GoRoute(path: AppRoutes.login, builder: (_, _) => const LoginScreen()),
+      GoRoute(
+        path: AppRoutes.verify,
+        builder: (_, state) => VerifyScreen(phone: state.extra! as String),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => MainShell(navigationShell: shell),
         branches: [

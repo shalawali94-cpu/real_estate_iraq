@@ -15,5 +15,25 @@
   "themeDark": "تاریک",
   "languageKurdish": "کوردی",
   "languageArabic": "العربية",
-  "languageEnglish": "English"
+  "languageEnglish": "English",
+  "authWelcomeTitle": "بەخێربێیت",
+  "authPhoneLabel": "ژمارەی مۆبایل",
+  "authPhoneHelp": "ژمارەکەت بنووسە بۆ وەرگرتنی کۆدی پشتڕاستکردنەوە",
+  "authSendCode": "ناردنی کۆد",
+  "authEnterCodeTitle": "کۆدی پشتڕاستکردنەوە",
+  "authCodeSentTo": "کۆد نێردرا بۆ {phone}",
+  "@authCodeSentTo": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "authVerify": "پشتڕاستکردنەوە",
+  "authResend": "ناردنەوەی کۆد",
+  "authInvalidPhone": "ژمارەی مۆبایلی عێراقیی دروست بنووسە",
+  "authInvalidCode": "کۆدەکە ٦ ژمارەیە",
+  "authGenericError": "هەڵەیەک ڕوویدا، دووبارە هەوڵبدەرەوە",
+  "authSignOut": "چوونەدەرەوە",
+  "authChangeNumber": "گۆڕینی ژمارە"
 }

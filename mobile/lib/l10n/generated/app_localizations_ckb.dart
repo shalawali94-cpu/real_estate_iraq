@@ -55,4 +55,45 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get languageEnglish => 'English';
+
+  @override
+  String get authWelcomeTitle => 'بەخێربێیت';
+
+  @override
+  String get authPhoneLabel => 'ژمارەی مۆبایل';
+
+  @override
+  String get authPhoneHelp => 'ژمارەکەت بنووسە بۆ وەرگرتنی کۆدی پشتڕاستکردنەوە';
+
+  @override
+  String get authSendCode => 'ناردنی کۆد';
+
+  @override
+  String get authEnterCodeTitle => 'کۆدی پشتڕاستکردنەوە';
+
+  @override
+  String authCodeSentTo(String phone) {
+    return 'کۆد نێردرا بۆ $phone';
+  }
+
+  @override
+  String get authVerify => 'پشتڕاستکردنەوە';
+
+  @override
+  String get authResend => 'ناردنەوەی کۆد';
+
+  @override
+  String get authInvalidPhone => 'ژمارەی مۆبایلی عێراقیی دروست بنووسە';
+
+  @override
+  String get authInvalidCode => 'کۆدەکە ٦ ژمارەیە';
+
+  @override
+  String get authGenericError => 'هەڵەیەک ڕوویدا، دووبارە هەوڵبدەرەوە';
+
+  @override
+  String get authSignOut => 'چوونەدەرەوە';
+
+  @override
+  String get authChangeNumber => 'گۆڕینی ژمارە';
 }

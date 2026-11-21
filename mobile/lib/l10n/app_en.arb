@@ -15,5 +15,25 @@
   "themeDark": "Dark",
   "languageKurdish": "کوردی",
   "languageArabic": "العربية",
-  "languageEnglish": "English"
+  "languageEnglish": "English",
+  "authWelcomeTitle": "Welcome",
+  "authPhoneLabel": "Mobile number",
+  "authPhoneHelp": "Enter your number to receive a verification code",
+  "authSendCode": "Send code",
+  "authEnterCodeTitle": "Verification code",
+  "authCodeSentTo": "Code sent to {phone}",
+  "@authCodeSentTo": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "authVerify": "Verify",
+  "authResend": "Resend code",
+  "authInvalidPhone": "Enter a valid Iraqi mobile number",
+  "authInvalidCode": "The code is 6 digits",
+  "authGenericError": "Something went wrong, please try again",
+  "authSignOut": "Sign out",
+  "authChangeNumber": "Change number"
 }

@@ -195,6 +195,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'English'**
   String get languageEnglish;
+
+  /// No description provided for @authWelcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get authWelcomeTitle;
+
+  /// No description provided for @authPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get authPhoneLabel;
+
+  /// No description provided for @authPhoneHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your number to receive a verification code'**
+  String get authPhoneHelp;
+
+  /// No description provided for @authSendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get authSendCode;
+
+  /// No description provided for @authEnterCodeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code'**
+  String get authEnterCodeTitle;
+
+  /// No description provided for @authCodeSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Code sent to {phone}'**
+  String authCodeSentTo(String phone);
+
+  /// No description provided for @authVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get authVerify;
+
+  /// No description provided for @authResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get authResend;
+
+  /// No description provided for @authInvalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid Iraqi mobile number'**
+  String get authInvalidPhone;
+
+  /// No description provided for @authInvalidCode.
+  ///
+  /// In en, this message translates to:
+  /// **'The code is 6 digits'**
+  String get authInvalidCode;
+
+  /// No description provided for @authGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong, please try again'**
+  String get authGenericError;
+
+  /// No description provided for @authSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get authSignOut;
+
+  /// No description provided for @authChangeNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Change number'**
+  String get authChangeNumber;
 }
 
 class _AppLocalizationsDelegate

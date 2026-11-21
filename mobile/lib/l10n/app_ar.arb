@@ -15,5 +15,25 @@
   "themeDark": "داكن",
   "languageKurdish": "کوردی",
   "languageArabic": "العربية",
-  "languageEnglish": "English"
+  "languageEnglish": "English",
+  "authWelcomeTitle": "أهلاً بك",
+  "authPhoneLabel": "رقم الجوال",
+  "authPhoneHelp": "أدخل رقمك لاستلام رمز التحقق",
+  "authSendCode": "إرسال الرمز",
+  "authEnterCodeTitle": "رمز التحقق",
+  "authCodeSentTo": "تم إرسال الرمز إلى {phone}",
+  "@authCodeSentTo": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "authVerify": "تحقق",
+  "authResend": "إعادة إرسال الرمز",
+  "authInvalidPhone": "أدخل رقم جوال عراقي صحيح",
+  "authInvalidCode": "الرمز مكوّن من 6 أرقام",
+  "authGenericError": "حدث خطأ، حاول مرة أخرى",
+  "authSignOut": "تسجيل الخروج",
+  "authChangeNumber": "تغيير الرقم"
 }

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../localization/app_settings_controllers.dart';
 import '../../../theme/app_theme.dart';
+import '../../authentication/data/auth_repository.dart';
 
 /// Phase 2: language + appearance settings (working).
 /// Account sections are added in Phase 5.
@@ -53,6 +54,15 @@ class ProfileScreen extends ConsumerWidget {
                 .read(themeModeControllerProvider.notifier)
                 .setThemeMode(s.first),
           ),
+          if (ref.watch(authRepositoryProvider) != null) ...[
+            const SizedBox(height: AppSpacing.xl),
+            OutlinedButton.icon(
+              key: const Key('signOutButton'),
+              onPressed: () => ref.read(authRepositoryProvider)!.signOut(),
+              icon: const Icon(Icons.logout),
+              label: Text(t.authSignOut),
+            ),
+          ],
         ],
       ),
     );

@@ -55,4 +55,45 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get languageEnglish => 'English';
+
+  @override
+  String get authWelcomeTitle => 'أهلاً بك';
+
+  @override
+  String get authPhoneLabel => 'رقم الجوال';
+
+  @override
+  String get authPhoneHelp => 'أدخل رقمك لاستلام رمز التحقق';
+
+  @override
+  String get authSendCode => 'إرسال الرمز';
+
+  @override
+  String get authEnterCodeTitle => 'رمز التحقق';
+
+  @override
+  String authCodeSentTo(String phone) {
+    return 'تم إرسال الرمز إلى $phone';
+  }
+
+  @override
+  String get authVerify => 'تحقق';
+
+  @override
+  String get authResend => 'إعادة إرسال الرمز';
+
+  @override
+  String get authInvalidPhone => 'أدخل رقم جوال عراقي صحيح';
+
+  @override
+  String get authInvalidCode => 'الرمز مكوّن من 6 أرقام';
+
+  @override
+  String get authGenericError => 'حدث خطأ، حاول مرة أخرى';
+
+  @override
+  String get authSignOut => 'تسجيل الخروج';
+
+  @override
+  String get authChangeNumber => 'تغيير الرقم';
 }
