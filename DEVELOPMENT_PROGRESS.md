@@ -70,3 +70,16 @@ Created: GitHub repo, Supabase project, Vercel project (backend). Not yet: Verce
 ## Open questions
 - FIB/Qi Card merchant onboarding (start early)
 - Full neighborhood list per governorate (official CSV if available)
+
+## Pre-publish checklist (deferred until just before release)
+Decision 2026-11-21: finish all app work first; do these right before publishing. Local dev uses test OTP numbers (supabase/config.toml `[auth.sms.test_otp]`, code 123456).
+- [ ] SMS provider for OTP (Twilio or Iraqi gateway) + cloud Supabase phone auth settings
+- [ ] FIB merchant credentials (sandbox, then production)
+- [ ] Qi Card merchant credentials (sandbox, then production)
+- [ ] Firebase / FCM project for push notifications
+- [ ] Map tiles provider key
+- [ ] AI provider keys (image enhancement, video)
+- [ ] Video render worker host (fallback slideshow renderer)
+- [ ] Apple Developer + Google Play accounts
+- [ ] Production Supabase + Vercel environments, backups, monitoring
+- [ ] Remove test OTP numbers from any production config

@@ -263,9 +263,9 @@ otp_expiry = 3600
 [auth.sms]
 # Allow/disallow the phone provider. When false, users can't sign up or sign in with SMS.
 # To block new signups only, set enable_signup = false under [auth] instead.
-enabled = false
+enabled = true
 # If enabled, users need to confirm their phone number before signing in.
-enable_confirmations = false
+enable_confirmations = true
 # Template for sending OTP to users
 template = "Your code is {{ .Code }}"
 # Controls the minimum amount of time that must pass before sending another sms otp.
@@ -273,8 +273,14 @@ max_frequency = "5s"
 
 # Use pre-defined map of phone number to OTP for testing.
 # Keys are the phone number with country code and without the + prefix.
-# [auth.sms.test_otp]
-# 14152127777 = "123456"
+# LOCAL DEVELOPMENT ONLY: fixed OTP codes for test numbers (no real SMS provider yet).
+# Real SMS provider (Twilio or an Iraqi gateway) is a PRE-PUBLISH item, see docs/credentials.md.
+[auth.sms.test_otp]
+9647500000001 = "123456"
+9647500000002 = "123456"
+9647700000001 = "123456"
+9647700000002 = "123456"
+9647800000001 = "123456"
 
 # Configure logged in session timeouts.
 # [auth.sessions]
