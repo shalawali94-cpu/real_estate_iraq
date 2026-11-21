@@ -1227,6 +1227,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review listings'**
   String get adminOpenButton;
+
+  /// No description provided for @filterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filterTitle;
+
+  /// No description provided for @filterMinPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Min price'**
+  String get filterMinPrice;
+
+  /// No description provided for @filterMaxPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Max price'**
+  String get filterMaxPrice;
+
+  /// No description provided for @filterMinBedrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedrooms (minimum)'**
+  String get filterMinBedrooms;
+
+  /// No description provided for @filterSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get filterSort;
+
+  /// No description provided for @filterApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get filterApply;
+
+  /// No description provided for @filterReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get filterReset;
+
+  /// No description provided for @sortNewest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get sortNewest;
+
+  /// No description provided for @sortPriceAsc.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest price'**
+  String get sortPriceAsc;
+
+  /// No description provided for @sortPriceDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Highest price'**
+  String get sortPriceDesc;
+
+  /// No description provided for @sortArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Largest area'**
+  String get sortArea;
+
+  /// No description provided for @sortPopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Most popular'**
+  String get sortPopular;
+
+  /// No description provided for @notifTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifTitle;
+
+  /// No description provided for @notifMarkAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all read'**
+  String get notifMarkAllRead;
+
+  /// No description provided for @notifEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get notifEmpty;
+
+  /// No description provided for @notifNewMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'New message'**
+  String get notifNewMessage;
+
+  /// No description provided for @notifPropertyApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing was approved'**
+  String get notifPropertyApproved;
+
+  /// No description provided for @notifPropertyRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing was rejected'**
+  String get notifPropertyRejected;
+
+  /// No description provided for @notifPropertySuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing was suspended'**
+  String get notifPropertySuspended;
+
+  /// No description provided for @notifPropertyRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing was restored'**
+  String get notifPropertyRestored;
+
+  /// No description provided for @notifPropertyExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your listing expired'**
+  String get notifPropertyExpired;
+
+  /// No description provided for @notifPaymentSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment received'**
+  String get notifPaymentSuccess;
+
+  /// No description provided for @notifPaymentFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed'**
+  String get notifPaymentFailed;
+
+  /// No description provided for @notifAiVideoDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Your video is ready'**
+  String get notifAiVideoDone;
+
+  /// No description provided for @notifAiVideoFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Video generation failed'**
+  String get notifAiVideoFailed;
+
+  /// No description provided for @notificationsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsButton;
 }
 
 class _AppLocalizationsDelegate

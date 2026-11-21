@@ -12,6 +12,7 @@ import '../features/authentication/presentation/verify_screen.dart';
 import '../features/explore/presentation/explore_screen.dart';
 import '../features/favorites/presentation/favorites_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/profile/data/profile_repository.dart';
 import '../features/profile/presentation/profile_form_screen.dart';
 import '../features/profile/presentation/profile_screen.dart';
@@ -43,6 +44,7 @@ bool _requiresAccount(String loc) =>
     loc.startsWith('/profile/edit') ||
     loc.startsWith('/profile/properties') ||
     loc.startsWith('/admin') ||
+    loc.startsWith('/notifications') ||
     loc.startsWith('/messages') ||
     loc.startsWith('/chat');
 
@@ -100,6 +102,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/property/:id',
         builder: (_, state) => PropertyDetailScreen(id: state.pathParameters['id']!),
       ),
+      GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: '/admin', builder: (_, _) => const AdminReviewScreen()),
       GoRoute(path: '/messages', builder: (_, _) => const InboxScreen()),
       GoRoute(

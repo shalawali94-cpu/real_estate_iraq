@@ -586,4 +586,82 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get adminOpenButton => 'پشکنینی ئیعلانەکان';
+
+  @override
+  String get filterTitle => 'فیلتەر';
+
+  @override
+  String get filterMinPrice => 'کەمترین نرخ';
+
+  @override
+  String get filterMaxPrice => 'زۆرترین نرخ';
+
+  @override
+  String get filterMinBedrooms => 'ژووری نوستن (کەمترین)';
+
+  @override
+  String get filterSort => 'ڕیزکردن بەپێی';
+
+  @override
+  String get filterApply => 'جێبەجێکردن';
+
+  @override
+  String get filterReset => 'گەڕاندنەوە';
+
+  @override
+  String get sortNewest => 'نوێترین';
+
+  @override
+  String get sortPriceAsc => 'کەمترین نرخ';
+
+  @override
+  String get sortPriceDesc => 'زۆرترین نرخ';
+
+  @override
+  String get sortArea => 'گەورەترین ڕووبەر';
+
+  @override
+  String get sortPopular => 'بەناوبانگترین';
+
+  @override
+  String get notifTitle => 'ئاگادارکردنەوەکان';
+
+  @override
+  String get notifMarkAllRead => 'هەمووی وەک خوێندراو دیاری بکە';
+
+  @override
+  String get notifEmpty => 'هێشتا هیچ ئاگادارکردنەوەیەک نییە';
+
+  @override
+  String get notifNewMessage => 'نامەی نوێ';
+
+  @override
+  String get notifPropertyApproved => 'ئیعلانەکەت پەسەند کرا';
+
+  @override
+  String get notifPropertyRejected => 'ئیعلانەکەت ڕەتکرایەوە';
+
+  @override
+  String get notifPropertySuspended => 'ئیعلانەکەت ڕاگیرا';
+
+  @override
+  String get notifPropertyRestored => 'ئیعلانەکەت گەڕێندرایەوە';
+
+  @override
+  String get notifPropertyExpired => 'ئیعلانەکەت بەسەرچوو';
+
+  @override
+  String get notifPaymentSuccess => 'پارەدان وەرگیرا';
+
+  @override
+  String get notifPaymentFailed => 'پارەدان سەرکەوتوو نەبوو';
+
+  @override
+  String get notifAiVideoDone => 'ڤیدیۆکەت ئامادەیە';
+
+  @override
+  String get notifAiVideoFailed => 'دروستکردنی ڤیدیۆ سەرکەوتوو نەبوو';
+
+  @override
+  String get notificationsButton => 'ئاگادارکردنەوەکان';
 }

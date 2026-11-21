@@ -582,4 +582,82 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get adminOpenButton => 'مراجعة الإعلانات';
+
+  @override
+  String get filterTitle => 'التصفية';
+
+  @override
+  String get filterMinPrice => 'أدنى سعر';
+
+  @override
+  String get filterMaxPrice => 'أعلى سعر';
+
+  @override
+  String get filterMinBedrooms => 'غرف النوم (الحد الأدنى)';
+
+  @override
+  String get filterSort => 'ترتيب حسب';
+
+  @override
+  String get filterApply => 'تطبيق';
+
+  @override
+  String get filterReset => 'إعادة ضبط';
+
+  @override
+  String get sortNewest => 'الأحدث';
+
+  @override
+  String get sortPriceAsc => 'الأقل سعرًا';
+
+  @override
+  String get sortPriceDesc => 'الأعلى سعرًا';
+
+  @override
+  String get sortArea => 'الأكبر مساحة';
+
+  @override
+  String get sortPopular => 'الأكثر رواجًا';
+
+  @override
+  String get notifTitle => 'الإشعارات';
+
+  @override
+  String get notifMarkAllRead => 'تحديد الكل كمقروء';
+
+  @override
+  String get notifEmpty => 'لا توجد إشعارات بعد';
+
+  @override
+  String get notifNewMessage => 'رسالة جديدة';
+
+  @override
+  String get notifPropertyApproved => 'تمت الموافقة على إعلانك';
+
+  @override
+  String get notifPropertyRejected => 'تم رفض إعلانك';
+
+  @override
+  String get notifPropertySuspended => 'تم إيقاف إعلانك';
+
+  @override
+  String get notifPropertyRestored => 'تمت استعادة إعلانك';
+
+  @override
+  String get notifPropertyExpired => 'انتهت صلاحية إعلانك';
+
+  @override
+  String get notifPaymentSuccess => 'تم استلام الدفعة';
+
+  @override
+  String get notifPaymentFailed => 'فشلت الدفعة';
+
+  @override
+  String get notifAiVideoDone => 'الفيديو جاهز';
+
+  @override
+  String get notifAiVideoFailed => 'فشل إنشاء الفيديو';
+
+  @override
+  String get notificationsButton => 'الإشعارات';
 }

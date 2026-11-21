@@ -586,4 +586,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminOpenButton => 'Review listings';
+
+  @override
+  String get filterTitle => 'Filters';
+
+  @override
+  String get filterMinPrice => 'Min price';
+
+  @override
+  String get filterMaxPrice => 'Max price';
+
+  @override
+  String get filterMinBedrooms => 'Bedrooms (minimum)';
+
+  @override
+  String get filterSort => 'Sort by';
+
+  @override
+  String get filterApply => 'Apply';
+
+  @override
+  String get filterReset => 'Reset';
+
+  @override
+  String get sortNewest => 'Newest';
+
+  @override
+  String get sortPriceAsc => 'Lowest price';
+
+  @override
+  String get sortPriceDesc => 'Highest price';
+
+  @override
+  String get sortArea => 'Largest area';
+
+  @override
+  String get sortPopular => 'Most popular';
+
+  @override
+  String get notifTitle => 'Notifications';
+
+  @override
+  String get notifMarkAllRead => 'Mark all read';
+
+  @override
+  String get notifEmpty => 'No notifications yet';
+
+  @override
+  String get notifNewMessage => 'New message';
+
+  @override
+  String get notifPropertyApproved => 'Your listing was approved';
+
+  @override
+  String get notifPropertyRejected => 'Your listing was rejected';
+
+  @override
+  String get notifPropertySuspended => 'Your listing was suspended';
+
+  @override
+  String get notifPropertyRestored => 'Your listing was restored';
+
+  @override
+  String get notifPropertyExpired => 'Your listing expired';
+
+  @override
+  String get notifPaymentSuccess => 'Payment received';
+
+  @override
+  String get notifPaymentFailed => 'Payment failed';
+
+  @override
+  String get notifAiVideoDone => 'Your video is ready';
+
+  @override
+  String get notifAiVideoFailed => 'Video generation failed';
+
+  @override
+  String get notificationsButton => 'Notifications';
 }

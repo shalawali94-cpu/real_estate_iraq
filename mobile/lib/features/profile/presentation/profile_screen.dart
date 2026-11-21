@@ -8,6 +8,7 @@ import '../../../theme/app_theme.dart';
 import '../../../core/network/api_client.dart';
 import '../../admin/presentation/admin_review_screen.dart';
 import '../../authentication/data/auth_repository.dart';
+import '../../notifications/presentation/notifications_screen.dart';
 import '../data/profile_repository.dart';
 
 /// Guest view (no account) or the signed-in user's profile, plus app settings.
@@ -154,6 +155,16 @@ class ProfileScreen extends ConsumerWidget {
                     onPressed: () => context.push('/profile/properties'),
                     icon: const Icon(Icons.home_work_outlined),
                     label: Text(t.myPropertiesTitle),
+                  ),
+                  OutlinedButton.icon(
+                    key: const Key('notificationsButton'),
+                    onPressed: () => context.push('/notifications'),
+                    icon: Badge(
+                      isLabelVisible: (ref.watch(unreadNotificationsProvider).value ?? 0) > 0,
+                      label: Text('${ref.watch(unreadNotificationsProvider).value ?? 0}'),
+                      child: const Icon(Icons.notifications_outlined),
+                    ),
+                    label: Text(t.notificationsButton),
                   ),
                   OutlinedButton.icon(
                     key: const Key('messagesButton'),

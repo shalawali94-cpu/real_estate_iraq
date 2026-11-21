@@ -5,6 +5,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
 import '../../properties/presentation/property_card_tile.dart';
 import '../../properties/presentation/property_list_controller.dart';
+import 'filter_sheet.dart';
 
 class ExploreScreen extends ConsumerStatefulWidget {
   const ExploreScreen({super.key});
@@ -16,6 +17,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   final _search = TextEditingController();
   final _scroll = ScrollController();
   String? _tx;
+  ExploreFilters _filters = const ExploreFilters();
 
   @override
   void initState() {
@@ -39,7 +41,15 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
     ref.read(exploreListProvider.notifier).setFilters({
       if (q.isNotEmpty) 'q': q,
       if (_tx != null) 'transaction_type': _tx,
+      ..._filters.toQuery(),
     });
+  }
+
+  Future<void> _openFilters() async {
+    final res = await showFilterSheet(context, _filters);
+    if (res == null || !mounted) return;
+    setState(() => _filters = res);
+    _apply();
   }
 
   @override
@@ -54,7 +64,21 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
       'investment': t.txInvestment,
     };
     return Scaffold(
-      appBar: AppBar(title: Text(t.navExplore)),
+      appBar: AppBar(
+        title: Text(t.navExplore),
+        actions: [
+          IconButton(
+            key: const Key('filterButton'),
+            tooltip: t.filterTitle,
+            onPressed: _openFilters,
+            icon: Badge(
+              isLabelVisible: _filters.activeCount > 0,
+              label: Text('${_filters.activeCount}'),
+              child: const Icon(Icons.tune),
+            ),
+          ),
+        ],
+      ),
       body: Column(children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 0),
