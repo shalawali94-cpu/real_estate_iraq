@@ -252,5 +252,6 @@
   "searchName": "Name",
   "searchEmpty": "No saved searches",
   "searchSaved": "Search saved",
-  "delete": "Delete"
+  "delete": "Delete",
+  "profileMyActivity": "My activity"
 }

@@ -1515,6 +1515,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get delete;
+
+  /// No description provided for @profileMyActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'My activity'**
+  String get profileMyActivity;
 }
 
 class _AppLocalizationsDelegate

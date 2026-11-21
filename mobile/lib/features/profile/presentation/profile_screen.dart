@@ -72,153 +72,211 @@ class ProfileScreen extends ConsumerWidget {
       'en': t.languageEnglish,
     };
 
-    return Scaffold(
-      appBar: AppBar(title: Text(t.navProfile)),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          if (!signedIn)
+    final isStaff = ref.watch(isStaffProvider).value ?? false;
+    final unread = ref.watch(unreadNotificationsProvider).value ?? 0;
+
+    Widget section(String title, List<Widget> children) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 4, bottom: 6, top: AppSpacing.md),
+              child: Text(title,
+                  style: theme.textTheme.labelLarge
+                      ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+            ),
             Card(
               color: theme.colorScheme.surfaceContainerHigh,
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Column(children: [
-                  Icon(Icons.account_circle_outlined, size: 56, color: theme.colorScheme.primary),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(t.profileGuestTitle,
-                      textAlign: TextAlign.center, style: theme.textTheme.titleMedium),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(t.profileGuestBody, textAlign: TextAlign.center),
-                  const SizedBox(height: AppSpacing.md),
-                  FilledButton(
-                    key: const Key('profileSignInButton'),
-                    onPressed: () => context.push('/login?from=%2Fprofile'),
-                    child: Text(t.authSignIn),
-                  ),
-                ]),
-              ),
-            )
-          else
-            Card(
-              color: theme.colorScheme.surfaceContainerHigh,
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Row(children: [
-                    CircleAvatar(
-                      radius: 28,
-                      child: Text(
-                        (profile?.fullName?.trim().isNotEmpty ?? false)
-                            ? profile!.fullName!.trim().characters.first
-                            : '?',
-                        style: theme.textTheme.titleLarge,
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.md),
-                    Expanded(
-                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(profile?.fullName ?? '—', style: theme.textTheme.titleMedium),
-                        if (profile?.phone != null)
-                          Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: Text('+${profile!.phone!.replaceAll('+', '')}'),
-                          ),
-                      ]),
-                    ),
-                  ]),
-                  const SizedBox(height: AppSpacing.md),
-                  Wrap(spacing: AppSpacing.sm, children: [
-                    Chip(label: Text(_accountLabel(t, profile?.accountType ?? 'individual'))),
-                    Chip(
-                      avatar: profile?.isStaff == true
-                          ? const Icon(Icons.shield_outlined, size: 16)
-                          : null,
-                      label: Text(_roleLabel(t, profile?.topRole)),
-                    ),
-                  ]),
-                  const SizedBox(height: AppSpacing.sm),
-                  OutlinedButton.icon(
-                    key: const Key('editProfileButton'),
-                    onPressed: () => context.push('/profile/edit'),
-                    icon: const Icon(Icons.edit_outlined),
-                    label: Text(t.editProfile),
-                  ),
-                  if (ref.watch(isStaffProvider).value ?? false)
-                    FilledButton.icon(
-                      key: const Key('adminButton'),
-                      onPressed: () => context.push('/admin'),
-                      icon: const Icon(Icons.admin_panel_settings_outlined),
-                      label: Text(t.adminOpenButton),
-                    ),
-                  OutlinedButton.icon(
-                    key: const Key('myPropertiesButton'),
-                    onPressed: () => context.push('/profile/properties'),
-                    icon: const Icon(Icons.home_work_outlined),
-                    label: Text(t.myPropertiesTitle),
-                  ),
-                  OutlinedButton.icon(
-                    key: const Key('notificationsButton'),
-                    onPressed: () => context.push('/notifications'),
-                    icon: Badge(
-                      isLabelVisible: (ref.watch(unreadNotificationsProvider).value ?? 0) > 0,
-                      label: Text('${ref.watch(unreadNotificationsProvider).value ?? 0}'),
-                      child: const Icon(Icons.notifications_outlined),
-                    ),
-                    label: Text(t.notificationsButton),
-                  ),
-                  OutlinedButton.icon(
-                    key: const Key('messagesButton'),
-                    onPressed: () => context.push('/messages'),
-                    icon: const Icon(Icons.chat_bubble_outline),
-                    label: Text(t.messagesTitle),
-                  ),
-                ]),
-              ),
-            ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(t.settingsLanguage, style: theme.textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.sm),
-          SegmentedButton<String>(
-            key: const Key('languageSelector'),
-            segments: [
-              for (final e in languages.entries)
-                ButtonSegment(value: e.key, label: Text(e.value)),
-            ],
-            selected: {locale.languageCode},
-            onSelectionChanged: (s) =>
-                ref.read(localeControllerProvider.notifier).setLocale(Locale(s.first)),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(t.settingsTheme, style: theme.textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.sm),
-          SegmentedButton<ThemeMode>(
-            segments: [
-              ButtonSegment(value: ThemeMode.system, label: Text(t.themeSystem)),
-              ButtonSegment(value: ThemeMode.light, label: Text(t.themeLight)),
-              ButtonSegment(value: ThemeMode.dark, label: Text(t.themeDark)),
-            ],
-            selected: {themeMode},
-            onSelectionChanged: (s) =>
-                ref.read(themeModeControllerProvider.notifier).setThemeMode(s.first),
-          ),
-          if (signedIn) ...[
-            const SizedBox(height: AppSpacing.xl),
-            OutlinedButton.icon(
-              key: const Key('signOutButton'),
-              onPressed: () => ref.read(authRepositoryProvider)!.signOut(),
-              icon: const Icon(Icons.logout),
-              label: Text(t.authSignOut),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            TextButton.icon(
-              key: const Key('deleteAccountButton'),
-              style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
-              onPressed: () => _deleteAccount(context, ref),
-              icon: const Icon(Icons.delete_forever_outlined),
-              label: Text(t.deleteAccount),
+              clipBehavior: Clip.antiAlias,
+              child: Column(children: children),
             ),
           ],
-        ],
+        );
+
+    Widget item(Key key, IconData icon, String label, VoidCallback onTap, {Widget? trailing}) =>
+        ListTile(
+          key: key,
+          leading: Icon(icon),
+          title: Text(label),
+          trailing: trailing ?? const Icon(Icons.chevron_right),
+          onTap: onTap,
+        );
+
+    return Scaffold(
+      appBar: AppBar(title: Text(t.navProfile)),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 640),
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, AppSpacing.xl),
+            children: [
+              if (!signedIn)
+                Card(
+                  color: theme.colorScheme.surfaceContainerHigh,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSpacing.lg),
+                    child: Column(children: [
+                      Icon(Icons.account_circle_outlined,
+                          size: 56, color: theme.colorScheme.primary),
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(t.profileGuestTitle,
+                          textAlign: TextAlign.center, style: theme.textTheme.titleMedium),
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(t.profileGuestBody, textAlign: TextAlign.center),
+                      const SizedBox(height: AppSpacing.md),
+                      FilledButton(
+                        key: const Key('profileSignInButton'),
+                        onPressed: () => context.push('/login?from=%2Fprofile'),
+                        child: Text(t.authSignIn),
+                      ),
+                    ]),
+                  ),
+                )
+              else ...[
+                Card(
+                  color: theme.colorScheme.surfaceContainerHigh,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    child: Row(children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: theme.colorScheme.primaryContainer,
+                        child: Text(
+                          (profile?.fullName?.trim().isNotEmpty ?? false)
+                              ? profile!.fullName!.trim().characters.first
+                              : '?',
+                          style: theme.textTheme.titleLarge,
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Text(profile?.fullName ?? '—',
+                              style: theme.textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700)),
+                          if (profile?.phone != null)
+                            Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: Text('+${profile!.phone!.replaceAll('+', '')}',
+                                  style: theme.textTheme.bodySmall),
+                            ),
+                          const SizedBox(height: 6),
+                          Wrap(spacing: 6, runSpacing: 4, children: [
+                            _Pill(_accountLabel(t, profile?.accountType ?? 'individual')),
+                            if (profile?.topRole != null || profile?.isStaff == true)
+                              _Pill(_roleLabel(t, profile?.topRole),
+                                  icon: profile?.isStaff == true ? Icons.shield_outlined : null),
+                          ]),
+                        ]),
+                      ),
+                      IconButton(
+                        key: const Key('editProfileButton'),
+                        tooltip: t.editProfile,
+                        onPressed: () => context.push('/profile/edit'),
+                        icon: const Icon(Icons.edit_outlined),
+                      ),
+                    ]),
+                  ),
+                ),
+                if (isStaff) ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  FilledButton.icon(
+                    key: const Key('adminButton'),
+                    onPressed: () => context.push('/admin'),
+                    icon: const Icon(Icons.admin_panel_settings_outlined),
+                    label: Text(t.adminOpenButton),
+                  ),
+                ],
+                section(t.profileMyActivity, [
+                  item(const Key('myPropertiesButton'), Icons.home_work_outlined,
+                      t.myPropertiesTitle, () => context.push('/profile/properties')),
+                  const Divider(height: 1),
+                  item(const Key('messagesButton'), Icons.chat_bubble_outline, t.messagesTitle,
+                      () => context.push('/messages')),
+                  const Divider(height: 1),
+                  item(const Key('notificationsButton'), Icons.notifications_outlined,
+                      t.notificationsButton, () => context.push('/notifications'),
+                      trailing: unread > 0
+                          ? Badge(label: Text('$unread'), child: const Icon(Icons.chevron_right))
+                          : null),
+                ]),
+              ],
+              section(t.settingsLanguage, [
+                Padding(
+                  padding: const EdgeInsets.all(AppSpacing.sm),
+                  child: SegmentedButton<String>(
+                    key: const Key('languageSelector'),
+                    showSelectedIcon: false,
+                    segments: [
+                      for (final e in languages.entries)
+                        ButtonSegment(value: e.key, label: Text(e.value)),
+                    ],
+                    selected: {locale.languageCode},
+                    onSelectionChanged: (s) => ref
+                        .read(localeControllerProvider.notifier)
+                        .setLocale(Locale(s.first)),
+                  ),
+                ),
+              ]),
+              section(t.settingsTheme, [
+                Padding(
+                  padding: const EdgeInsets.all(AppSpacing.sm),
+                  child: SegmentedButton<ThemeMode>(
+                    showSelectedIcon: false,
+                    segments: [
+                      ButtonSegment(value: ThemeMode.system, label: Text(t.themeSystem)),
+                      ButtonSegment(value: ThemeMode.light, label: Text(t.themeLight)),
+                      ButtonSegment(value: ThemeMode.dark, label: Text(t.themeDark)),
+                    ],
+                    selected: {themeMode},
+                    onSelectionChanged: (s) => ref
+                        .read(themeModeControllerProvider.notifier)
+                        .setThemeMode(s.first),
+                  ),
+                ),
+              ]),
+              if (signedIn) ...[
+                const SizedBox(height: AppSpacing.lg),
+                OutlinedButton.icon(
+                  key: const Key('signOutButton'),
+                  onPressed: () => ref.read(authRepositoryProvider)!.signOut(),
+                  icon: const Icon(Icons.logout),
+                  label: Text(t.authSignOut),
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                TextButton.icon(
+                  key: const Key('deleteAccountButton'),
+                  style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
+                  onPressed: () => _deleteAccount(context, ref),
+                  icon: const Icon(Icons.delete_forever_outlined),
+                  label: Text(t.deleteAccount),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Pill extends StatelessWidget {
+  const _Pill(this.text, {this.icon});
+  final String text;
+  final IconData? icon;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          if (icon != null) ...[Icon(icon, size: 14), const SizedBox(width: 4)],
+          Text(text, style: theme.textTheme.labelSmall),
+        ]),
       ),
     );
   }

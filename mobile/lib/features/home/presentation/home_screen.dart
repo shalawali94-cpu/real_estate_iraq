@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/app_theme.dart';
@@ -23,9 +24,16 @@ class HomeScreen extends ConsumerWidget {
           ref.invalidate(latestPropertiesProvider);
         },
         child: ListView(
-          padding: const EdgeInsets.all(AppSpacing.md),
+          padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, AppSpacing.lg),
           children: [
-            _Section(title: t.homeFeatured, provider: featuredPropertiesProvider, repo: repo, hideWhenEmpty: true),
+            _SearchBar(hint: t.exploreSearchHint, onTap: () => context.go('/explore')),
+            const SizedBox(height: AppSpacing.sm),
+            _Section(
+                title: t.homeFeatured,
+                provider: featuredPropertiesProvider,
+                repo: repo,
+                hideWhenEmpty: true,
+                horizontal: true),
             _Section(title: t.homeLatest, provider: latestPropertiesProvider, repo: repo),
           ],
         ),
@@ -34,8 +42,44 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
+class _SearchBar extends StatelessWidget {
+  const _SearchBar({required this.hint, required this.onTap});
+  final String hint;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Material(
+      color: theme.colorScheme.surfaceContainerHigh,
+      borderRadius: BorderRadius.circular(28),
+      child: InkWell(
+        key: const Key('homeSearchBar'),
+        borderRadius: BorderRadius.circular(28),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 14),
+          child: Row(children: [
+            Icon(Icons.search, color: theme.colorScheme.onSurfaceVariant),
+            const SizedBox(width: AppSpacing.sm),
+            Text(hint,
+                style: theme.textTheme.bodyMedium
+                    ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
 class _Section extends ConsumerWidget {
-  const _Section({required this.title, required this.provider, required this.repo, this.hideWhenEmpty = false});
+  const _Section({
+    required this.title,
+    required this.provider,
+    required this.repo,
+    this.hideWhenEmpty = false,
+    this.horizontal = false,
+  });
+  final bool horizontal;
   final String title;
   final FutureProvider<List<PropertySummary>> provider;
   final PropertyRepository? repo;
@@ -67,14 +111,29 @@ class _Section extends ConsumerWidget {
         }
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-            child: Text(title, style: Theme.of(context).textTheme.titleLarge),
+            padding: const EdgeInsets.only(top: AppSpacing.md, bottom: AppSpacing.sm),
+            child: Text(title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.w700)),
           ),
-          for (final p in items)
-            Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.md),
-              child: PropertyCardTile(property: p),
-            ),
+          if (horizontal)
+            SizedBox(
+              height: 232,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
+                itemBuilder: (_, i) => PropertyCardTile(property: items[i], vertical: true),
+              ),
+            )
+          else
+            for (final p in items)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                child: PropertyCardTile(property: p),
+              ),
         ]);
       },
     );

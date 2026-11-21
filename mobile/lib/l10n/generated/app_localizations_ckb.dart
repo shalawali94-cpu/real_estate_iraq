@@ -730,4 +730,7 @@ class AppLocalizationsCkb extends AppLocalizations {
 
   @override
   String get delete => 'سڕینەوە';
+
+  @override
+  String get profileMyActivity => 'چالاکییەکانم';
 }

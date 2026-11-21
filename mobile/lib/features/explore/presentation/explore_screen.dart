@@ -169,7 +169,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                   controller: _scroll,
                   padding: const EdgeInsets.all(AppSpacing.md),
                   itemCount: state.items.length + (state.loading ? 1 : 0),
-                  separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
+                  separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.sm),
                   itemBuilder: (_, i) {
                     if (i >= state.items.length) {
                       return const Padding(
