@@ -53,7 +53,8 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
             districtId: _gov == null ? null : _district,
             markOnboarded: current?.onboarded != true,
           );
-      ref.invalidate(profileProvider);
+      // Wait for the fresh profile so the router already knows onboarding is done.
+      await ref.refresh(profileProvider.future);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.profileSaved)));
       if (widget.editMode && context.canPop()) {

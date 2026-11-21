@@ -44,14 +44,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   final signedIn = ValueNotifier<bool>(
     ref.read(authRepositoryProvider)?.currentSession != null,
   );
-  final needsOnboarding = ValueNotifier<bool>(false);
+  // null = signed in but the profile hasn't loaded yet (don't guess: avoids a Home flash).
+  final needsOnboarding = ValueNotifier<bool?>(null);
   ref.listen<AsyncValue<Session?>>(sessionProvider, (_, next) {
     signedIn.value = next.value != null;
-    if (next.value == null) needsOnboarding.value = false;
+    needsOnboarding.value = next.value == null ? false : null;
   });
   ref.listen<AsyncValue<UserProfile?>>(profileProvider, (_, next) {
+    if (next.isLoading) return; // keep the last known value while reloading
+    if (next.hasError) {
+      needsOnboarding.value = false; // don't trap the user if the profile can't load
+      return;
+    }
     final p = next.value;
-    needsOnboarding.value = p != null && !p.onboarded;
+    needsOnboarding.value = p == null ? null : !p.onboarded;
   });
   ref.onDispose(signedIn.dispose);
   ref.onDispose(needsOnboarding.dispose);
@@ -68,8 +74,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       if (!signedIn.value) {
         return _requiresAccount(loc) ? _loginFor(state.uri.toString()) : null;
       }
-      if (needsOnboarding.value && loc != AppRoutes.onboarding) {
+      if (needsOnboarding.value == true && loc != AppRoutes.onboarding) {
         return AppRoutes.onboarding;
+      }
+      // Profile still loading right after login: stay put until we know where to go.
+      if (needsOnboarding.value == null && onAuth) return null;
+      if (needsOnboarding.value == false && loc == AppRoutes.onboarding) {
+        return AppRoutes.home;
       }
       if (onAuth) {
         final from = state.uri.queryParameters['from'];
